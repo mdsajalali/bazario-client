@@ -1,1 +1,75 @@
-<p>register works!</p>
+<div class="container d-flex justify-content-center align-items-center vh-100">
+  <div class="col-md-6">
+    <p-card header="Create an Account" styleClass="shadow-sm">
+      <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+        <div class="mb-3">
+          <label for="name" class="form-label">Name</label>
+          <input
+            pInputText
+            id="name"
+            type="text"
+            formControlName="name"
+            class="form-control"
+            placeholder="Enter name"
+          />
+          @if(registerForm.get("name")?.touched &&
+          registerForm.get("name")?.hasError("required")){
+          <div class="text-danger">Name is required.</div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label for="email" class="form-label">Email address</label>
+          <input
+            pInputText
+            id="email"
+            type="email"
+            formControlName="email"
+            class="form-control"
+            placeholder="Enter email"
+          />
+
+          @if(registerForm.get("email")?.touched &&
+          registerForm.get("email")?.hasError("required")){
+          <div class="text-danger">Email is required.</div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label for="password" class="form-label">Password</label>
+          <input
+            pInputText
+            id="password"
+            type="password"
+            formControlName="password"
+            class="form-control"
+            placeholder="Enter password"
+          />
+
+          @if(registerForm.get("password")?.touched &&
+          registerForm.get("password")?.hasError("required")){
+          <div class="text-danger">Password is required.</div>
+          } @if(registerForm.get("password")?.touched &&
+          registerForm.get("password")?.hasError("minlength")){
+          <div class="text-danger">Password must be at least 8 characters.</div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <button
+            pButton
+            type="submit"
+            label="Register"
+            class="w-100"
+            [disabled]="registerForm.invalid"
+          ></button>
+        </div>
+
+        <div class="text-center">
+          <span>Already have an account?</span>
+          <a class="ms-1" routerLink="/login">Login</a>
+        </div>
+      </form>
+    </p-card>
+  </div>
+</div>

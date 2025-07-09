@@ -9,6 +9,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { InputTextModule } from 'primeng/inputtext';
 
 @Component({
   selector: 'app-login',
@@ -18,6 +19,7 @@ import {
     RouterLink,
     CardModule,
     ButtonModule,
+    InputTextModule,
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
