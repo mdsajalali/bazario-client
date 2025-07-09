@@ -1,0 +1,54 @@
+<div class="d-flex gap-2">
+  <div
+    class="d-flex flex-column vh-100 bg-light border-end"
+    style="width: 250px"
+  >
+    <div class="p-3 flex-grow-1">
+      <h5 class="mb-4">Admin Panel</h5>
+      <nav class="nav flex-column">
+        <a
+          routerLink="/dashboard"
+          routerLinkActive="active"
+          class="nav-link d-flex align-items-center mb-2"
+        >
+          <i class="pi pi-home me-2"></i> Dashboard
+        </a>
+        <a
+          routerLink="/dashboard/products"
+          routerLinkActive="active"
+          class="nav-link d-flex align-items-center mb-2"
+        >
+          <i class="pi pi-box me-2"></i> Products
+        </a>
+        <a
+          routerLink="/dashboard/brands"
+          routerLinkActive="active"
+          class="nav-link d-flex align-items-center mb-2"
+        >
+          <i class="pi pi-tags me-2"></i> Brands
+        </a>
+        <a
+          routerLink="/dashboard/categories"
+          routerLinkActive="active"
+          class="nav-link d-flex align-items-center mb-2"
+        >
+          <i class="pi pi-th-large me-2"></i> Categories
+        </a>
+      </nav>
+    </div>
+
+    <div class="p-3 border-top">
+      <button
+        pButton
+        type="button"
+        label="Logout"
+        icon="pi pi-sign-out"
+        class="w-100"
+      >
+        Logout
+      </button>
+    </div>
+  </div>
+
+  <router-outlet />
+</div>
