@@ -1,1 +1,72 @@
-<p>orders works!</p>
+<div class="container-fluid py-4">
+  <h3 class="mb-4">Order Management</h3>
+
+  <!-- Search -->
+  <div class="row mb-3">
+    <div class="col-md-4">
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Search by customer..."
+      />
+    </div>
+  </div>
+
+  <!-- Table -->
+  <div class="table-responsive">
+    <table class="table table-bordered table-hover align-middle text-center">
+      <thead class="table-dark">
+        <tr>
+          <th>Order ID</th>
+          <th>Customer</th>
+          <th>Payment Type</th>
+          <th>Date</th>
+          <th>Total</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>#ORD001</td>
+          <td>John Doe</td>
+          <td>Card</td>
+          <td>2025-07-10</td>
+          <td>$150.00</td>
+          <td>
+            <select class="form-select form-select-sm">
+              <option selected>Completed</option>
+              <option>Pending</option>
+              <option>Cancelled</option>
+              <option>Processing</option>
+            </select>
+          </td>
+          <td>
+            <button class="btn btn-sm btn-danger" title="Delete">🗑️</button>
+          </td>
+        </tr>
+        <tr>
+          <td>#ORD002</td>
+          <td>Jane Smith</td>
+          <td>Online</td>
+          <td>2025-07-08</td>
+          <td>$220.00</td>
+          <td>
+            <select class="form-select form-select-sm">
+              <option>Completed</option>
+              <option selected>Pending</option>
+              <option>Cancelled</option>
+              <option>Processing</option>
+            </select>
+          </td>
+          <td>
+            <button class="btn btn-sm btn-danger" title="Delete">🗑️</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Pagination Placeholder -->
+  <app-pagination />
+</div>
