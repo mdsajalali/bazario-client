@@ -11,6 +11,9 @@ import { OrdersComponent } from './pages/admin/orders/orders.component';
 import { AddBrandComponent } from './pages/admin/add-brand/add-brand.component';
 import { AddCategoryComponent } from './pages/admin/add-category/add-category.component';
 import { AddProductComponent } from './pages/admin/add-product/add-product.component';
+import { UpdateBrandComponent } from './pages/admin/update-brand/update-brand.component';
+import { UpdateCategoryComponent } from './pages/admin/update-category/update-category.component';
+import { UpdateProductComponent } from './pages/admin/update-product/update-product.component';
 
 export const routes: Routes = [
   {
@@ -27,12 +30,28 @@ export const routes: Routes = [
         component: DashboardComponent,
       },
       {
+        path: 'dashboard/products',
+        component: ProductsComponent,
+      },
+      {
+        path: 'dashboard/add-product',
+        component: AddProductComponent,
+      },
+      {
+        path: 'dashboard/product/edit/:id',
+        component: UpdateProductComponent,
+      },
+      {
         path: 'dashboard/brands',
         component: BrandsComponent,
       },
       {
         path: 'dashboard/add-brand',
         component: AddBrandComponent,
+      },
+      {
+        path: 'dashboard/brand/edit/:id',
+        component: UpdateBrandComponent,
       },
       {
         path: 'dashboard/categories',
@@ -43,13 +62,10 @@ export const routes: Routes = [
         component: AddCategoryComponent,
       },
       {
-        path: 'dashboard/products',
-        component: ProductsComponent,
+        path: 'dashboard/category/edit/:id',
+        component: UpdateCategoryComponent,
       },
-      {
-        path: 'dashboard/add-product',
-        component: AddProductComponent,
-      },
+
       {
         path: 'dashboard/orders',
         component: OrdersComponent,
