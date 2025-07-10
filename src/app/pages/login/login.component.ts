@@ -1,26 +1,15 @@
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { IconFieldModule } from 'primeng/iconfield';
-import { CardModule } from 'primeng/card';
-import { ButtonModule } from 'primeng/button';
 import {
   FormBuilder,
   FormGroup,
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { InputTextModule } from 'primeng/inputtext';
 
 @Component({
   selector: 'app-login',
-  imports: [
-    ReactiveFormsModule,
-    IconFieldModule,
-    RouterLink,
-    CardModule,
-    ButtonModule,
-    InputTextModule,
-  ],
+  imports: [ReactiveFormsModule, RouterLink],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
 })

@@ -1,11 +1,10 @@
 <div class="container d-flex justify-content-center align-items-center vh-100">
-  <div class="col-md-6">
-    <p-card header="Create an Account" styleClass="shadow-sm">
+  <div class="col-md-5 shadow p-4 rounded">
+      <h3 class="">Create an Account</h3>
       <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
         <div class="mb-3">
           <label for="name" class="form-label">Name</label>
           <input
-            pInputText
             id="name"
             type="text"
             formControlName="name"
@@ -21,7 +20,6 @@
         <div class="mb-3">
           <label for="email" class="form-label">Email address</label>
           <input
-            pInputText
             id="email"
             type="email"
             formControlName="email"
@@ -38,7 +36,6 @@
         <div class="mb-3">
           <label for="password" class="form-label">Password</label>
           <input
-            pInputText
             id="password"
             type="password"
             formControlName="password"
@@ -57,12 +54,10 @@
 
         <div class="mb-3">
           <button
-            pButton
             type="submit"
-            label="Register"
-            class="w-100"
+            class="w-100 btn btn-success"
             [disabled]="registerForm.invalid"
-          ></button>
+          >Register</button>
         </div>
 
         <div class="text-center">
@@ -70,6 +65,5 @@
           <a class="ms-1" routerLink="/login">Login</a>
         </div>
       </form>
-    </p-card>
+    </div>
   </div>
-</div>
