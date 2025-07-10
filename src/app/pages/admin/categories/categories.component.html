@@ -1,1 +1,60 @@
-<p>categories works!</p>
+<div class="container-fluid py-4">
+    <h3 class="mb-4">Category Management</h3>
+  
+    <div class="row mb-3">
+      <div class="col-md-4">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Search by category..."
+        />
+      </div>
+    </div>
+  
+    <div class="table-responsive">
+      <table
+        class="table table-bordered table-hover align-middle text-center product-table"
+      >
+        <thead class="table-dark">
+          <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Created At</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>Smartphone</td>
+            <td>2025-06-28</td>
+            <td>
+              <button class="btn btn-sm btn-warning me-1" title="Edit">✏️</button>
+              <button class="btn btn-sm btn-danger" title="Delete">🗑️</button>
+            </td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>Smartphone</td>
+            <td>2025-06-28</td>
+            <td>
+              <button class="btn btn-sm btn-warning me-1" title="Edit">✏️</button>
+              <button class="btn btn-sm btn-danger" title="Delete">🗑️</button>
+            </td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td>Smartphone</td>
+            <td>2025-06-28</td>
+            <td>
+              <button class="btn btn-sm btn-warning me-1" title="Edit">✏️</button>
+              <button class="btn btn-sm btn-danger" title="Delete">🗑️</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  
+    <app-pagination />
+  </div>
+  
