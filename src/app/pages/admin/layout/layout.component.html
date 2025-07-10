@@ -4,35 +4,47 @@
     style="width: 250px"
   >
     <div class="p-3 flex-grow-1">
-      <h5 class="mb-4">Admin Panel</h5>
+      <h5 class="mb-4">
+        <a routerLink="/" class="text-black text-decoration-none"
+          >Admin Panel</a
+        >
+      </h5>
       <nav class="nav flex-column">
         <a
           routerLink="/dashboard"
           routerLinkActive="active"
-          class="nav-link d-flex align-items-center mb-2"
+          [routerLinkActiveOptions]="{ exact: true }"
+          class="nav-link btn btn-light text-black d-flex align-items-center mb-2"
         >
           Dashboard
         </a>
         <a
           routerLink="/dashboard/products"
           routerLinkActive="active"
-          class="nav-link d-flex align-items-center mb-2"
+          class="nav-link btn btn-light text-black d-flex align-items-center mb-2"
         >
           Products
         </a>
         <a
           routerLink="/dashboard/brands"
           routerLinkActive="active"
-          class="nav-link d-flex align-items-center mb-2"
+          class="nav-link btn btn-light text-black d-flex align-items-center mb-2"
         >
           Brands
         </a>
         <a
           routerLink="/dashboard/categories"
           routerLinkActive="active"
-          class="nav-link d-flex align-items-center mb-2"
+          class="nav-link btn btn-light text-black d-flex align-items-center mb-2"
         >
           Categories
+        </a>
+        <a
+          routerLink="/dashboard/orders"
+          routerLinkActive="active"
+          class="nav-link btn btn-light text-black d-flex align-items-center mb-2"
+        >
+          Orders
         </a>
       </nav>
     </div>
@@ -42,5 +54,7 @@
     </div>
   </div>
 
-  <router-outlet />
+  <div class="w-100">
+    <router-outlet />
+  </div>
 </div>
