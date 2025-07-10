@@ -1,10 +1,18 @@
+.sidebar {
+  width: 250px;
+}
+
 .title-arrow {
   display: flex;
-  align-items: center;
   justify-content: space-between;
+  align-items: center;
   cursor: pointer;
 
-  .title-text {
-    font-size: 15px;
+  svg {
+    transition: transform 0.3s ease-in-out;
+  }
+
+  .rotated {
+    transform: rotate(180deg);
   }
 }

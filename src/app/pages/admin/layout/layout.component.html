@@ -1,120 +1,136 @@
 <div class="d-flex gap-2">
-  <div
-    class="d-flex flex-column vh-100 bg-light border-end"
-    style="width: 250px"
-  >
+  <div class="d-flex flex-column vh-100 bg-light border-end sidebar">
     <div class="p-3 flex-grow-1">
       <h5 class="mb-4">
-        <a routerLink="/" class="text-black text-decoration-none"
+        <a
+          routerLink="/"
+          class="text-black text-decoration-none"
+          (click)="closeAllSubmenus()"
           >Admin Panel</a
         >
       </h5>
+
       <nav class="nav flex-column">
         <a
           routerLink="/dashboard"
-          routerLinkActive="active"
-          [routerLinkActiveOptions]="{ exact: true }"
-          class="nav-link btn btn-light text-black d-flex align-items-center mb-2"
+          class="nav-link btn btn-light fw-medium text-black d-flex align-items-center mb-2"
+          (click)="closeAllSubmenus()"
         >
           Dashboard
         </a>
-        <div>
-          <div class="title-arrow btn btn-light">
-            <h6 class="mb-0 title-text">Products</h6>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="12px"
-              height="12px"
-              viewBox="0 0 512 512"
-              fill="currentColor"
-            >
-              <path
-                d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z"
-              />
-            </svg>
-          </div>
 
-          <a
-            routerLink="/dashboard/products"
-            routerLinkActive="active"
-            class="nav-link btn btn-light text-black d-flex align-items-center mb-2"
-          >
-            All Products
-          </a>
-          <a
-            routerLink="/dashboard/add-product"
-            routerLinkActive="active"
-            class="nav-link btn btn-light text-black d-flex align-items-center mb-2"
-          >
-            Add Product
-          </a>
-        </div>
         <div>
-          <div class="title-arrow btn btn-light">
-            <h6 class="mb-0 title-text">Brands</h6>
+          <div
+            class="title-arrow btn btn-light mb-1"
+            (click)="toggleSubmenu('products')"
+          >
+            <h6 class="mb-0">Products</h6>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="12px"
               height="12px"
               viewBox="0 0 512 512"
               fill="currentColor"
+              [ngClass]="{ rotated: submenuOpen.products }"
             >
               <path
-                d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z"
+                d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192
+              c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256
+              338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3
+              0s-12.5 32.8 0 45.3l192 192z"
               />
             </svg>
           </div>
-          <a
-            routerLink="/dashboard/brands"
-            routerLinkActive="active"
-            class="nav-link btn btn-light text-black d-flex align-items-center mb-2"
-          >
-            All Brands
-          </a>
-          <a
-            routerLink="/dashboard/add-brand"
-            routerLinkActive="active"
-            class="nav-link btn btn-light text-black d-flex align-items-center mb-2"
-          >
-            Add Brand
-          </a>
+          <div [hidden]="!submenuOpen.products">
+            <a
+              routerLink="/dashboard/products"
+              class="nav-link btn btn-light text-black mb-1"
+              >All Products</a
+            >
+            <a
+              routerLink="/dashboard/add-product"
+              class="nav-link btn btn-light text-black mb-1"
+              >Add Product</a
+            >
+          </div>
         </div>
 
         <div>
-          <div class="title-arrow btn btn-light">
-            <h6 class="mb-0 title-text">Categories</h6>
+          <div
+            class="title-arrow btn btn-light mb-1"
+            (click)="toggleSubmenu('brands')"
+          >
+            <h6 class="mb-0">Brands</h6>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="12px"
               height="12px"
               viewBox="0 0 512 512"
               fill="currentColor"
+              [ngClass]="{ rotated: submenuOpen.brands }"
             >
               <path
-                d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z"
+                d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192
+              c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256
+              338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3
+              0s-12.5 32.8 0 45.3l192 192z"
               />
             </svg>
           </div>
-          <a
-            routerLink="/dashboard/categories"
-            routerLinkActive="active"
-            class="nav-link btn btn-light text-black d-flex align-items-center mb-2"
+          <div [hidden]="!submenuOpen.brands">
+            <a
+              routerLink="/dashboard/brands"
+              class="nav-link btn btn-light text-black mb-1"
+              >All Brands</a
+            >
+            <a
+              routerLink="/dashboard/add-brand"
+              class="nav-link btn btn-light text-black mb-1"
+              >Add Brand</a
+            >
+          </div>
+        </div>
+
+        <div>
+          <div
+            class="title-arrow btn btn-light mb-1"
+            (click)="toggleSubmenu('categories')"
           >
-            All Categories
-          </a>
-          <a
-            routerLink="/dashboard/add-category"
-            routerLinkActive="active"
-            class="nav-link btn btn-light text-black d-flex align-items-center mb-2"
-          >
-            Add Category
-          </a>
+            <h6 class="mb-0">Categories</h6>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="12px"
+              height="12px"
+              viewBox="0 0 512 512"
+              fill="currentColor"
+              [ngClass]="{ rotated: submenuOpen.categories }"
+            >
+              <path
+                d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192
+              c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256
+              338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3
+              0s-12.5 32.8 0 45.3l192 192z"
+              />
+            </svg>
+          </div>
+          <div [hidden]="!submenuOpen.categories">
+            <a
+              routerLink="/dashboard/categories"
+              class="nav-link btn btn-light text-black mb-1"
+              >All Categories</a
+            >
+            <a
+              routerLink="/dashboard/add-category"
+              class="nav-link btn btn-light text-black mb-1"
+              >Add Category</a
+            >
+          </div>
         </div>
 
         <a
           routerLink="/dashboard/orders"
-          routerLinkActive="active"
-          class="nav-link btn btn-light text-black d-flex align-items-center mb-2"
+          class="nav-link btn btn-light text-black fw-medium d-flex align-items-center mb-2"
+          (click)="closeAllSubmenus()"
         >
           Orders
         </a>
@@ -122,11 +138,11 @@
     </div>
 
     <div class="p-3 border-top">
-      <button type="button" class="w-100 btn btn-danger">Logout</button>
+      <button class="btn btn-danger w-100">Logout</button>
     </div>
   </div>
 
   <div class="w-100">
-    <router-outlet />
+    <router-outlet></router-outlet>
   </div>
 </div>
