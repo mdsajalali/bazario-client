@@ -8,6 +8,9 @@ import { CategoriesComponent } from './pages/admin/categories/categories.compone
 import { ProductsComponent } from './pages/admin/products/products.component';
 import { HomeComponent } from './pages/home/home.component';
 import { OrdersComponent } from './pages/admin/orders/orders.component';
+import { AddBrandComponent } from './pages/admin/add-brand/add-brand.component';
+import { AddCategoryComponent } from './pages/admin/add-category/add-category.component';
+import { AddProductComponent } from './pages/admin/add-product/add-product.component';
 
 export const routes: Routes = [
   {
@@ -28,12 +31,24 @@ export const routes: Routes = [
         component: BrandsComponent,
       },
       {
+        path: 'dashboard/add-brand',
+        component: AddBrandComponent,
+      },
+      {
         path: 'dashboard/categories',
         component: CategoriesComponent,
       },
       {
+        path: 'dashboard/add-category',
+        component: AddCategoryComponent,
+      },
+      {
         path: 'dashboard/products',
         component: ProductsComponent,
+      },
+      {
+        path: 'dashboard/add-product',
+        component: AddProductComponent,
       },
       {
         path: 'dashboard/orders',
