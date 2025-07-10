@@ -5,7 +5,7 @@ import { MenuKey } from '../../../types';
 
 @Component({
   selector: 'app-layout',
-  imports: [RouterOutlet, RouterLink, RouterLinkActive, NgClass],
+  imports: [RouterOutlet, RouterLink, NgClass],
   templateUrl: './layout.component.html',
   styleUrl: './layout.component.scss',
 })
