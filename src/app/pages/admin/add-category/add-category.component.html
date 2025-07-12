@@ -1,24 +1,40 @@
 <div class="container py-4">
-    <h3 class="mb-4">Add New Category</h3>
-  
-    <form>
-      <div class="row g-3">
-        <div class="col-md-6">
-          <label for="categoryName" class="form-label">Category Name</label>
-          <input
-            type="text"
-            class="form-control"
-            id="categoryName"
-            placeholder="Enter category name"
-            required
-          />
-        </div>
-  
-        <div class="col-12 d-flex justify-content-end gap-2 mt-3">
-          <button type="submit" class="btn btn-danger">Reset</button>
-          <button type="submit" class="btn btn-primary">Add Category</button>
-        </div>
+  <h3 class="mb-3">Add New Category</h3>
+
+  <p-toast />
+  <div class="card flex justify-center border border-white">
+    <form
+      [formGroup]="categoryForm"
+      (ngSubmit)="onSubmit()"
+      class="flex flex-col gap-4 w-full sm:w-56"
+    >
+      <div class="flex flex-col gap-1 my-3">
+        <label for="name">Category Name</label>
+        <br />
+        <input
+          pInputText
+          type="text"
+          id="name"
+          placeholder="Enter your category name"
+          formControlName="name"
+          class="w-50 mt-1"
+          [invalid]="isInvalid('name')"
+        />
+        @if (isInvalid('name')) {
+        <p-message severity="error" size="small" variant="simple"
+          >Category Name is required.</p-message
+        >
+        }
+      </div>
+
+      <div class="d-flex gap-2 justify-content-end">
+        <button pButton severity="danger" type="reset">
+          <span pButtonLabel>Reset</span>
+        </button>
+        <button pButton severity="secondary" type="add">
+          <span pButtonLabel>Add</span>
+        </button>
       </div>
     </form>
   </div>
-  
+</div>
