@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { TableModule } from 'primeng/table';
 import { HttpClientModule } from '@angular/common/http';
 import { InputTextModule } from 'primeng/inputtext';
@@ -6,6 +6,8 @@ import { IconField } from 'primeng/iconfield';
 import { InputIcon } from 'primeng/inputicon';
 import { SelectModule } from 'primeng/select';
 import { FormsModule } from '@angular/forms';
+import { NavigationEnd, Router } from '@angular/router';
+import { filter } from 'rxjs';
 
 interface Order {
   orderId: string;
@@ -40,6 +42,8 @@ export class OrdersComponent implements OnInit {
   cities: City[] | undefined;
   selectedCity!: City;
   globalFilterValue: string = '';
+  router = inject(Router);
+  isDashboard: boolean = false;
 
   selectedOrder!: Order;
 
@@ -55,6 +59,18 @@ export class OrdersComponent implements OnInit {
     ];
 
     this.selectedCity = this.cities[1];
+
+    // route check
+    this.checkRoute(this.router.url);
+    this.router.events
+      .pipe(filter((event) => event instanceof NavigationEnd))
+      .subscribe((event: NavigationEnd) => {
+        this.checkRoute(event.urlAfterRedirects);
+      });
+  }
+
+  private checkRoute(url: string) {
+    this.isDashboard = url === '/dashboard';
   }
 
   getOrders(): Promise<Order[]> {

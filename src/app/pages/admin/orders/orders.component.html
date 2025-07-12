@@ -1,5 +1,8 @@
 <div class="container-fluid py-4">
-  <h3 class="mb-4">Order Management</h3>
+  <h4 class="mb-4">
+    {{ isDashboard ? "Recent Orders" : "Order Management" }}
+  </h4>
+
   <div class="card">
     <p-table
       #dt1
