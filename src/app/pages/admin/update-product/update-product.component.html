@@ -1,122 +1,170 @@
 <div class="container py-4">
-    <h3 class="mb-4">Update Product</h3>
-  
-    <form>
-      <div class="row g-3">
-        <div class="col-md-6">
-          <label for="productName" class="form-label">Product Name</label>
-          <input
-            type="text"
-            class="form-control"
-            id="productName"
-            placeholder="Enter product name"
-            required
-          />
-        </div>
-  
-        <div class="col-md-6">
-          <label for="shortDescription" class="form-label"
-            >Short Description</label
-          >
-          <input
-            type="text"
-            class="form-control"
-            id="shortDescription"
-            placeholder="Enter a short description"
-          />
-        </div>
-  
-        <div class="col-12">
-          <label for="description" class="form-label">Detailed Description</label>
-          <textarea
-            class="form-control"
-            id="description"
-            rows="4"
-            placeholder="Enter detailed product description"
-          ></textarea>
-        </div>
-  
-        <div class="col-md-4">
-          <label for="price" class="form-label">Price ($)</label>
-          <input
-            type="number"
-            step="0.01"
-            min="0"
-            class="form-control"
-            id="price"
-            placeholder="Enter price"
-            required
-          />
-        </div>
-  
-        <div class="col-md-4">
-          <label for="discount" class="form-label">Discount (%)</label>
-          <input
-            type="number"
-            step="1"
-            min="0"
-            max="100"
-            class="form-control"
-            id="discount"
-            placeholder="Enter discount"
-          />
-        </div>
-  
-        <div class="col-md-2 d-flex align-items-center">
-          <div class="form-check mt-4">
-            <input class="form-check-input" type="checkbox" id="isFeatured" />
-            <label class="form-check-label" for="isFeatured">
-              Featured Product
-            </label>
-          </div>
-        </div>
-  
-        <div class="col-md-2 d-flex align-items-center">
-          <div class="form-check mt-4">
-            <input class="form-check-input" type="checkbox" id="isNew" />
-            <label class="form-check-label" for="isNew">New Product</label>
-          </div>
-        </div>
-  
-        <div class="col-md-6">
-          <label for="category" class="form-label">Category</label>
-          <select id="category" name="category" class="form-select">
-            <option value="" selected>Select category</option>
-            <option value="apple">Apple</option>
-            <option value="vivo">Vivo</option>
-            <option value="oppo">Oppo</option>
-          </select>
-        </div>
-  
-        <div class="col-md-6">
-          <label for="brand" class="form-label">Brand</label>
-          <select id="brand" name="brand" class="form-select">
-            <option value="" selected>Select brand</option>
-            <option value="brand1">Brand 1</option>
-            <option value="brand2">Brand 2</option>
-            <option value="brand3">Brand 3</option>
-          </select>
-        </div>
-  
-        <div class="col-12">
-          <label for="images" class="form-label">Product Images</label>
-          <input
-            class="form-control"
-            type="file"
-            id="images"
-            multiple
-            accept="image/*"
-          />
-          <small class="form-text text-muted"
-            >You can upload multiple images</small
-          >
-        </div>
-  
-        <div class="col-12 d-flex justify-content-end gap-2 mt-3">
-          <button type="submit" class="btn btn-danger">Reset</button>
-          <button type="submit" class="btn btn-primary">Update Product</button>
-        </div>
+  <h3 class="mb-4">Update Product</h3>
+
+  <p-toast />
+
+  <div class="card p-4">
+    <form [formGroup]="productForm" (ngSubmit)="onSubmit()" class="row g-3">
+      <div class="col-md-6">
+        <label for="name" class="form-label">Product Name</label>
+        <input
+          pInputText
+          id="name"
+          placeholder="Enter product name"
+          formControlName="name"
+          class="form-control"
+          [ngClass]="{ 'ng-invalid': isInvalid('name') }"
+        />
+        @if (isInvalid('name')) {
+        <p-message severity="error" size="small" variant="simple">
+          Product name is required.
+        </p-message>
+        }
+      </div>
+
+      <div class="col-md-6">
+        <label for="shortDescription" class="form-label"
+          >Short Description</label
+        >
+        <input
+          pInputText
+          id="shortDescription"
+          placeholder="Enter short description"
+          formControlName="shortDescription"
+          class="form-control"
+        />
+        @if (isInvalid('shortDescription')) {
+        <p-message severity="error" size="small" variant="simple">
+          Short Description is required.
+        </p-message>
+        }
+      </div>
+
+      <div class="col-12">
+        <label for="description" class="form-label">Detailed Description</label>
+        <textarea
+          pInputTextarea
+          id="description"
+          rows="4"
+          placeholder="Enter detailed product description"
+          formControlName="description"
+          class="form-control"
+        ></textarea>
+        @if (isInvalid('description')) {
+        <p-message severity="error" size="small" variant="simple">
+          Description is required.
+        </p-message>
+        }
+      </div>
+
+      <div class="col-md-4">
+        <label for="price" class="form-label">Price ($)</label>
+        <input
+          pInputText
+          type="number"
+          id="price"
+          placeholder="Enter price"
+          formControlName="price"
+          class="form-control"
+        />
+        @if (isInvalid('price')) {
+        <p-message severity="error" size="small" variant="simple">
+          Price is required.
+        </p-message>
+        }
+      </div>
+
+      <div class="col-md-4">
+        <label for="discount" class="form-label">Discount (%)</label>
+        <input
+          pInputText
+          type="number"
+          id="discount"
+          placeholder="Enter discount"
+          formControlName="discount"
+          class="form-control"
+        />
+        @if (isInvalid('discount')) {
+        <p-message severity="error" size="small" variant="simple">
+          Discount is required.
+        </p-message>
+        }
+      </div>
+
+      <div class="col-md-2 d-flex align-items-center">
+        <p-checkbox
+          inputId="isFeatured"
+          binary="true"
+          formControlName="isFeatured"
+        ></p-checkbox>
+        <label for="isFeatured" class="ms-2 mt-1">Featured</label>
+      </div>
+
+      <div class="col-md-2 d-flex align-items-center">
+        <p-checkbox
+          inputId="isNew"
+          binary="true"
+          formControlName="isNew"
+        ></p-checkbox>
+        <label for="isNew" class="ms-2 mt-1">New</label>
+      </div>
+
+      <div class="col-md-6">
+        <label for="category" class="form-label">Category</label>
+        <p-select
+          [options]="categories"
+          optionLabel="label"
+          formControlName="category"
+          placeholder="Select a category"
+          class="w-100"
+        ></p-select>
+        @if (isInvalid('category')) {
+        <p-message severity="error" size="small" variant="simple">
+          Category is required.
+        </p-message>
+        }
+      </div>
+
+      <div class="col-md-6">
+        <label for="brand" class="form-label">Brand</label>
+        <p-select
+          [options]="brands"
+          optionLabel="label"
+          formControlName="brand"
+          placeholder="Select a brand"
+          class="w-100"
+        ></p-select>
+        @if (isInvalid('brand')) {
+        <p-message severity="error" size="small" variant="simple">
+          Brand is required.
+        </p-message>
+        }
+      </div>
+
+      <div class="col-12">
+        <label for="images" class="form-label">Product Images</label>
+        <input
+          type="file"
+          id="images"
+          class="form-control"
+          multiple
+          (change)="onFileChange($event)"
+        />
+        @if (isInvalid('images')) {
+        <p-message severity="error" size="small" variant="simple">
+          Image is required.
+        </p-message>
+        }
+      </div>
+
+      <div class="d-flex gap-2 justify-content-end">
+        <button pButton severity="danger" type="reset">
+          <span pButtonLabel>Reset</span>
+        </button>
+        <button pButton severity="secondary" type="add">
+          <span pButtonLabel>Add</span>
+        </button>
       </div>
     </form>
   </div>
-  
+</div>
