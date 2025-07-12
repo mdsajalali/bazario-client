@@ -25,9 +25,9 @@
           </p-inputicon>
           <input
             pInputText
-            type="text"
-            [value]="getGlobalFilterValue(dt1.filters?.['global'])"
-            (input)="dt1.filterGlobal($any($event.target).value, 'contains')"
+            type="search"
+            [(ngModel)]="globalFilterValue"
+            (ngModelChange)="dt1.filterGlobal(globalFilterValue, 'contains')"
             placeholder="Global Search"
           />
         </p-iconfield>
@@ -35,18 +35,12 @@
 
       <ng-template #header>
         <tr>
-          <th pSortableColumn="orderId">
-            Order ID <p-sortIcon field="orderId" />
-          </th>
-          <th pSortableColumn="customer">
-            Customer <p-sortIcon field="customer" />
-          </th>
-          <th pSortableColumn="paymentType">
-            Payment Type <p-sortIcon field="paymentType" />
-          </th>
-          <th pSortableColumn="date">Date <p-sortIcon field="date" /></th>
-          <th pSortableColumn="total">Total <p-sortIcon field="total" /></th>
-          <th pSortableColumn="status">Status <p-sortIcon field="status" /></th>
+          <th>Order ID</th>
+          <th>Customer</th>
+          <th>Payment Type</th>
+          <th>Date</th>
+          <th>Total</th>
+          <th>Status</th>
           <th>Actions</th>
         </tr>
       </ng-template>
@@ -59,18 +53,12 @@
           <td>{{ order.date }}</td>
           <td>${{ order.total }}</td>
           <td>
-            <select class="form-select form-select-sm">
-              <option [selected]="order.status === 'Completed'">
-                Completed
-              </option>
-              <option [selected]="order.status === 'Pending'">Pending</option>
-              <option [selected]="order.status === 'Cancelled'">
-                Cancelled
-              </option>
-              <option [selected]="order.status === 'Processing'">
-                Processing
-              </option>
-            </select>
+            <p-select
+              [options]="cities"
+              [(ngModel)]="selectedCity"
+              optionLabel="name"
+              class="w-100"
+            />
           </td>
           <td>
             <button class="btn btn-sm btn-danger" title="Delete">

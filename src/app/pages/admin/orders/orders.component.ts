@@ -4,6 +4,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { InputTextModule } from 'primeng/inputtext';
 import { IconField } from 'primeng/iconfield';
 import { InputIcon } from 'primeng/inputicon';
+import { SelectModule } from 'primeng/select';
+import { FormsModule } from '@angular/forms';
 
 interface Order {
   orderId: string;
@@ -12,6 +14,11 @@ interface Order {
   date: string;
   total: number;
   status: string;
+}
+
+interface City {
+  name: string;
+  code: string;
 }
 
 @Component({
@@ -24,15 +31,30 @@ interface Order {
     InputTextModule,
     IconField,
     InputIcon,
+    SelectModule,
+    FormsModule,
   ],
 })
 export class OrdersComponent implements OnInit {
   orders!: Order[];
+  cities: City[] | undefined;
+  selectedCity!: City;
+  globalFilterValue: string = '';
 
   selectedOrder!: Order;
 
   ngOnInit() {
     this.getOrders().then((data) => (this.orders = data));
+
+    this.cities = [
+      { name: 'New York', code: 'NY' },
+      { name: 'Rome', code: 'RM' },
+      { name: 'London', code: 'LDN' },
+      { name: 'Istanbul', code: 'IST' },
+      { name: 'Paris', code: 'PRS' },
+    ];
+
+    this.selectedCity = this.cities[1];
   }
 
   getOrders(): Promise<Order[]> {
