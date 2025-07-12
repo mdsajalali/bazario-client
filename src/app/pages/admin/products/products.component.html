@@ -1,21 +1,32 @@
 <div class="container-fluid py-4">
-  <h3 class="mb-4">Product Management</h3>
+  <h4 class="mb-4">Product Management</h4>
 
-  <div class="row mb-3">
-    <div class="col-md-4">
-      <input
-        type="text"
-        class="form-control"
-        placeholder="Search by name, brand, category..."
-      />
-    </div>
-  </div>
-
-  <div class="table-responsive">
-    <table
-      class="table table-bordered table-hover align-middle text-center product-table"
+  <div class="card">
+    <p-table
+      #dt1
+      [value]="products"
+      [globalFilterFields]="['name', 'brand', 'category', 'shortDesc']"
+      [rows]="5"
+      [paginator]="true"
+      stateStorage="session"
+      stateKey="product-management"
     >
-      <thead class="table-dark">
+      <ng-template #caption>
+        <p-iconfield iconPosition="left">
+          <p-inputicon>
+            <i class="pi pi-search"></i>
+          </p-inputicon>
+          <input
+            pInputText
+            type="search"
+            [(ngModel)]="globalFilterValue"
+            (ngModelChange)="dt1.filterGlobal(globalFilterValue, 'contains')"
+            placeholder="Search by name, brand, category..."
+          />
+        </p-iconfield>
+      </ng-template>
+
+      <ng-template pTemplate="header">
         <tr>
           <th>#</th>
           <th>Name</th>
@@ -29,73 +40,59 @@
           <th>New</th>
           <th>Actions</th>
         </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>1</td>
-          <td>Smartphone</td>
-          <td>
-            <div class="image-preview">
-              <img src="https://via.placeholder.com/40" alt="img1" />
-            </div>
-          </td>
-          <td>Latest model</td>
-          <td>$500</td>
-          <td>10%</td>
-          <td>Samsung</td>
-          <td>Electronics</td>
-          <td><span class="badge bg-success">Yes</span></td>
-          <td><span class="badge bg-info">Yes</span></td>
+      </ng-template>
 
+      <ng-template pTemplate="body" let-product let-rowIndex="rowIndex">
+        <tr>
+          <td>{{ rowIndex + 1 }}</td>
+          <td>{{ product.name }}</td>
           <td>
-            <a class="btn btn-sm btn-warning me-1" title="Edit" routerLink="/dashboard/product/edit/123">✏️</a>
-            <button class="btn btn-sm btn-danger" title="Delete">🗑️</button>
+            <img
+              [src]="product.image"
+              alt="Product Image"
+              width="40"
+              height="40"
+            />
+          </td>
+          <td>{{ product.shortDesc }}</td>
+          <td>${{ product.price }}</td>
+          <td>{{ product.discount }}%</td>
+          <td>{{ product.brand }}</td>
+          <td>{{ product.category }}</td>
+          <td>
+            <span
+              class="badge"
+              [ngClass]="product.featured ? 'bg-success' : 'bg-secondary'"
+              >{{ product.featured ? "Yes" : "No" }}</span
+            >
+          </td>
+          <td>
+            <span
+              class="badge"
+              [ngClass]="product.isNew ? 'bg-success' : 'bg-secondary'"
+              >{{ product.isNew ? "Yes" : "No" }}</span
+            >
+          </td>
+          <td>
+            <a
+              class="btn btn-sm btn-warning me-1"
+              title="Edit"
+              routerLink="/dashboard/product/edit/123"
+            >
+              <i class="pi pi-pen-to-square mt-1"></i>
+            </a>
+            <button class="btn btn-sm btn-danger" title="Delete">
+              <i class="pi pi-trash mt-1"></i>
+            </button>
           </td>
         </tr>
-        <tr>
-          <td>1</td>
-          <td>Smartphone</td>
-          <td>
-            <div class="image-preview">
-              <img src="https://via.placeholder.com/40" alt="img1" />
-            </div>
-          </td>
-          <td>Latest model</td>
-          <td>$500</td>
-          <td>10%</td>
-          <td>Samsung</td>
-          <td>Electronics</td>
-          <td><span class="badge bg-success">Yes</span></td>
-          <td><span class="badge bg-info">Yes</span></td>
+      </ng-template>
 
-          <td>
-            <a class="btn btn-sm btn-warning me-1" title="Edit" routerLink="/dashboard/product/edit/123">✏️</a>
-            <button class="btn btn-sm btn-danger" title="Delete">🗑️</button>
-          </td>
-        </tr>
+      <ng-template pTemplate="emptymessage">
         <tr>
-          <td>1</td>
-          <td>Smartphone</td>
-          <td>
-            <div class="image-preview">
-              <img src="https://via.placeholder.com/40" alt="img1" />
-            </div>
-          </td>
-          <td>Latest model</td>
-          <td>$500</td>
-          <td>10%</td>
-          <td>Samsung</td>
-          <td>Electronics</td>
-          <td><span class="badge bg-success">Yes</span></td>
-          <td><span class="badge bg-info">Yes</span></td>
-
-          <td>
-            <a class="btn btn-sm btn-warning me-1" title="Edit" routerLink="/dashboard/product/edit/123">✏️</a>
-            <button class="btn btn-sm btn-danger" title="Delete">🗑️</button>
-          </td>
+          <td colspan="11">No products found.</td>
         </tr>
-      </tbody>
-    </table>
+      </ng-template>
+    </p-table>
   </div>
-
 </div>
