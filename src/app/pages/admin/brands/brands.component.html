@@ -1,77 +1,66 @@
 <div class="container-fluid py-4">
-  <h3 class="mb-4">Brand Management</h3>
+  <h4 class="mb-4">Brand Management</h4>
 
-  <div class="row mb-3">
-    <div class="col-md-4">
-      <input
-        type="text"
-        class="form-control"
-        placeholder="Search by brand..."
-      />
-    </div>
-  </div>
-
-  <div class="table-responsive">
-    <table
-      class="table table-bordered table-hover align-middle text-center product-table"
+  <div class="card">
+    <p-table
+      #dt1
+      [value]="orders"
+      [globalFilterFields]="['brandId', 'name', 'date']"
+      [rows]="5"
+      [paginator]="true"
+      dataKey="brandId"
+      stateStorage="session"
+      stateKey="order-management"
     >
-      <thead class="table-dark">
+      <ng-template #caption>
+        <p-iconfield iconPosition="left">
+          <p-inputicon>
+            <i class="pi pi-search"></i>
+          </p-inputicon>
+          <input
+            pInputText
+            type="search"
+            [(ngModel)]="globalFilterValue"
+            (ngModelChange)="dt1.filterGlobal(globalFilterValue, 'contains')"
+            placeholder="Global Search"
+          />
+        </p-iconfield>
+      </ng-template>
+
+      <ng-template #header>
         <tr>
-          <th>#</th>
+          <th>Brand ID</th>
           <th>Name</th>
-          <th>Created At</th>
+          <th>Date</th>
           <th>Actions</th>
         </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>1</td>
-          <td>Smartphone</td>
-          <td>2025-06-28</td>
-          <td>
-            <a
-              class="btn btn-sm btn-warning me-1"
-              title="Edit"
-              routerLink="/dashboard/brand/edit/123"
-            >
-              ✏️
-            </a>
-            <button class="btn btn-sm btn-danger" title="Delete">🗑️</button>
-          </td>
-        </tr>
-        <tr>
-          <td>2</td>
-          <td>Smartphone</td>
-          <td>2025-06-28</td>
-          <td>
-            <a
-              class="btn btn-sm btn-warning me-1"
-              title="Edit"
-              routerLink="/dashboard/brand/edit/123"
-            >
-              ✏️
-            </a>
-            <button class="btn btn-sm btn-danger" title="Delete">🗑️</button>
-          </td>
-        </tr>
-        <tr>
-          <td>3</td>
-          <td>Smartphone</td>
-          <td>2025-06-28</td>
-          <td>
-            <a
-              class="btn btn-sm btn-warning me-1"
-              title="Edit"
-              routerLink="/dashboard/brand/edit/123"
-            >
-              ✏️
-            </a>
-            <button class="btn btn-sm btn-danger" title="Delete">🗑️</button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+      </ng-template>
 
-  <app-pagination />
+      <ng-template #body let-order>
+        <tr>
+          <td>{{ order.brandId }}</td>
+          <td>{{ order.name }}</td>
+          <td>{{ order.date }}</td>
+          <td>
+            <a
+              class="btn btn-sm btn-warning me-1"
+              title="Edit"
+              routerLink="/dashboard/brand/edit/123"
+            >
+              <i class="pi pi-pen-to-square mt-1"></i>
+            </a>
+            <button class="btn btn-sm btn-danger" title="Delete">
+              <i class="pi pi-trash mt-1"></i>
+            </button>
+          </td>
+        </tr>
+      </ng-template>
+
+      <ng-template emptymessage>
+        <tr>
+          <td colspan="7">No brands found.</td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
 </div>
