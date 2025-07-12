@@ -1,1 +1,66 @@
-<p>footer works!</p>
+<footer class="footer bg-light py-5">
+  <div class="container">
+    <div class="row gy-4">
+      <!-- About -->
+      <div class="col-12 col-md-6 col-lg-3">
+        <h5 class="text-primary" routerLink="/">Bazario</h5>
+        <p class="text-muted">
+          Your one-stop shop for quality products. Great deals & fast delivery.
+        </p>
+      </div>
+
+      <!-- Quick Links -->
+      <div class="col-6 col-md-3 col-lg-2">
+        <h6 class="text-dark">Quick Links</h6>
+        <ul class="list-unstyled">
+          <li><a routerLink="/" class="footer-link">Home</a></li>
+          <li><a routerLink="/shop" class="footer-link">Shop</a></li>
+          <li>
+            <a routerLink="/categories" class="footer-link">Categories</a>
+          </li>
+          <li><a routerLink="/about" class="footer-link">About Us</a></li>
+        </ul>
+      </div>
+
+      <!-- Support -->
+      <div class="col-6 col-md-3 col-lg-2">
+        <h6 class="text-dark">Support</h6>
+        <ul class="list-unstyled">
+          <li><a routerLink="/contact" class="footer-link">Contact</a></li>
+          <li><a href="#" class="footer-link">Privacy Policy</a></li>
+          <li><a href="#" class="footer-link">Returns</a></li>
+          <li><a href="#" class="footer-link">Terms</a></li>
+        </ul>
+      </div>
+
+      <!-- Newsletter -->
+      <div class="col-12 col-md-6 col-lg-5">
+        <h6 class="text-dark">Newsletter</h6>
+        <p class="text-muted">Subscribe for updates and offers.</p>
+        <form class="d-flex flex-column flex-sm-row gap-2">
+          <input type="email" class="form-control" placeholder="Your email" />
+          <button type="submit" class="btn btn-primary">Subscribe</button>
+        </form>
+
+        <div class="mt-3">
+          <a href="#" class="me-2 text-dark"
+            ><i class="pi pi-facebook fs-5"></i
+          ></a>
+          <a href="#" class="me-2 text-dark"
+            ><i class="pi pi-instagram fs-5"></i
+          ></a>
+          <a href="#" class="me-2 text-dark"
+            ><i class="pi pi-twitter fs-5"></i
+          ></a>
+          <a href="#" class="text-dark"><i class="pi pi-youtube fs-5"></i></a>
+        </div>
+      </div>
+    </div>
+
+    <hr class="my-4" />
+
+    <div class="text-center text-muted small">
+      &copy; 2025 Bazario. All rights reserved.
+    </div>
+  </div>
+</footer>

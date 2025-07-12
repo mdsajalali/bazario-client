@@ -1,0 +1,27 @@
+.footer {
+  .footer-link {
+    display: block;
+    color: #333;
+    font-size: 0.95rem;
+    margin-bottom: 0.5rem;
+    text-decoration: none;
+    transition: color 0.3s;
+
+    &:hover {
+      color: #4f46e5;
+    }
+  }
+
+  form {
+    input {
+      min-width: 0;
+    }
+  }
+
+  i {
+    transition: color 0.3s;
+    &:hover {
+      color: #4f46e5;
+    }
+  }
+}
