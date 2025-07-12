@@ -43,6 +43,16 @@
     </div>
   </div>
 
+  <div class="card border border-white">
+    <h4 class="mt-4">Quarterly Sales Overview</h4>
+    <p-chart
+      type="bar"
+      [data]="basicData"
+      [options]="basicOptions"
+       class="h-25"
+    />
+  </div>
+
   <div class="mt-5">
     <app-orders />
   </div>
