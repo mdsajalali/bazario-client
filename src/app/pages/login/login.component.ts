@@ -25,6 +25,7 @@ import { MessageService } from 'primeng/api';
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
+  providers: [MessageService],
 })
 export class LoginComponent {
   messageService = inject(MessageService);
@@ -35,8 +36,8 @@ export class LoginComponent {
 
   constructor(private fb: FormBuilder) {
     this.loginForm = this.fb.group({
-      username: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
+      password: ['', Validators.required],
     });
   }
 
@@ -49,6 +50,7 @@ export class LoginComponent {
         detail: 'Form Submitted',
         life: 3000,
       });
+      console.log("Login Value", this.loginForm.value)
       this.loginForm.reset();
       this.formSubmitted = false;
     }
