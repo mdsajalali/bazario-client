@@ -47,10 +47,10 @@ export class LoginComponent {
       this.messageService.add({
         severity: 'success',
         summary: 'Success',
-        detail: 'Form Submitted',
+        detail: 'Login Successfully!',
         life: 3000,
       });
-      console.log("Login Value", this.loginForm.value)
+      console.log('Login Value', this.loginForm.value);
       this.loginForm.reset();
       this.formSubmitted = false;
     }

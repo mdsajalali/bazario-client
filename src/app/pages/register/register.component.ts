@@ -1,34 +1,64 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { InputTextModule } from 'primeng/inputtext';
 import {
   FormBuilder,
   FormGroup,
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { ButtonModule } from 'primeng/button';
+import { MessageModule } from 'primeng/message';
 import { RouterLink } from '@angular/router';
+import { ToastModule } from 'primeng/toast';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-register',
-  imports: [ReactiveFormsModule, RouterLink],
+  imports: [
+    ReactiveFormsModule,
+    InputTextModule,
+    ButtonModule,
+    MessageModule,
+    RouterLink,
+    ToastModule,
+    MessageModule,
+  ],
   templateUrl: './register.component.html',
   styleUrl: './register.component.scss',
+  providers: [MessageService],
 })
 export class RegisterComponent {
-  registerForm!: FormGroup;
+  messageService = inject(MessageService);
+
+  registerForm: FormGroup;
+
+  formSubmitted = false;
 
   constructor(private fb: FormBuilder) {
     this.registerForm = this.fb.group({
-      name: ['', [Validators.required]],
-      email: ['', [Validators.email, Validators.required]],
-      password: ['', [Validators.required, Validators.minLength(8)]],
+      name: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', Validators.required],
     });
   }
 
   onSubmit() {
+    this.formSubmitted = true;
     if (this.registerForm.valid) {
-      console.log('Register', this.registerForm.value);
-    } else {
-      this.registerForm.markAsTouched();
+      this.messageService.add({
+        severity: 'success',
+        summary: 'Success',
+        detail: 'User Created Successfully!',
+        life: 3000,
+      });
+      console.log('Register Value', this.registerForm.value);
+      this.registerForm.reset();
+      this.formSubmitted = false;
     }
+  }
+
+  isInvalid(controlName: string) {
+    const control = this.registerForm.get(controlName);
+    return control?.invalid && (control.touched || this.formSubmitted);
   }
 }

@@ -9,13 +9,14 @@
         class="flex flex-col gap-4 w-full sm:w-56"
       >
         <div class="flex flex-col gap-1 mt-2">
+           <label for="email">Email</label>
           <input
             pInputText
             type="email"
             id="email"
-            placeholder="Email"
+            placeholder="Enter your email"
             formControlName="email"
-            class="w-100"
+            class="w-100 mt-1"
             [invalid]="isInvalid('email')"
           />
           @if (isInvalid('email')) { @if
@@ -30,18 +31,19 @@
           } }
         </div>
         <div class="flex flex-col gap-1 my-3">
+           <label for="password">Password</label>
           <input
             pInputText
             type="password"
             id="password"
-            placeholder="password"
+            placeholder="Enter your password"
             formControlName="password"
-            class="w-100"
+            class="w-100 mt-1"
             [invalid]="isInvalid('password')"
           />
           @if (isInvalid('password')) {
           <p-message severity="error" size="small" variant="simple"
-            >password is required.</p-message
+            >Password is required.</p-message
           >
           }
         </div>

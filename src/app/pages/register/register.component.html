@@ -1,69 +1,77 @@
 <div class="container d-flex justify-content-center align-items-center vh-100">
   <div class="col-md-5 shadow p-4 rounded">
-      <h3 class="">Create an Account</h3>
-      <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
-        <div class="mb-3">
-          <label for="name" class="form-label">Name</label>
+    <h4>Create an Account</h4>
+    <p-toast />
+    <div class="card flex justify-center border border-white">
+      <form
+        [formGroup]="registerForm"
+        (ngSubmit)="onSubmit()"
+        class="flex flex-col gap-4 w-full sm:w-56"
+      >
+        <div class="flex flex-col gap-1 mt-2">
+          <label for="name">Name</label>
           <input
-            id="name"
+            pInputText
             type="text"
+            id="name"
+            placeholder="Enter your name"
             formControlName="name"
-            class="form-control"
-            placeholder="Enter name"
+            class="w-100 mt-1"
+            [invalid]="isInvalid('name')"
           />
-          @if(registerForm.get("name")?.touched &&
-          registerForm.get("name")?.hasError("required")){
-          <div class="text-danger">Name is required.</div>
+          @if (isInvalid('name')) {
+          <p-message severity="error" size="small" variant="simple"
+            >Name is required.</p-message
+          >
           }
         </div>
-
-        <div class="mb-3">
-          <label for="email" class="form-label">Email address</label>
+        <div class="flex flex-col gap-1 mt-2">
+          <label for="email">Email</label>
           <input
-            id="email"
+            pInputText
             type="email"
+            id="email"
+            placeholder="Enter your email"
             formControlName="email"
-            class="form-control"
-            placeholder="Enter email"
+            class="w-100 mt-1"
+            [invalid]="isInvalid('email')"
           />
-
-          @if(registerForm.get("email")?.touched &&
-          registerForm.get("email")?.hasError("required")){
-          <div class="text-danger">Email is required.</div>
-          }
+          @if (isInvalid('email')) { @if
+          (registerForm.get('email')?.errors?.['required']) {
+          <p-message severity="error" size="small" variant="simple"
+            >Email is required.</p-message
+          >
+          } @if (registerForm.get('email')?.errors?.['email']) {
+          <p-message severity="error" size="small" variant="simple"
+            >Please enter a valid email.</p-message
+          >
+          } }
         </div>
-
-        <div class="mb-3">
-          <label for="password" class="form-label">Password</label>
+        <div class="flex flex-col gap-1 my-3">
+          <label for="password">Password</label>
           <input
-            id="password"
+            pInputText
             type="password"
+            id="password"
+            placeholder="Enter your password"
             formControlName="password"
-            class="form-control"
-            placeholder="Enter password"
+            class="w-100 mt-1"
+            [invalid]="isInvalid('password')"
           />
-
-          @if(registerForm.get("password")?.touched &&
-          registerForm.get("password")?.hasError("required")){
-          <div class="text-danger">Password is required.</div>
-          } @if(registerForm.get("password")?.touched &&
-          registerForm.get("password")?.hasError("minlength")){
-          <div class="text-danger">Password must be at least 8 characters.</div>
+          @if (isInvalid('password')) {
+          <p-message severity="error" size="small" variant="simple"
+            >Password is required.</p-message
+          >
           }
         </div>
-
-        <div class="mb-3">
-          <button
-            type="submit"
-            class="w-100 btn btn-success"
-            [disabled]="registerForm.invalid"
-          >Register</button>
-        </div>
-
-        <div class="text-center">
-          <span>Already have an account?</span>
-          <a class="ms-1" routerLink="/login">Login</a>
-        </div>
+        <button pButton severity="secondary" class="w-100" type="register">
+          <span pButtonLabel>Register</span>
+        </button>
       </form>
+      <div class="text-center mt-4">
+        <span>Already have an account?</span>
+        <a class="ms-1" routerLink="/login">Login</a>
+      </div>
     </div>
   </div>
+</div>
