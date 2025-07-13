@@ -16,6 +16,7 @@ import { UpdateCategoryComponent } from './pages/admin/update-category/update-ca
 import { UpdateProductComponent } from './pages/admin/update-product/update-product.component';
 import { AboutComponent } from './pages/about/about.component';
 import { ContactComponent } from './pages/contact/contact.component';
+import { ProductDetailsComponent } from './components/product-details/product-details.component';
 
 export const routes: Routes = [
   {
@@ -77,6 +78,10 @@ export const routes: Routes = [
   {
     path: 'about',
     component: AboutComponent,
+  },
+  {
+    path: 'product/:id',
+    component: ProductDetailsComponent,
   },
   {
     path: 'contact',
