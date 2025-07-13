@@ -17,6 +17,8 @@ import { UpdateProductComponent } from './pages/admin/update-product/update-prod
 import { AboutComponent } from './pages/about/about.component';
 import { ContactComponent } from './pages/contact/contact.component';
 import { ProductDetailsComponent } from './components/product-details/product-details.component';
+import { CartComponent } from './pages/cart/cart.component';
+import { WishlistComponent } from './pages/wishlist/wishlist.component';
 
 export const routes: Routes = [
   {
@@ -78,6 +80,14 @@ export const routes: Routes = [
   {
     path: 'about',
     component: AboutComponent,
+  },
+  {
+    path: 'cart',
+    component: CartComponent,
+  },
+  {
+    path: 'wishlist',
+    component: WishlistComponent,
   },
   {
     path: 'product/:id',
