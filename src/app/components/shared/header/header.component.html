@@ -34,10 +34,13 @@
         >
           <div class="d-flex align-items-center gap-2">
             <input
-              type="text"
+              type="search"
               class="form-control"
               placeholder="Search products..."
+              [(ngModel)]="searchValue"
+              (keydown.enter)="onSearchEnter()"
             />
+
             <button
               class="btn btn-sm btn-outline-secondary"
               (click)="toggleSearch()"

@@ -1,22 +1,33 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { Component, inject } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-header',
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, FormsModule],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
 })
 export class HeaderComponent {
-  cartCount = 0;
-  wishlistCount = 0;
   isSearchOpen = false;
+  searchValue: string = '';
+  router = inject(Router);
+
+  onSearchEnter() {
+    if (this.searchValue.trim()) {
+      this.router.navigate(['/search'], {
+        queryParams: { q: this.searchValue.trim() },
+      });
+    } else {
+      console.log('Search input is empty');
+    }
+  }
 
   toggleSearch() {
     this.isSearchOpen = !this.isSearchOpen;
   }
-  
+
   isMenuOpen = false;
 
   toggleMenu(): void {
