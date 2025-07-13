@@ -5,10 +5,11 @@ import { BannerComponent } from "../../components/banner/banner.component";
 import { ShopCategoryComponent } from "../../components/shop-category/shop-category.component";
 import { FeaturedProductsComponent } from "../../components/featured-products/featured-products.component";
 import { RecentProductsComponent } from "../../components/recent-products/recent-products.component";
+import { ShopBrandsComponent } from "../../components/shop-brands/shop-brands.component";
 
 @Component({
   selector: 'app-home',
-  imports: [HeaderComponent, FooterComponent, BannerComponent, ShopCategoryComponent, FeaturedProductsComponent, RecentProductsComponent],
+  imports: [HeaderComponent, FooterComponent, BannerComponent, ShopCategoryComponent, FeaturedProductsComponent, RecentProductsComponent, ShopBrandsComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })

@@ -1,0 +1,22 @@
+.brand-grid {
+  .col-lg-1-5 {
+    flex: 0 0 12.5%;
+    max-width: 12.5%;
+  }
+}
+
+.brand-card {
+  background-color: #fff;
+  transition: transform 0.3s ease;
+  cursor: pointer;
+
+  img {
+    max-height: 80px;
+    max-width: 100%;
+    object-fit: contain;
+  }
+
+  &:hover {
+    transform: scale(1.05);
+  }
+}
