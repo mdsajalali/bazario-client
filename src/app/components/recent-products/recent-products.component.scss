@@ -1,0 +1,15 @@
+$primary-color: #4f46e5;
+$dark-text: #111;
+
+:host ::ng-deep .p-carousel-item {
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+
+.text-color {
+  color: $dark-text;
+}
+
+.bg-color {
+  background: $primary-color !important;
+}
