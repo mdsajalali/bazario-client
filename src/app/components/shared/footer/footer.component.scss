@@ -15,6 +15,11 @@ $transition: 0.3s;
     }
   }
 
+  .logo {
+    color: $primary-color;
+    cursor: pointer;
+  }
+
   form {
     input {
       min-width: 0;
