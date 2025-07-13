@@ -1,4 +1,66 @@
 .carousel_container {
-  height: calc(100vh - 72.8px);
+  height: 80vh;
+  border-radius: 10px;
+
+  .carousel-item,
+  .carousel-item img {
+    height: 80vh;
+    object-fit: cover;
+  }
+}
+
+.side-img-container {
+  height: 39.5vh;
+  border-radius: 10px;
+}
+
+.side-img {
+  height: 39.5vh;
+  width: 100%;
   object-fit: cover;
+}
+
+/* Responsive adjustments */
+@media (max-width: 991.98px) {
+  .carousel_container,
+  .carousel_container .carousel-item,
+  .carousel_container .carousel-item img {
+    height: 50vh; /* smaller height on tablets and below */
+  }
+
+  .side-img-container,
+  .side-img {
+    height: 25vh; /* smaller stacked images */
+  }
+}
+
+@media (max-width: 575.98px) {
+  .carousel_container,
+  .carousel_container .carousel-item,
+  .carousel_container .carousel-item img {
+    height: 40vh;
+  }
+
+  .side-img-container,
+  .side-img {
+    height: 20vh;
+  }
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: rgba(128, 128, 128, 0.6);
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  width: 20px;
+  height: 20px;
+  background-size: 20px 20px;
+  filter: brightness(0) invert(1);
 }
