@@ -9,6 +9,14 @@ import { RouterModule } from '@angular/router';
   styleUrl: './header.component.scss',
 })
 export class HeaderComponent {
+  cartCount = 0;
+  wishlistCount = 0;
+  isSearchOpen = false;
+
+  toggleSearch() {
+    this.isSearchOpen = !this.isSearchOpen;
+  }
+  
   isMenuOpen = false;
 
   toggleMenu(): void {

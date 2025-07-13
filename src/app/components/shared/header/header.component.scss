@@ -50,21 +50,21 @@ $transition: 0.3s;
         }
       }
     }
+  }
 
-    .login-btn {
-      padding: 0.5rem 1rem;
-      background-color: $primary-color;
-      color: $light-bg;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      transition: background-color $transition;
-      text-decoration: none;
-      font-weight: 500;
+  .login-btn {
+    padding: 0.5rem 1rem;
+    background-color: $primary-color;
+    color: $light-bg;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color $transition;
+    text-decoration: none;
+    font-weight: 500;
 
-      &:hover {
-        background-color: darken($primary-color, 5%);
-      }
+    &:hover {
+      background-color: darken($primary-color, 5%);
     }
   }
 
@@ -129,5 +129,37 @@ $transition: 0.3s;
 
   .menu-toggle {
     display: flex;
+  }
+}
+
+
+.icon-group {
+  .icon-wrapper {
+    cursor: pointer;
+
+    .badge {
+      position: absolute;
+      top: -6px;
+      right: -10px;
+      background-color: #4f46e5;
+      color: #fff;
+      font-size: 0.65rem;
+      padding: 2px 5px;
+      border-radius: 50%;
+      line-height: 1;
+    }
+  }
+
+  .search-popup {
+    z-index: 1050;
+    width: 250px;
+
+    input {
+      flex: 1;
+    }
+
+    .btn {
+      padding: 4px 8px;
+    }
   }
 }
