@@ -7,10 +7,11 @@ import { FeaturedProductsComponent } from "../../components/featured-products/fe
 import { RecentProductsComponent } from "../../components/recent-products/recent-products.component";
 import { ShopBrandsComponent } from "../../components/shop-brands/shop-brands.component";
 import { BlogsComponent } from "../../components/blogs/blogs.component";
+import { HomeProductsComponent } from "../../components/home-products/home-products.component";
 
 @Component({
   selector: 'app-home',
-  imports: [HeaderComponent, FooterComponent, BannerComponent, ShopCategoryComponent, FeaturedProductsComponent, RecentProductsComponent, ShopBrandsComponent, BlogsComponent],
+  imports: [HeaderComponent, FooterComponent, BannerComponent, ShopCategoryComponent, FeaturedProductsComponent, RecentProductsComponent, ShopBrandsComponent, BlogsComponent, HomeProductsComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
