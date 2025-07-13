@@ -18,6 +18,11 @@ interface Order {
 })
 export class CartComponent {
   orders!: Order[];
+  orderStep: number = 0;
+
+  get checkoutOrderStepUpdate() {
+    return (this.orderStep = 1);
+  }
 
   ngOnInit() {
     this.getOrders().then((data) => (this.orders = data));
