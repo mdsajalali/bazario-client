@@ -21,3 +21,10 @@ export interface ProductType {
   categoryId: string;
   brandId: string;
 }
+
+// categories
+export interface CategoriesType {
+  _id: string;
+  name: string;
+  image: string;
+}
