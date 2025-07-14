@@ -22,12 +22,14 @@
             />
             <p-tag
               [value]="product.inventoryStatus"
-              [severity]="getSeverity(product.inventoryStatus)"
               class="position-absolute"
               [ngStyle]="{ 'top.px': 5, 'left.px': 5 }"
             />
           </div>
           <h6 class="mb-2 fw-semibold">{{ product.name }}</h6>
+          <p class="card-text flex-grow-1 text-muted">
+            {{ product.shortDescription }}
+          </p>
           <div class="d-flex align-items-center justify-content-around">
             <div class="text-color fw-bold mb-2">${{ product.price }}</div>
             <div class="d-flex justify-content-center gap-2">

@@ -18,7 +18,7 @@ export class HomeProductsComponent implements OnInit {
 
   ngOnInit() {
     this.productService.getProducts().subscribe({
-      next: (result) => {
+      next: (result : any) => {
         this.products = result;
         this.loading = false;
       },

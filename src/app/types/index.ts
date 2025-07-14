@@ -20,6 +20,8 @@ export interface ProductType {
   images: string[];
   categoryId: string;
   brandId: string;
+  isNew: boolean;
+  isFeatured: boolean;
 }
 
 // categories
