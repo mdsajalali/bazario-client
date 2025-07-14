@@ -1,28 +1,29 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { Carousel } from 'primeng/carousel';
 import { ButtonModule } from 'primeng/button';
-import { Tag } from 'primeng/tag';
-import { NgStyle } from '@angular/common';
 import { ProductType } from '../../types';
 import { ProductsService } from '../../services/products/products.service';
 
 @Component({
   selector: 'app-featured-products',
-  imports: [Carousel, ButtonModule, Tag, NgStyle],
+  imports: [Carousel, ButtonModule],
   templateUrl: './featured-products.component.html',
   styleUrl: './featured-products.component.scss',
 })
 export class FeaturedProductsComponent implements OnInit {
   products: ProductType[] = [];
   productService = inject(ProductsService);
+  loading: boolean = true;
 
   ngOnInit() {
     this.productService.getProducts().subscribe({
       next: (result: any) => {
         this.products = result.filter((p: ProductType) => p.isFeatured);
+        this.loading = false;
       },
       error: (error) => {
         console.log(error);
+        this.loading = false;
       },
     });
   }
