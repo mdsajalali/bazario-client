@@ -7,3 +7,17 @@ export interface AuthResponse {
   token: string;
   message: string;
 }
+
+// product type
+
+export interface ProductType {
+  _id: string;
+  name: string;
+  shortDescription: string;
+  description: string;
+  price: number;
+  discount: number;
+  images: string[];
+  categoryId: string;
+  brandId: string;
+}
