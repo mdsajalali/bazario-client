@@ -8,9 +8,10 @@ import {
 } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
 import { MessageModule } from 'primeng/message';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -29,6 +30,8 @@ import { MessageService } from 'primeng/api';
 })
 export class LoginComponent {
   messageService = inject(MessageService);
+  authService = inject(AuthService);
+  router = inject(Router);
 
   loginForm: FormGroup;
 
@@ -44,15 +47,32 @@ export class LoginComponent {
   onSubmit() {
     this.formSubmitted = true;
     if (this.loginForm.valid) {
-      this.messageService.add({
-        severity: 'success',
-        summary: 'Success',
-        detail: 'Login Successfully!',
-        life: 3000,
+      const value = this.loginForm.value;
+      this.authService.login(value.email, value.password).subscribe({
+        next: (result: any) => {
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Success',
+            detail: result.message,
+            life: 3000,
+          });
+          localStorage.setItem('token', result.token);
+          this.loginForm.reset();
+          this.formSubmitted = false;
+          setTimeout(() => {
+            this.router.navigateByUrl('/');
+          }, 1000);
+        },
+        error: (error) => {
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Login Failed',
+            detail: error?.error?.message || 'Something went wrong!',
+            life: 3000,
+          });
+          this.formSubmitted = false;
+        },
       });
-      console.log('Login Value', this.loginForm.value);
-      this.loginForm.reset();
-      this.formSubmitted = false;
     }
   }
 

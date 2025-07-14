@@ -51,18 +51,29 @@ export class RegisterComponent {
       const value = this.registerForm.value;
       this.authService
         .register(value.name, value.email, value.password)
-        .subscribe((result: any) => {
-          this.messageService.add({
-            severity: 'success',
-            summary: 'Success',
-            detail: result.message,
-            life: 3000,
-          });
-          this.registerForm.reset();
-          this.formSubmitted = false;
-          setTimeout(() => {
-            this.router.navigateByUrl('/login');
-          }, 1000);
+        .subscribe({
+          next: (result: any) => {
+            this.messageService.add({
+              severity: 'success',
+              summary: 'Success',
+              detail: result.message,
+              life: 3000,
+            });
+            this.registerForm.reset();
+            this.formSubmitted = false;
+            setTimeout(() => {
+              this.router.navigateByUrl('/login');
+            }, 1000);
+          },
+          error: (error) => {
+            this.messageService.add({
+              severity: 'error',
+              summary: 'Register Failed',
+              detail: error?.error?.message || 'Something went wrong!',
+              life: 3000,
+            });
+            this.formSubmitted = false;
+          },
         });
     }
   }
