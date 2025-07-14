@@ -14,6 +14,10 @@ export class ProductsService {
     return this.http.get<ProductType>(environment.apiUrl + '/products');
   }
 
+  getProductById(id: string): Observable<ProductType> {
+    return this.http.get<ProductType>(environment.apiUrl + `/products/${id}`);
+  }
+
   getBrands(): Observable<BrandsType> {
     return this.http.get<BrandsType>(environment.apiUrl + '/brands');
   }
