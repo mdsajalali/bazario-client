@@ -8,9 +8,10 @@ import {
 } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
 import { MessageModule } from 'primeng/message';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-register',
@@ -29,6 +30,8 @@ import { MessageService } from 'primeng/api';
 })
 export class RegisterComponent {
   messageService = inject(MessageService);
+  authService = inject(AuthService);
+  router = inject(Router);
 
   registerForm: FormGroup;
 
@@ -45,15 +48,22 @@ export class RegisterComponent {
   onSubmit() {
     this.formSubmitted = true;
     if (this.registerForm.valid) {
-      this.messageService.add({
-        severity: 'success',
-        summary: 'Success',
-        detail: 'User Created Successfully!',
-        life: 3000,
-      });
-      console.log('Register Value', this.registerForm.value);
-      this.registerForm.reset();
-      this.formSubmitted = false;
+      const value = this.registerForm.value;
+      this.authService
+        .register(value.name, value.email, value.password)
+        .subscribe((result: any) => {
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Success',
+            detail: result.message,
+            life: 3000,
+          });
+          this.registerForm.reset();
+          this.formSubmitted = false;
+          setTimeout(() => {
+            this.router.navigateByUrl('/login');
+          }, 1000);
+        });
     }
   }
 
