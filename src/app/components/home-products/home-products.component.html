@@ -5,40 +5,13 @@
   </div>
 
   <div class="row g-4">
-    @for (product of products.slice(0, 8); track product._id) {
+    @if(loading){
+    <p>Loading...</p>
+    } @if(!loading && products.length === 0){
+    <p>No products available.</p>
+    } @for (product of products.slice(0, 8); track product._id) {
     <div class="col-12 col-md-6 col-lg-3">
-      <div class="product-card card h-100 shadow-sm border rounded">
-        <img
-          [src]="product.images[0]"
-          class="card-img-top"
-          [alt]="product.name"
-          loading="lazy"
-          style="object-fit: cover; height: 200px"
-        />
-        <div class="card-body d-flex flex-column">
-          <h5 class="card-title">{{ product.name }}</h5>
-          <p class="card-text flex-grow-1 text-muted">
-            {{ product.shortDescription }}
-          </p>
-          <div class="d-flex justify-content-between align-items-center mt-3">
-            <div class="fw-bold fs-5">${{ product.price }}</div>
-            <div class="d-flex justify-content-center gap-2">
-              <p-button
-                icon="pi pi-heart"
-                severity="secondary"
-                [outlined]="true"
-                size="small"
-                styleClass="p-button-rounded"
-              ></p-button>
-              <p-button
-                icon="pi pi-shopping-cart"
-                size="small"
-                styleClass="p-button-rounded"
-              ></p-button>
-            </div>
-          </div>
-        </div>
-      </div>
+      <app-product-card [product]="product" />
     </div>
     }
   </div>
