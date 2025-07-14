@@ -24,6 +24,13 @@ export interface ProductType {
   isFeatured: boolean;
 }
 
+// brands type
+export interface BrandsType {
+  _id: string;
+  name: string;
+  image: string;
+}
+
 // categories
 export interface CategoriesType {
   _id: string;
