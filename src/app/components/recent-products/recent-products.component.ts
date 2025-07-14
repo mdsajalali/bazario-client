@@ -3,10 +3,11 @@ import { Carousel } from 'primeng/carousel';
 import { ButtonModule } from 'primeng/button';
 import { ProductType } from '../../types';
 import { ProductsService } from '../../services/products/products.service';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-recent-products',
-  imports: [Carousel, ButtonModule],
+  imports: [Carousel, ButtonModule, RouterLink],
   templateUrl: './recent-products.component.html',
   styleUrl: './recent-products.component.scss',
 })
