@@ -5,10 +5,19 @@ import { RecentProductsComponent } from '../recent-products/recent-products.comp
 import { ProductType } from '../../types';
 import { ProductsService } from '../../services/products/products.service';
 import { ActivatedRoute } from '@angular/router';
+import { Carousel, CarouselModule } from 'primeng/carousel';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-product-details',
-  imports: [HeaderComponent, FooterComponent, RecentProductsComponent],
+  imports: [
+    HeaderComponent,
+    FooterComponent,
+    RecentProductsComponent,
+    Carousel,
+    CarouselModule,
+    CommonModule
+  ],
   templateUrl: './product-details.component.html',
   styleUrl: './product-details.component.scss',
 })
@@ -42,4 +51,27 @@ export class ProductDetailsComponent {
     this.selectedImage = image;
     console.log(image);
   }
+
+  responsiveOptions = [
+    {
+      breakpoint: '1400px',
+      numVisible: 4,
+      numScroll: 1,
+    },
+    {
+      breakpoint: '1199px',
+      numVisible: 3,
+      numScroll: 1,
+    },
+    {
+      breakpoint: '767px',
+      numVisible: 2,
+      numScroll: 1,
+    },
+    {
+      breakpoint: '575px',
+      numVisible: 1,
+      numScroll: 1,
+    },
+  ];
 }
