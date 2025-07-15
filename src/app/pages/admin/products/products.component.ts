@@ -47,6 +47,17 @@ export class ProductsComponent {
     });
   }
 
+  deleteProduct(id: string) {
+    this.productService.deleteProduct(id).subscribe({
+      next: (result: any) => {
+        alert(result.message);
+      },
+      error: (error) => {
+        console.log(error);
+      },
+    });
+  }
+
   getGlobalFilterValue(filter: any): string {
     if (filter && !Array.isArray(filter)) {
       return filter.value || '';

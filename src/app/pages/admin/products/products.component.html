@@ -86,7 +86,11 @@
             >
               <i class="pi pi-pen-to-square mt-1"></i>
             </a>
-            <button class="btn btn-sm btn-danger" title="Delete">
+            <button
+              class="btn btn-sm btn-danger"
+              title="Delete"
+              (click)="deleteProduct(product._id)"
+            >
               <i class="pi pi-trash mt-1"></i>
             </button>
           </td>

@@ -20,4 +20,10 @@ export class ProductsService {
       product
     );
   }
+
+  deleteProduct(id: string): Observable<ProductType> {
+    return this.http.delete<ProductType>(
+      environment.apiUrl + `/products/${id}`
+    );
+  }
 }
