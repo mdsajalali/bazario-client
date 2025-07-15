@@ -1,6 +1,6 @@
 import { NgClass } from '@angular/common';
-import { Component } from '@angular/core';
-import { RouterLink,   RouterOutlet } from '@angular/router';
+import { Component, inject } from '@angular/core';
+import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import { MenuKey } from '../../../types';
 import { ButtonModule } from 'primeng/button';
 
@@ -17,6 +17,8 @@ export class LayoutComponent {
     categories: false,
   };
 
+  router = inject(Router);
+
   toggleSubmenu(menu: MenuKey): void {
     const currentlyOpen = this.submenuOpen[menu];
 
@@ -31,5 +33,11 @@ export class LayoutComponent {
     for (const key of Object.keys(this.submenuOpen) as MenuKey[]) {
       this.submenuOpen[key] = false;
     }
+  }
+
+  // logout
+  logout() {
+    localStorage.removeItem('token');
+    this.router.navigateByUrl('/login');
   }
 }
