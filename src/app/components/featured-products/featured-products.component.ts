@@ -3,11 +3,11 @@ import { Carousel } from 'primeng/carousel';
 import { ButtonModule } from 'primeng/button';
 import { ProductType } from '../../types';
 import { ProductsService } from '../../services/products/products.service';
-import { RouterLink } from '@angular/router';
+import { BaseProductCardComponent } from "../shared/base-product-card/base-product-card.component"; 
 
 @Component({
   selector: 'app-featured-products',
-  imports: [Carousel, ButtonModule, RouterLink],
+  imports: [Carousel, ButtonModule, BaseProductCardComponent],
   templateUrl: './featured-products.component.html',
   styleUrl: './featured-products.component.scss',
 })
