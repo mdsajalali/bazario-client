@@ -21,6 +21,7 @@ import { CartComponent } from './pages/cart/cart.component';
 import { WishlistComponent } from './pages/wishlist/wishlist.component';
 import { SearchComponent } from './pages/search/search.component';
 import { BlogsComponent } from './pages/blogs/blogs.component';
+import { BlogDetailsComponent } from './components/blog-details/blog-details.component';
 
 export const routes: Routes = [
   {
@@ -102,6 +103,10 @@ export const routes: Routes = [
   {
     path: 'blogs',
     component: BlogsComponent,
+  },
+  {
+    path: 'blogs/:id',
+    component: BlogDetailsComponent,
   },
   {
     path: 'contact',

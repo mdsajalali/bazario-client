@@ -3,6 +3,10 @@ $light-bg: #fff;
 $dark-text: #111;
 $transition: 0.3s;
 
+.card-title {
+  color: $primary-color;
+}
+
 .blog_btn {
   padding: 0.5rem 1rem;
   background-color: $primary-color;
