@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { TableModule } from 'primeng/table';
 import { HttpClientModule } from '@angular/common/http';
 import { InputTextModule } from 'primeng/inputtext';
@@ -7,11 +7,11 @@ import { InputIcon } from 'primeng/inputicon';
 import { SelectModule } from 'primeng/select';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
+import { BrandsService } from '../../../services/dashboard/brands.service';
 
 interface Brand {
   brandId: string;
   name: string;
-  date: string;
 }
 
 @Component({
@@ -30,27 +30,28 @@ interface Brand {
   styleUrl: './brands.component.scss',
 })
 export class BrandsComponent {
-  orders!: Brand[];
+  brands!: Brand[];
+  brandService = inject(BrandsService);
+  loading: boolean = true;
 
   globalFilterValue: string = '';
 
   ngOnInit() {
-    this.getBrands().then((data) => (this.orders = data));
+    this.getBrands();
   }
 
-  getBrands(): Promise<Brand[]> {
-    return Promise.resolve([
-      {
-        brandId: '#ORD001',
-        name: 'John Doe',
-        date: '2025-07-10',
+  getBrands() {
+    return this.brandService.getBrands().subscribe({
+      next: (result: any) => {
+        this.brands = result;
+        this.loading = false;
       },
-      {
-        brandId: '#ORD001',
-        name: 'Sajal',
-        date: '2025-07-10',
+      error: (error) => {
+        console.log(error);
+        this.loading = false;
+
       },
-    ]);
+    });
   }
 
   getGlobalFilterValue(filter: any): string {

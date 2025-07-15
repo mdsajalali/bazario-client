@@ -1,14 +1,19 @@
 <div class="container-fluid py-4">
   <h4 class="mb-4">Brand Management</h4>
 
+  @if (loading) {
+  <p>Loading...</p>
+  }@else if (!loading && brands.length === 0) {
+  <p>No brands available.</p>
+  }@else {
   <div class="card">
     <p-table
       #dt1
-      [value]="orders"
-      [globalFilterFields]="['brandId', 'name', 'date']"
+      [value]="brands"
+      [globalFilterFields]="['_id', 'name']"
       [rows]="5"
       [paginator]="true"
-      dataKey="brandId"
+      dataKey="_id"
       stateStorage="session"
       stateKey="order-management"
     >
@@ -30,17 +35,19 @@
       <ng-template #header>
         <tr>
           <th>Brand ID</th>
+          <th>Image</th>
           <th>Name</th>
-          <th>Date</th>
           <th>Actions</th>
         </tr>
       </ng-template>
 
-      <ng-template #body let-order>
+      <ng-template #body let-brand>
         <tr>
-          <td>{{ order.brandId }}</td>
-          <td>{{ order.name }}</td>
-          <td>{{ order.date }}</td>
+          <td>#{{ brand._id.slice(0, 5) }}</td>
+          <td>
+            <img [src]="brand.image" class="brand_image" [alt]="brand.name" />
+          </td>
+          <td>{{ brand.name }}</td>
           <td>
             <a
               class="btn btn-sm btn-warning me-1"
@@ -63,4 +70,5 @@
       </ng-template>
     </p-table>
   </div>
+  }
 </div>

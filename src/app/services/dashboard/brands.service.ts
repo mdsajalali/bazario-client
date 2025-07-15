@@ -12,4 +12,8 @@ export class BrandsService {
   createBrand(brand: { name: string; image: string }): Observable<any> {
     return this.http.post(environment.apiUrl + '/brands', brand);
   }
+
+  getBrands(): Observable<any> {
+    return this.http.get(environment.apiUrl + '/brands');
+  }
 }
