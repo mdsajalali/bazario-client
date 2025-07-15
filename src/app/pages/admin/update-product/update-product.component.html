@@ -144,15 +144,16 @@
       <div class="col-12">
         <label for="images" class="form-label">Product Images</label>
         <input
-          type="file"
+          text="url"
           id="images"
+          placeholder="Enter product images"
+          formControlName="images"
           class="form-control"
-          multiple
-          (change)="onFileChange($event)"
+          [ngClass]="{ 'ng-invalid': isInvalid('images') }"
         />
         @if (isInvalid('images')) {
         <p-message severity="error" size="small" variant="simple">
-          Image is required.
+          Product Images is required.
         </p-message>
         }
       </div>

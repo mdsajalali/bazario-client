@@ -21,6 +21,17 @@ export class ProductsService {
     );
   }
 
+  getProductById(id: string): Observable<ProductType> {
+    return this.http.get<ProductType>(environment.apiUrl + `/products/${id}`);
+  }
+
+  updateProduct(id: string, product: ProductType): Observable<ProductType> {
+    return this.http.put<ProductType>(
+      environment.apiUrl + `/products/${id}`,
+      product
+    );
+  }
+
   deleteProduct(id: string): Observable<ProductType> {
     return this.http.delete<ProductType>(
       environment.apiUrl + `/products/${id}`

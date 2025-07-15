@@ -107,7 +107,6 @@ export class AddProductComponent implements OnInit {
         brandId: value.brandId?.value || value.brandId,
       };
 
-      console.log('✅ Form Data:', product);
 
       this.productService.createProduct(product).subscribe({
         next: (result: any) => {
