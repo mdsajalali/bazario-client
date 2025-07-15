@@ -8,7 +8,7 @@ import { BaseProductCardComponent } from "../shared/base-product-card/base-produ
 
 @Component({
   selector: 'app-recent-products',
-  imports: [Carousel, ButtonModule, RouterLink, BaseProductCardComponent],
+  imports: [Carousel, ButtonModule, BaseProductCardComponent],
   templateUrl: './recent-products.component.html',
   styleUrl: './recent-products.component.scss',
 })

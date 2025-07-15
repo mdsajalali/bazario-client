@@ -20,4 +20,11 @@ export class WishlistService {
       {}
     );
   }
+
+  removeToWishlist(id: string): Observable<any> {
+    return this.http.delete<any>(
+      environment.apiUrl + `/shop/wishlists/${id}`,
+      {}
+    );
+  }
 }
