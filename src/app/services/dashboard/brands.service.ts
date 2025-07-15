@@ -17,6 +17,10 @@ export class BrandsService {
     return this.http.get(environment.apiUrl + '/brands');
   }
 
+  getBrandById(id: string): Observable<any> {
+    return this.http.get(environment.apiUrl + `/brands/${id}`);
+  }
+
   deleteBrand(id: string): Observable<any> {
     return this.http.delete(environment.apiUrl + `/brands/${id}`);
   }

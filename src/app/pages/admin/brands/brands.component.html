@@ -52,11 +52,15 @@
             <a
               class="btn btn-sm btn-warning me-1"
               title="Edit"
-              routerLink="/dashboard/brand/edit/123"
+              [routerLink]="['/dashboard/brand/edit/', brand._id]"
             >
               <i class="pi pi-pen-to-square mt-1"></i>
             </a>
-            <button class="btn btn-sm btn-danger" title="Delete" (click)="deleteBrand(brand._id)">
+            <button
+              class="btn btn-sm btn-danger"
+              title="Delete"
+              (click)="deleteBrand(brand._id)"
+            >
               <i class="pi pi-trash mt-1"></i>
             </button>
           </td>

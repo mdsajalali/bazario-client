@@ -1,16 +1,17 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { MessageModule } from 'primeng/message';
 import { ToastModule } from 'primeng/toast';
+import { BrandsService } from '../../../services/dashboard/brands.service';
 
 @Component({
   selector: 'app-update-brand',
@@ -25,9 +26,11 @@ import { ToastModule } from 'primeng/toast';
   styleUrl: './update-brand.component.scss',
   providers: [MessageService],
 })
-export class UpdateBrandComponent {
+export class UpdateBrandComponent implements OnInit {
   messageService = inject(MessageService);
+  brandService = inject(BrandsService);
   router = inject(Router);
+  activeRoute = inject(ActivatedRoute);
 
   brandForm: FormGroup;
 
@@ -36,6 +39,19 @@ export class UpdateBrandComponent {
   constructor(private fb: FormBuilder) {
     this.brandForm = this.fb.group({
       name: ['', Validators.required],
+      image: ['', Validators.required],
+    });
+  }
+
+  ngOnInit() {
+    const id = this.activeRoute.snapshot.paramMap.get('id') || '';
+    this.brandService.getBrandById(id).subscribe({
+      next: (result: any) => {
+        this.brandForm.patchValue({
+          name: result.name,
+          image: result.image,
+        });
+      },
     });
   }
 
