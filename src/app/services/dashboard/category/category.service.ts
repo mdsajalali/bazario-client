@@ -13,11 +13,25 @@ export class CategoryService {
     return this.http.post<any>(environment.apiUrl + '/categories', category);
   }
 
+  getCategoryById(id: string): Observable<any> {
+    return this.http.get<any>(environment.apiUrl + `/categories/${id}`);
+  }
+
   getCategories(): Observable<any> {
     return this.http.get<any>(environment.apiUrl + '/categories');
   }
 
   deleteCategory(id: string): Observable<any> {
     return this.http.delete<any>(environment.apiUrl + `/categories/${id}`);
+  }
+
+  updateCategory(
+    id: string,
+    category: { name: string; image: string }
+  ): Observable<any> {
+    return this.http.put<any>(
+      environment.apiUrl + `/categories/${id}`,
+      category
+    );
   }
 }

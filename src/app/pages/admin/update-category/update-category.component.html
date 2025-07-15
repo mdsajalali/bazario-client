@@ -2,6 +2,9 @@
   <h3 class="mb-3">Update Category</h3>
 
   <p-toast />
+  @if(loading){
+  <p>Loading...</p>
+  }@else {
   <div class="card flex justify-center border border-white">
     <form
       [formGroup]="categoryForm"
@@ -27,6 +30,25 @@
         }
       </div>
 
+      <div class="flex flex-col gap-1 my-3">
+        <label for="image">Category Image</label>
+        <br />
+        <input
+          pInputText
+          type="url"
+          id="image"
+          placeholder="Enter your category image"
+          formControlName="image"
+          class="w-50 mt-1"
+          [invalid]="isInvalid('image')"
+        />
+        @if (isInvalid('image')) {
+        <p-message severity="error" size="small" variant="simple"
+          >Category Image is required.</p-message
+        >
+        }
+      </div>
+
       <div class="d-flex gap-2 justify-content-end">
         <button pButton severity="danger" type="reset">
           <span pButtonLabel>Reset</span>
@@ -37,4 +59,5 @@
       </div>
     </form>
   </div>
+  }
 </div>

@@ -5,12 +5,13 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { MessageModule } from 'primeng/message';
 import { ToastModule } from 'primeng/toast';
+import { CategoryService } from '../../../services/dashboard/category/category.service';
 
 @Component({
   selector: 'app-update-category',
@@ -27,7 +28,10 @@ import { ToastModule } from 'primeng/toast';
 })
 export class UpdateCategoryComponent {
   messageService = inject(MessageService);
+  categoryService = inject(CategoryService);
   router = inject(Router);
+  activeRoute = inject(ActivatedRoute);
+  loading: boolean = true;
 
   categoryForm: FormGroup;
 
@@ -36,6 +40,20 @@ export class UpdateCategoryComponent {
   constructor(private fb: FormBuilder) {
     this.categoryForm = this.fb.group({
       name: ['', Validators.required],
+      image: ['', Validators.required],
+    });
+  }
+
+  ngOnInit() {
+    const id = this.activeRoute.snapshot.paramMap.get('id') || '';
+    this.categoryService.getCategoryById(id).subscribe({
+      next: (result: any) => {
+        this.categoryForm.patchValue({
+          name: result.name,
+          image: result.image,
+        });
+        this.loading = false;
+      },
     });
   }
 
