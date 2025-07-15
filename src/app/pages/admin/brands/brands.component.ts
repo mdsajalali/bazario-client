@@ -7,7 +7,7 @@ import { InputIcon } from 'primeng/inputicon';
 import { SelectModule } from 'primeng/select';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
-import { BrandsService } from '../../../services/dashboard/brands.service';
+import { BrandsService } from '../../../services/dashboard/brands/brands.service';
 
 interface Brand {
   brandId: string;

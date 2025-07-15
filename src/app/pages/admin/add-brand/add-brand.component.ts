@@ -11,7 +11,7 @@ import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { MessageModule } from 'primeng/message';
 import { ToastModule } from 'primeng/toast';
-import { BrandsService } from '../../../services/dashboard/brands.service';
+import { BrandsService } from '../../../services/dashboard/brands/brands.service';
 
 @Component({
   selector: 'app-add-brand',

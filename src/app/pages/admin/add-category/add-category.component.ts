@@ -11,6 +11,7 @@ import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { MessageModule } from 'primeng/message';
 import { ToastModule } from 'primeng/toast';
+import { CategoryService } from '../../../services/dashboard/category/category.service';
 
 @Component({
   selector: 'app-add-category',
@@ -27,6 +28,7 @@ import { ToastModule } from 'primeng/toast';
 })
 export class AddCategoryComponent {
   messageService = inject(MessageService);
+  categoryService = inject(CategoryService);
   router = inject(Router);
 
   categoryForm: FormGroup;
@@ -36,24 +38,35 @@ export class AddCategoryComponent {
   constructor(private fb: FormBuilder) {
     this.categoryForm = this.fb.group({
       name: ['', Validators.required],
+      image: ['', Validators.required],
     });
   }
 
   onSubmit() {
     this.formSubmitted = true;
     if (this.categoryForm.valid) {
-      this.messageService.add({
-        severity: 'success',
-        summary: 'Success',
-        detail: 'Category Created Successfully!',
-        life: 3000,
+      const value = {
+        name: this.categoryForm.value.name,
+        image: this.categoryForm.value.image,
+      };
+      this.categoryService.createCategory(value).subscribe({
+        next: (result: any) => {
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Success',
+            detail: result.message,
+            life: 3000,
+          });
+          this.categoryForm.reset();
+          this.formSubmitted = false;
+          setTimeout(() => {
+            this.router.navigateByUrl('/dashboard/categories');
+          }, 1000);
+        },
+        error: (error) => {
+          console.log(error);
+        },
       });
-      console.log('Brand Value', this.categoryForm.value);
-      this.categoryForm.reset();
-      this.formSubmitted = false;
-      setTimeout(() => {
-        this.router.navigateByUrl('/dashboard/categories');
-      }, 1000);
     }
   }
 
