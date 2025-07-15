@@ -31,6 +31,7 @@ export class UpdateBrandComponent implements OnInit {
   brandService = inject(BrandsService);
   router = inject(Router);
   activeRoute = inject(ActivatedRoute);
+  loading: boolean = true;
 
   brandForm: FormGroup;
 
@@ -51,25 +52,40 @@ export class UpdateBrandComponent implements OnInit {
           name: result.name,
           image: result.image,
         });
+        this.loading = false;
       },
     });
   }
 
   onSubmit() {
     this.formSubmitted = true;
+
     if (this.brandForm.valid) {
-      this.messageService.add({
-        severity: 'success',
-        summary: 'Success',
-        detail: 'Brand Updated Successfully!',
-        life: 3000,
+      const id = this.activeRoute.snapshot.paramMap.get('id') || '';
+
+      const updateBrand = {
+        name: this.brandForm.value.name,
+        image: this.brandForm.value.image,
+      };
+
+      this.brandService.updateBrand(id, updateBrand).subscribe({
+        next: (result: any) => {
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Success',
+            detail: result.message,
+            life: 3000,
+          });
+
+          console.log('Brand Value', this.brandForm.value);
+          this.brandForm.reset();
+          this.formSubmitted = false;
+
+          setTimeout(() => {
+            this.router.navigateByUrl('/dashboard/brands');
+          }, 1000);
+        },
       });
-      console.log('Brand Value', this.brandForm.value);
-      this.brandForm.reset();
-      this.formSubmitted = false;
-      setTimeout(() => {
-        this.router.navigateByUrl('/dashboard/brands');
-      }, 1000);
     }
   }
 

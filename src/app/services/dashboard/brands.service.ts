@@ -24,4 +24,11 @@ export class BrandsService {
   deleteBrand(id: string): Observable<any> {
     return this.http.delete(environment.apiUrl + `/brands/${id}`);
   }
+
+  updateBrand(
+    id: string,
+    brand: { name: string; image: string }
+  ): Observable<any> {
+    return this.http.put(environment.apiUrl + `/brands/${id}`, brand);
+  }
 }
