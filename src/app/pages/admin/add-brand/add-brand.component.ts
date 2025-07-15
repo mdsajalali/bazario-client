@@ -11,6 +11,7 @@ import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { MessageModule } from 'primeng/message';
 import { ToastModule } from 'primeng/toast';
+import { BrandsService } from '../../../services/dashboard/brands.service';
 
 @Component({
   selector: 'app-add-brand',
@@ -28,6 +29,7 @@ import { ToastModule } from 'primeng/toast';
 export class AddBrandComponent {
   messageService = inject(MessageService);
   router = inject(Router);
+  brandService = inject(BrandsService);
 
   brandForm: FormGroup;
 
@@ -36,24 +38,37 @@ export class AddBrandComponent {
   constructor(private fb: FormBuilder) {
     this.brandForm = this.fb.group({
       name: ['', Validators.required],
+      image: ['', Validators.required],
     });
   }
 
   onSubmit() {
     this.formSubmitted = true;
     if (this.brandForm.valid) {
-      this.messageService.add({
-        severity: 'success',
-        summary: 'Success',
-        detail: 'Brand Created Successfully!',
-        life: 3000,
+      const brand = {
+        name: this.brandForm.value.name,
+        image: this.brandForm.value.image,
+      };
+
+      this.brandService.createBrand(brand).subscribe({
+        next: (result: any) => {
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Success',
+            detail: result.message,
+            life: 3000,
+          });
+          console.log('Brand Value', this.brandForm.value);
+          this.brandForm.reset();
+          this.formSubmitted = false;
+          setTimeout(() => {
+            this.router.navigateByUrl('/dashboard/brands');
+          }, 1000);
+        },
+        error: (error) => {
+          console.log(error);
+        },
       });
-      console.log('Brand Value', this.brandForm.value);
-      this.brandForm.reset();
-      this.formSubmitted = false;
-      setTimeout(() => {
-        this.router.navigateByUrl('/dashboard/brands');
-      }, 1000);
     }
   }
 
