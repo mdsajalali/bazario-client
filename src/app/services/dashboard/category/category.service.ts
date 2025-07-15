@@ -16,4 +16,8 @@ export class CategoryService {
   getCategories(): Observable<any> {
     return this.http.get<any>(environment.apiUrl + '/categories');
   }
+
+  deleteCategory(id: string): Observable<any> {
+    return this.http.delete<any>(environment.apiUrl + `/categories/${id}`);
+  }
 }

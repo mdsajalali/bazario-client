@@ -33,17 +33,30 @@ interface Category {
 export class CategoriesComponent {
   categories!: Category[];
   categoryService = inject(CategoryService);
+  loading: boolean = true;
 
   globalFilterValue: string = '';
 
   ngOnInit() {
-    this.getCategory()
+    this.getCategory();
   }
 
   getCategory() {
     this.categoryService.getCategories().subscribe({
       next: (result: any) => {
         this.categories = result;
+        this.loading = false;
+      },
+    });
+  }
+
+  deleteCategory(id: string) {
+    this.categoryService.deleteCategory(id).subscribe({
+      next: (result: any) => {
+        alert(result.message);
+      },
+      error: (error) => {
+        console.log(error);
       },
     });
   }

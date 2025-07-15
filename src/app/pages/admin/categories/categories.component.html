@@ -1,6 +1,9 @@
 <div class="container-fluid py-4">
   <h4 class="mb-4">Category Management</h4>
 
+  @if(loading){
+  <p>Loading...</p>
+  }@else {
   <div class="card">
     <p-table
       #dt1
@@ -55,7 +58,11 @@
             >
               <i class="pi pi-pen-to-square mt-1"></i>
             </a>
-            <button class="btn btn-sm btn-danger" title="Delete">
+            <button
+              class="btn btn-sm btn-danger"
+              title="Delete"
+              (click)="deleteCategory(category._id)"
+            >
               <i class="pi pi-trash mt-1"></i>
             </button>
           </td>
@@ -69,4 +76,5 @@
       </ng-template>
     </p-table>
   </div>
+  }
 </div>
