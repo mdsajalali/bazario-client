@@ -4,8 +4,8 @@
   <div class="card">
     <p-table
       #dt1
-      [value]="orders"
-      [globalFilterFields]="['categoryId', 'name', 'date']"
+      [value]="categories"
+      [globalFilterFields]="['_id', 'name']"
       [rows]="5"
       [paginator]="true"
       dataKey="categoryId"
@@ -30,17 +30,23 @@
       <ng-template #header>
         <tr>
           <th>Category ID</th>
+          <th>Image</th>
           <th>Name</th>
-          <th>Date</th>
           <th>Actions</th>
         </tr>
       </ng-template>
 
-      <ng-template #body let-order>
+      <ng-template #body let-category>
         <tr>
-          <td>{{ order.categoryId }}</td>
-          <td>{{ order.name }}</td>
-          <td>{{ order.date }}</td>
+          <td>#{{ category._id.slice(0, 5) }}</td>
+          <td>
+            <img
+              class="category_image"
+              [src]="category.image"
+              [alt]="category.name"
+            />
+          </td>
+          <td>{{ category.name }}</td>
           <td>
             <a
               class="btn btn-sm btn-warning me-1"

@@ -1,5 +1,5 @@
 import { HttpClientModule } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { TableModule } from 'primeng/table';
 import { InputTextModule } from 'primeng/inputtext';
@@ -7,11 +7,12 @@ import { IconField } from 'primeng/iconfield';
 import { InputIcon } from 'primeng/inputicon';
 import { SelectModule } from 'primeng/select';
 import { FormsModule } from '@angular/forms';
+import { CategoryService } from '../../../services/dashboard/category/category.service';
 
 interface Category {
-  categoryId: string;
+  _id: string;
   name: string;
-  date: string;
+  image: string;
 }
 
 @Component({
@@ -30,27 +31,21 @@ interface Category {
   styleUrl: './categories.component.scss',
 })
 export class CategoriesComponent {
-  orders!: Category[];
+  categories!: Category[];
+  categoryService = inject(CategoryService);
 
   globalFilterValue: string = '';
 
   ngOnInit() {
-    this.getBrands().then((data) => (this.orders = data));
+    this.getCategory()
   }
 
-  getBrands(): Promise<Category[]> {
-    return Promise.resolve([
-      {
-        categoryId: '#ORD001',
-        name: 'Samsung',
-        date: '2025-07-10',
+  getCategory() {
+    this.categoryService.getCategories().subscribe({
+      next: (result: any) => {
+        this.categories = result;
       },
-      {
-        categoryId: '#ORD001',
-        name: 'Vivo',
-        date: '2025-07-10',
-      },
-    ]);
+    });
   }
 
   getGlobalFilterValue(filter: any): string {
