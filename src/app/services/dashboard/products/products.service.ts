@@ -10,6 +10,10 @@ import { environment } from '../../../../environments/environment';
 export class ProductsService {
   http = inject(HttpClient);
 
+  getProducts(): Observable<ProductType> {
+    return this.http.get<ProductType>(environment.apiUrl + '/products');
+  }
+
   createProduct(product: ProductType): Observable<ProductType> {
     return this.http.post<ProductType>(
       environment.apiUrl + '/products',

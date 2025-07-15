@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { TableModule } from 'primeng/table';
 import { HttpClientModule } from '@angular/common/http';
 import { InputTextModule } from 'primeng/inputtext';
@@ -8,19 +8,8 @@ import { SelectModule } from 'primeng/select';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { NgClass } from '@angular/common';
-
-interface Product {
-  id: number;
-  name: string;
-  image: string;
-  shortDesc: string;
-  price: number;
-  discount: number;
-  brand: string;
-  category: string;
-  featured: boolean;
-  isNew: boolean;
-}
+import { ProductsService } from '../../../services/dashboard/products/products.service';
+import { ProductType } from '../../../types';
 
 @Component({
   selector: 'app-products',
@@ -39,40 +28,23 @@ interface Product {
   styleUrl: './products.component.scss',
 })
 export class ProductsComponent {
-  products: Product[] = [];
+  products: ProductType[] = [];
   globalFilterValue: string = '';
+  productService = inject(ProductsService);
 
   ngOnInit() {
-    this.getProducts().then((data) => (this.products = data));
+    this.getProducts();
   }
 
-  getProducts(): Promise<Product[]> {
-    return Promise.resolve([
-      {
-        id: 1,
-        name: 'Smartphone',
-        image: 'https://via.placeholder.com/40',
-        shortDesc: 'Latest model',
-        price: 500,
-        discount: 10,
-        brand: 'Samsung',
-        category: 'Electronics',
-        featured: true,
-        isNew: true,
+  getProducts() {
+    this.productService.getProducts().subscribe({
+      next: (result: any) => {
+        this.products = result;
       },
-      {
-        id: 2,
-        name: 'Laptop',
-        image: 'https://via.placeholder.com/40',
-        shortDesc: 'High performance',
-        price: 1200,
-        discount: 15,
-        brand: 'Dell',
-        category: 'Electronics',
-        featured: false,
-        isNew: true,
+      error: (error) => {
+        console.log(error);
       },
-    ]);
+    });
   }
 
   getGlobalFilterValue(filter: any): string {

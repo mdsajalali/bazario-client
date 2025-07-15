@@ -5,7 +5,13 @@
     <p-table
       #dt1
       [value]="products"
-      [globalFilterFields]="['name', 'brand', 'category', 'shortDesc']"
+      [globalFilterFields]="[
+        'name',
+        'brandId.name',
+        'categoryId.name',
+        'shortDescription',
+        'price'
+      ]"
       [rows]="5"
       [paginator]="true"
       stateStorage="session"
@@ -44,26 +50,25 @@
 
       <ng-template pTemplate="body" let-product let-rowIndex="rowIndex">
         <tr>
-          <td>{{ rowIndex + 1 }}</td>
+          <td>#{{ product._id.slice(0, 5) }}</td>
           <td>{{ product.name }}</td>
           <td>
             <img
-              [src]="product.image"
+              [src]="product.images[0]"
               alt="Product Image"
-              width="40"
-              height="40"
+              class="product_image"
             />
           </td>
-          <td>{{ product.shortDesc }}</td>
+          <td>{{ product.shortDescription }}</td>
           <td>${{ product.price }}</td>
           <td>{{ product.discount }}%</td>
-          <td>{{ product.brand }}</td>
-          <td>{{ product.category }}</td>
+          <td>{{ product.brandId?.name }}</td>
+          <td>{{ product.categoryId?.name }}</td>
           <td>
             <span
               class="badge"
-              [ngClass]="product.featured ? 'bg-success' : 'bg-secondary'"
-              >{{ product.featured ? "Yes" : "No" }}</span
+              [ngClass]="product.isFeatured ? 'bg-success' : 'bg-secondary'"
+              >{{ product.isFeatured ? "Yes" : "No" }}</span
             >
           </td>
           <td>
@@ -77,7 +82,7 @@
             <a
               class="btn btn-sm btn-warning me-1"
               title="Edit"
-              routerLink="/dashboard/product/edit/123"
+              [routerLink]="['/dashboard/product/edit/', product._id]"
             >
               <i class="pi pi-pen-to-square mt-1"></i>
             </a>
