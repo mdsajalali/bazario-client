@@ -1,5 +1,15 @@
 <app-header />
 <div class="container py-5">
-  <p>wishlist works!</p>
+  <div class="row">
+    @if (loading) {
+    <p>Loading...</p>
+    }@else if (!loading && wishlists.length === 0) {
+    <p>Wishlist not found.</p>
+    }@else { @for (wishlist of wishlists; track wishlist._id) {
+    <div class="col-12 col-md-6 col-lg-3">
+      <app-product-card [product]="wishlist" />
+    </div>
+    } }
+  </div>
 </div>
 <app-footer />

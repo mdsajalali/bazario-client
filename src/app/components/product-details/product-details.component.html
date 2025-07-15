@@ -2,8 +2,7 @@
 <section class="container py-5">
   @if(loading){
   <p>Loading...</p>
-  }
-
+  }@else {
   <div class="row g-5 align-items-start">
     <div class="col-lg-6">
       <div class="main-image mb-2">
@@ -58,6 +57,7 @@
       </ul>
     </div>
   </div>
+  }
 </section>
 
 <app-recent-products />
