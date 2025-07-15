@@ -60,18 +60,26 @@ export class UpdateCategoryComponent {
   onSubmit() {
     this.formSubmitted = true;
     if (this.categoryForm.valid) {
-      this.messageService.add({
-        severity: 'success',
-        summary: 'Success',
-        detail: 'Category Updated Successfully!',
-        life: 3000,
+      const id = this.activeRoute.snapshot.paramMap.get('id') || '';
+      const category = {
+        name: this.categoryForm.value.name,
+        image: this.categoryForm.value.image,
+      };
+      this.categoryService.updateCategory(id, category).subscribe({
+        next: (result: any) => {
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Success',
+            detail: result.message,
+            life: 3000,
+          });
+          this.categoryForm.reset();
+          this.formSubmitted = false;
+          setTimeout(() => {
+            this.router.navigateByUrl('/dashboard/categories');
+          }, 1000);
+        },
       });
-      console.log('Brand Value', this.categoryForm.value);
-      this.categoryForm.reset();
-      this.formSubmitted = false;
-      setTimeout(() => {
-        this.router.navigateByUrl('/dashboard/categories');
-      }, 1000);
     }
   }
 
