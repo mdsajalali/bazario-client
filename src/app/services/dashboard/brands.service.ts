@@ -16,4 +16,8 @@ export class BrandsService {
   getBrands(): Observable<any> {
     return this.http.get(environment.apiUrl + '/brands');
   }
+
+  deleteBrand(id: string): Observable<any> {
+    return this.http.delete(environment.apiUrl + `/brands/${id}`);
+  }
 }

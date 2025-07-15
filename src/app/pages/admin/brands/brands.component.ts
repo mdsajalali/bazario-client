@@ -49,7 +49,17 @@ export class BrandsComponent {
       error: (error) => {
         console.log(error);
         this.loading = false;
+      },
+    });
+  }
 
+  deleteBrand(id: string) {
+    return this.brandService.deleteBrand(id).subscribe({
+      next: () => {
+        alert('deleted');
+      },
+      error: (error) => {
+        console.log(error);
       },
     });
   }
