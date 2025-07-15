@@ -20,6 +20,7 @@ import { ProductDetailsComponent } from './components/product-details/product-de
 import { CartComponent } from './pages/cart/cart.component';
 import { WishlistComponent } from './pages/wishlist/wishlist.component';
 import { SearchComponent } from './pages/search/search.component';
+import { BlogsComponent } from './pages/blogs/blogs.component';
 
 export const routes: Routes = [
   {
@@ -97,6 +98,10 @@ export const routes: Routes = [
   {
     path: 'product/:id',
     component: ProductDetailsComponent,
+  },
+  {
+    path: 'blogs',
+    component: BlogsComponent,
   },
   {
     path: 'contact',

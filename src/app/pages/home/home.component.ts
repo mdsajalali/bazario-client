@@ -6,12 +6,12 @@ import { ShopCategoryComponent } from "../../components/shop-category/shop-categ
 import { FeaturedProductsComponent } from "../../components/featured-products/featured-products.component";
 import { RecentProductsComponent } from "../../components/recent-products/recent-products.component";
 import { ShopBrandsComponent } from "../../components/shop-brands/shop-brands.component";
-import { BlogsComponent } from "../../components/blogs/blogs.component";
 import { HomeProductsComponent } from "../../components/home-products/home-products.component";
+import { HomeBlogsComponent } from '../../components/home-blogs/home-blogs.component';
 
 @Component({
   selector: 'app-home',
-  imports: [HeaderComponent, FooterComponent, BannerComponent, ShopCategoryComponent, FeaturedProductsComponent, RecentProductsComponent, ShopBrandsComponent, BlogsComponent, HomeProductsComponent],
+  imports: [HeaderComponent, FooterComponent, BannerComponent, ShopCategoryComponent, FeaturedProductsComponent, RecentProductsComponent, ShopBrandsComponent, HomeBlogsComponent, HomeProductsComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
