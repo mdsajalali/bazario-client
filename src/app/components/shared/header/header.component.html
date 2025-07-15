@@ -12,8 +12,10 @@
       </ul>
     </nav>
 
-    <div class="d-flex align-items-center gap-4">
-      <div class="icon-group d-flex align-items-center gap-3 position-relative">
+    <div class="d-flex align-items-center gap-2">
+      <div
+        class="icon-group d-flex align-items-center gap-3 position-relative pe-4"
+      >
         <a routerLink="/cart" class="icon-wrapper position-relative">
           <i class="pi pi-shopping-cart fs-5 text-dark"></i>
           <span class="badge">0</span>
@@ -52,7 +54,13 @@
         }
       </div>
 
+      @if (isLoggedIn) {
+      <div class="login-btn" (click)="logout()">Logout</div>
+
+      }@else {
       <a class="login-btn" routerLink="/login">Login</a>
+      <a class="login-btn" routerLink="/register">Register</a>
+      }
     </div>
 
     <div class="menu-toggle" (click)="toggleMenu()">
