@@ -1,5 +1,5 @@
 import { NgClass } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -15,6 +15,9 @@ import { InputTextModule } from 'primeng/inputtext';
 import { MessageModule } from 'primeng/message';
 import { SelectModule } from 'primeng/select';
 import { ToastModule } from 'primeng/toast';
+import { CategoryService } from '../../../services/dashboard/category/category.service';
+import { BrandsService } from '../../../services/dashboard/brands/brands.service';
+import { ProductsService } from '../../../services/dashboard/products/products.service';
 
 @Component({
   selector: 'app-add-product',
@@ -33,28 +36,41 @@ import { ToastModule } from 'primeng/toast';
   styleUrl: './add-product.component.scss',
   providers: [MessageService],
 })
-export class AddProductComponent {
+export class AddProductComponent implements OnInit {
   messageService = inject(MessageService);
   router = inject(Router);
+  categories: any[] = [];
+  brands: any[] = [];
+
+  categoryService = inject(CategoryService);
+  brandService = inject(BrandsService);
+  productService = inject(ProductsService);
 
   productForm!: FormGroup;
   formSubmitted = false;
 
-  categories = [
-    { label: 'Apple', value: 'apple' },
-    { label: 'Vivo', value: 'vivo' },
-    { label: 'Oppo', value: 'oppo' },
-  ];
-  brands = [
-    { label: 'Brand 1', value: 'brand1' },
-    { label: 'Brand 2', value: 'brand2' },
-    { label: 'Brand 3', value: 'brand3' },
-  ];
-
   selectedCategory: any = null;
   selectedBrand: any = null;
 
-  uploadedImages: File[] = [];
+  ngOnInit() {
+    this.categoryService.getCategories().subscribe({
+      next: (result: any) => {
+        this.categories = result.map((item: any) => ({
+          label: item.name,
+          value: item._id,
+        }));
+      },
+    });
+
+    this.brandService.getBrands().subscribe({
+      next: (result: any) => {
+        this.brands = result.map((item: any) => ({
+          label: item.name,
+          value: item._id,
+        }));
+      },
+    });
+  }
 
   constructor(private fb: FormBuilder) {
     this.productForm = this.fb.group({
@@ -65,50 +81,54 @@ export class AddProductComponent {
       discount: [null, Validators.required],
       isFeatured: [false],
       isNew: [false],
-      category: [null, Validators.required],
-      brand: [null, Validators.required],
+      categoryId: [null, Validators.required],
+      brandId: [null, Validators.required],
       images: [null, Validators.required],
     });
   }
 
-  onCategoryChange(value: string) {
-    this.productForm.patchValue({ category: value });
+  onCategoryChange(value: any) {
+    this.productForm.patchValue({ categoryId: value });
   }
 
-  onBrandChange(value: string) {
-    this.productForm.patchValue({ brand: value });
-  }
-
-  onFileChange(event: any) {
-    const files = event.target.files;
-    if (files && files.length > 0) {
-      this.uploadedImages = Array.from(files);
-      this.productForm.patchValue({ images: this.uploadedImages });
-    }
+  onBrandChange(value: any) {
+    this.productForm.patchValue({ brandId: value });
   }
 
   onSubmit() {
     this.formSubmitted = true;
 
     if (this.productForm.valid) {
-      console.log('✅ Form Data:', this.productForm.value);
-      console.log('📦 Images:', this.uploadedImages);
+      const value = this.productForm.value;
 
-      this.messageService.add({
-        severity: 'success',
-        summary: 'Success',
-        detail: 'Product created successfully!',
-        life: 3000,
+      const product = {
+        ...value,
+        categoryId: value.categoryId?.value || value.categoryId,
+        brandId: value.brandId?.value || value.brandId,
+      };
+
+      console.log('✅ Form Data:', product);
+
+      this.productService.createProduct(product).subscribe({
+        next: (result: any) => {
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Success',
+            detail: result.message,
+            life: 3000,
+          });
+
+          console.log('result', result);
+
+          this.productForm.reset();
+          this.selectedBrand = null;
+          this.selectedCategory = null;
+          this.formSubmitted = false;
+          setTimeout(() => {
+            this.router.navigateByUrl('/dashboard/products');
+          }, 1000);
+        },
       });
-
-      this.productForm.reset();
-      this.selectedBrand = null;
-      this.selectedCategory = null;
-      this.uploadedImages = [];
-      this.formSubmitted = false;
-      setTimeout(() => {
-        this.router.navigateByUrl('/dashboard/products');
-      }, 1000);
     }
   }
 

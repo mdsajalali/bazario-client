@@ -110,15 +110,15 @@
       </div>
 
       <div class="col-md-6">
-        <label for="category" class="form-label">Category</label>
+        <label for="categoryId" class="form-label">Category</label>
         <p-select
           [options]="categories"
           optionLabel="label"
-          formControlName="category"
+          formControlName="categoryId"
           placeholder="Select a category"
           class="w-100"
         ></p-select>
-        @if (isInvalid('category')) {
+        @if (isInvalid('categoryId')) {
         <p-message severity="error" size="small" variant="simple">
           Category is required.
         </p-message>
@@ -126,33 +126,33 @@
       </div>
 
       <div class="col-md-6">
-        <label for="brand" class="form-label">Brand</label>
+        <label for="brandId" class="form-label">Brand</label>
         <p-select
           [options]="brands"
           optionLabel="label"
-          formControlName="brand"
+          formControlName="brandId"
           placeholder="Select a brand"
           class="w-100"
         ></p-select>
-        @if (isInvalid('brand')) {
+        @if (isInvalid('brandId')) {
         <p-message severity="error" size="small" variant="simple">
           Brand is required.
         </p-message>
         }
       </div>
-
       <div class="col-12">
-        <label for="images" class="form-label">Product Images</label>
+        <label for="images" class="form-label">Product Image</label>
         <input
-          type="file"
+          type="url"
           id="images"
+          placeholder="Enter product images"
+          formControlName="images"
           class="form-control"
-          multiple
-          (change)="onFileChange($event)"
+          [ngClass]="{ 'ng-invalid': isInvalid('images') }"
         />
         @if (isInvalid('images')) {
         <p-message severity="error" size="small" variant="simple">
-          Image is required.
+          Product Images is required.
         </p-message>
         }
       </div>
