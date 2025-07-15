@@ -37,17 +37,23 @@
     <div class="col-lg-6">
       <h2 class="fw-bold mb-3">{{ product.name }}</h2>
       <p class="text-muted mb-2">Brand: HyperSound</p>
-      <h4 class="text-primary fw-semibold mb-3">${{ product.price }}</h4>
+      <h4 class="text_color fw-semibold mb-3">${{ product.price }}</h4>
 
       <p class="mb-4">
         {{ product.description }}
       </p>
 
       <div class="d-flex gap-3 mb-4">
-        <button class="btn btn-primary px-4">Add to Cart</button>
-        <button class="btn btn-outline-secondary px-4">
-          <i class="bi bi-heart"></i> Wishlist
-        </button>
+        <button class="cart_btn">Add to Cart</button>
+        <p-button
+          class="mt-1"
+          (onClick)="toggleWishlist(product._id)"
+          icon="pi pi-heart"
+          [severity]="isWishlisted ? 'danger' : 'secondary'"
+          [outlined]="!isWishlisted"
+          size="small"
+          styleClass="p-button-rounded"
+        ></p-button>
       </div>
 
       <ul class="list-unstyled">

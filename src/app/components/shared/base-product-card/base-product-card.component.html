@@ -1,37 +1,38 @@
 <div
-          class="rounded border p-3 h-100 text-center d-flex flex-column gap-2 justify-content-between"
-        >
-          <div class="mb-3">
-            <a [routerLink]="['/product/', product._id]">
-              <img
-                [src]="product.images[0]"
-                [alt]="product.name"
-                class="img-fluid rounded"
-                style="width: 100%; height: 160px; object-fit: cover"
-              />
-            </a>
-          </div>
-          <h6 class="mb-2 fw-semibold">{{ product.name }}</h6>
-          <a [routerLink]="['/product/', product._id]" class="text-decoration-none">
-            <p class="card-text flex-grow-1 text-muted">
-              {{ product.shortDescription }}
-            </p>
-          </a>
-          <div class="d-flex align-items-center justify-content-around">
-            <div class="text-color fw-bold mb-2">${{ product.price }}</div>
-            <div class="d-flex justify-content-center gap-2">
-              <p-button
-                icon="pi pi-heart"
-                severity="secondary"
-                [outlined]="true"
-                size="small"
-                styleClass="p-button-rounded"
-              ></p-button>
-              <p-button
-                icon="pi pi-shopping-cart"
-                size="small"
-                styleClass="p-button-rounded "
-              ></p-button>
-            </div>
-          </div>
-        </div>
+  class="rounded border p-3 h-100 text-center d-flex flex-column gap-2 justify-content-between"
+>
+  <div class="mb-3">
+    <a [routerLink]="['/product/', product._id]">
+      <img
+        [src]="product.images[0]"
+        [alt]="product.name"
+        class="img-fluid rounded"
+        style="width: 100%; height: 160px; object-fit: cover"
+      />
+    </a>
+  </div>
+  <h6 class="mb-2 fw-semibold">{{ product.name }}</h6>
+  <a [routerLink]="['/product/', product._id]" class="text-decoration-none">
+    <p class="card-text flex-grow-1 text-muted">
+      {{ product.shortDescription }}
+    </p>
+  </a>
+  <div class="d-flex align-items-center justify-content-around">
+    <div class="text-color fw-bold mb-2">${{ product.price }}</div>
+    <div class="d-flex justify-content-center gap-2">
+      <p-button
+        (onClick)="toggleWishlist(product._id)"
+        icon="pi pi-heart"
+        [severity]="isWishlisted ? 'danger' : 'secondary'"
+        [outlined]="!isWishlisted"
+        size="small"
+        styleClass="p-button-rounded"
+      ></p-button>
+      <p-button
+        icon="pi pi-shopping-cart"
+        size="small"
+        styleClass="p-button-rounded "
+      ></p-button>
+    </div>
+  </div>
+</div>

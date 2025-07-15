@@ -7,6 +7,8 @@ import { ProductsService } from '../../services/products/products.service';
 import { ActivatedRoute } from '@angular/router';
 import { Carousel, CarouselModule } from 'primeng/carousel';
 import { CommonModule } from '@angular/common';
+import { Button } from 'primeng/button';
+import { WishlistService } from '../../services/wishlist.service';
 
 @Component({
   selector: 'app-product-details',
@@ -16,7 +18,8 @@ import { CommonModule } from '@angular/common';
     RecentProductsComponent,
     Carousel,
     CarouselModule,
-    CommonModule
+    CommonModule,
+    Button,
   ],
   templateUrl: './product-details.component.html',
   styleUrl: './product-details.component.scss',
@@ -28,7 +31,11 @@ export class ProductDetailsComponent {
   loading: boolean = true;
   selectedImage: string = '';
 
+  wishlistService = inject(WishlistService);
+  isWishlisted: boolean = false;
+
   ngOnInit() {
+    this.checkWishlistStatus();
     const id = this.route.snapshot.paramMap.get('id');
     if (id) {
       this.productService.getProductById(id).subscribe({
@@ -45,6 +52,46 @@ export class ProductDetailsComponent {
         },
       });
     }
+  }
+
+  checkWishlistStatus() {
+    this.wishlistService.getWishlists().subscribe({
+      next: (wishlist: any) => {
+        this.isWishlisted = wishlist.some(
+          (item: any) => item._id === this.product._id
+        );
+      },
+    });
+  }
+
+  toggleWishlist(id: string) {
+    if (this.isWishlisted) {
+      this.removeToWishlist(id);
+    } else {
+      this.addToWishlist(id);
+    }
+  }
+
+  addToWishlist(id: string) {
+    this.wishlistService.addToWishlist(id).subscribe({
+      next: () => {
+        this.checkWishlistStatus();
+      },
+      error: (error) => {
+        console.log(error);
+      },
+    });
+  }
+
+  removeToWishlist(id: string) {
+    this.wishlistService.removeToWishlist(id).subscribe({
+      next: () => {
+        this.checkWishlistStatus();
+      },
+      error: (error) => {
+        console.log(error);
+      },
+    });
   }
 
   getImage(image: string) {
