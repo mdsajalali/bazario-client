@@ -109,73 +109,169 @@
   }@else if (orderStep === 1) {
   <div class="my-5">
     <div class="row g-4">
-      <!-- Delivery Information -->
       <div class="col-lg-8">
         <div class="card p-4 shadow-sm">
           <h4 class="mb-4">Delivery Information</h4>
 
-          <form>
-            <div class="row mb-3">
-              <div class="col-md-6">
-                <label class="form-label">First Name*</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  placeholder="First name"
-                />
-              </div>
-              <div class="col-md-6">
-                <label class="form-label">Last Name*</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  placeholder="Last name"
-                />
-              </div>
-            </div>
-
-            <div class="mb-3">
-              <label class="form-label">Email Address*</label>
+          <form [formGroup]="deliveryForm" class="row g-3">
+            <div class="col-md-6">
+              <label for="firstName" class="form-label">First Name*</label>
               <input
-                type="email"
+                pInputText
+                type="text"
+                id="firstName"
+                placeholder="Enter first name"
                 class="form-control"
-                placeholder="Email address"
+                formControlName="firstName"
               />
+              @if (isInvalid('firstName')) {
+              <p-message severity="error" size="small" variant="simple">
+                First Name is required.
+              </p-message>
+              }
             </div>
 
-            <div class="mb-3">
-              <label class="form-label">Street Address*</label>
-              <input type="text" class="form-control" placeholder="Street" />
+            <div class="col-md-6">
+              <label for="lastName" class="form-label">Last Name*</label>
+              <input
+                pInputText
+                type="text"
+                id="lastName"
+                placeholder="Enter last name"
+                class="form-control"
+                formControlName="lastName"
+              />
+              @if (isInvalid('lastName')) {
+              <p-message severity="error" size="small" variant="simple">
+                Last Name is required.
+              </p-message>
+              }
             </div>
 
-            <div class="row mb-3">
-              <div class="col-md-4">
-                <label class="form-label">City*</label>
-                <input type="text" class="form-control" placeholder="City" />
-              </div>
-              <div class="col-md-4">
-                <label class="form-label">State*</label>
-                <input type="text" class="form-control" placeholder="State" />
-              </div>
-              <div class="col-md-4">
-                <label class="form-label">Zip Code*</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  placeholder="Zip code"
-                />
-              </div>
+            <div class="col-md-12">
+              <label for="email" class="form-label">Email*</label>
+              <input
+                pInputText
+                type="email"
+                id="email"
+                placeholder="Enter email address"
+                class="form-control"
+                formControlName="email"
+              />
+              @if (isInvalid('email')) { @if
+              (deliveryForm.get('email')?.errors?.['required']) {
+              <p-message severity="error" size="small" variant="simple">
+                Email is required.
+              </p-message>
+              } @if (deliveryForm.get('email')?.errors?.['email']) {
+              <p-message severity="error" size="small" variant="simple">
+                Please enter a valid email.
+              </p-message>
+              } }
             </div>
 
-            <div class="row mb-4">
-              <div class="col-md-6">
-                <label class="form-label">Country*</label>
-                <input type="text" class="form-control" placeholder="Country" />
-              </div>
-              <div class="col-md-6">
-                <label class="form-label">Phone Number*</label>
-                <input type="text" class="form-control" placeholder="Phone" />
-              </div>
+            <div class="col-md-12">
+              <label for="streetAddress" class="form-label"
+                >Street Address*</label
+              >
+              <input
+                pInputText
+                type="text"
+                id="streetAddress"
+                placeholder="Enter street address"
+                class="form-control"
+                formControlName="streetAddress"
+              />
+              @if (isInvalid('streetAddress')) {
+              <p-message severity="error" size="small" variant="simple">
+                Street address is required.
+              </p-message>
+              }
+            </div>
+
+            <div class="col-md-6">
+              <label for="city" class="form-label">City*</label>
+              <input
+                pInputText
+                type="text"
+                id="city"
+                placeholder="Enter city"
+                class="form-control"
+                formControlName="city"
+              />
+              @if (isInvalid('city')) {
+              <p-message severity="error" size="small" variant="simple">
+                City is required.
+              </p-message>
+              }
+            </div>
+
+            <div class="col-md-6">
+              <label for="state" class="form-label">State*</label>
+              <input
+                pInputText
+                type="text"
+                id="state"
+                placeholder="Enter state"
+                class="form-control"
+                formControlName="state"
+              />
+              @if (isInvalid('state')) {
+              <p-message severity="error" size="small" variant="simple">
+                State is required.
+              </p-message>
+              }
+            </div>
+
+            <div class="col-md-6">
+              <label for="zipCode" class="form-label">Zip Code*</label>
+              <input
+                pInputText
+                type="text"
+                id="zipCode"
+                placeholder="Enter zip code"
+                class="form-control"
+                formControlName="zipCode"
+              />
+              @if (isInvalid('zipCode')) {
+              <p-message severity="error" size="small" variant="simple">
+                Zip Code is required.
+              </p-message>
+              }
+            </div>
+
+            <div class="col-md-6">
+              <label for="country" class="form-label">Country*</label>
+              <input
+                pInputText
+                type="text"
+                id="country"
+                placeholder="Enter country"
+                class="form-control"
+                formControlName="country"
+              />
+              @if (isInvalid('country')) {
+              <p-message severity="error" size="small" variant="simple">
+                Country is required.
+              </p-message>
+              }
+            </div>
+
+            <div class="col-md-12">
+              <label for="phoneNumber" class="form-label">Phone Number*</label>
+              <input
+                pInputText
+                type="text"
+                id="phoneNumber"
+                placeholder="Enter phone number"
+                class="form-control"
+                formControlName="phoneNumber"
+              />
+              @if (isInvalid('phoneNumber')) {
+              <p-message severity="error" size="small" variant="simple">
+                Phone Number is required.
+              </p-message>
+              }
             </div>
           </form>
         </div>
@@ -189,15 +285,75 @@
             class="d-flex justify-content-between align-items-center border-bottom pb-2 mb-3"
           >
             <span class="fw-semibold fs-5">TOTAL</span>
-            <span class="text-success fw-bold fs-5">$122</span>
+            <span class="text-success fw-bold fs-5">${{ totalAmount.toFixed(2) }}</span>
           </div>
-          <button class="btn btn-primary w-100">Proceed To Payment</button>
+          <button
+            pButton
+            severity="secondary"
+            type="button"
+            (click)="onSubmit()"
+            class="w-100"
+          >
+            Proceed To Payment
+          </button>
         </div>
       </div>
     </div>
   </div>
 
-  }
-</div>
+  }@else if(orderStep === 2){
+  <div class="card p-4 shadow-sm">
+    <h1 class="fs-4 fw-bold mb-4">Select Payment Method</h1>
 
-<app-footer />
+    <div class="mb-3">
+      <div class="form-check">
+        <input
+          class="form-check-input"
+          type="radio"
+          name="paymentType"
+          id="cashPayment"
+          value="cash"
+          [(ngModel)]="paymentType"
+        />
+        <label class="form-check-label" for="cashPayment">
+          Cash on Delivery
+        </label>
+      </div>
+
+      <div class="form-check mt-2">
+        <input
+          class="form-check-input"
+          type="radio"
+          name="paymentType"
+          id="cardPayment"
+          value="card"
+          disabled
+          [(ngModel)]="paymentType"
+        />
+        <label class="form-check-label text-muted" for="cardPayment">
+          Card (Coming Soon)
+        </label>
+      </div>
+    </div>
+
+    @if (!paymentType) {
+    <p-message
+      severity="warn"
+      size="small"
+      text="Please select a payment method."
+    ></p-message>
+    }
+
+    <button
+      type="submit"
+      class="w-100 btn btn-primary mt-3"
+      [disabled]="!paymentType"
+      (click)="completeOrder()"
+    >
+      Continue
+    </button>
+  </div>
+  }
+
+  <app-footer />
+</div>
