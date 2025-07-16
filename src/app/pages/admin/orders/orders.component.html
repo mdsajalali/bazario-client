@@ -40,6 +40,7 @@
         <tr>
           <th>Order ID</th>
           <th>Customer</th>
+          <th>Items</th>
           <th>Payment Type</th>
           <th>Date</th>
           <th>Total</th>
@@ -50,19 +51,23 @@
 
       <ng-template #body let-order>
         <tr>
-          <td>{{ order.orderId }}</td>
-          <td>{{ order.customer }}</td>
+          <td>#{{ order._id.slice(0, 5) }}</td>
+          <td>{{ order.address.firstName + order.address.lastName }}</td>
+          <td>{{ order.items.length }}</td>
           <td>{{ order.paymentType }}</td>
-          <td>{{ order.date }}</td>
+          <td>{{ order.date | date }}</td>
           <td>${{ order.total }}</td>
           <td>
             <p-select
-              [options]="cities"
-              [(ngModel)]="selectedCity"
-              optionLabel="name"
+              [options]="orderStatus"
+              [(ngModel)]="order.status"
+              optionLabel="label"
+              placeholder="Select Status"
+              (onChange)="handleStatusChange(order)"
               class="w-100"
             />
           </td>
+
           <td>
             <button class="btn btn-sm btn-danger" title="Delete">
               <i class="pi pi-trash mt-1"></i>

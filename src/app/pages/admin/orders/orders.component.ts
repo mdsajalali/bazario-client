@@ -8,20 +8,8 @@ import { SelectModule } from 'primeng/select';
 import { FormsModule } from '@angular/forms';
 import { NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs';
-
-interface Order {
-  orderId: string;
-  customer: string;
-  paymentType: string;
-  date: string;
-  total: number;
-  status: string;
-}
-
-interface City {
-  name: string;
-  code: string;
-}
+import { OrdersService } from '../../../services/orders/orders.service';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-orders',
@@ -35,30 +23,34 @@ interface City {
     InputIcon,
     SelectModule,
     FormsModule,
+    DatePipe,
   ],
 })
 export class OrdersComponent implements OnInit {
-  orders!: Order[];
-  cities: City[] | undefined;
-  selectedCity!: City;
+  orders!: any[];
   globalFilterValue: string = '';
   router = inject(Router);
   isDashboard: boolean = false;
+  orderService = inject(OrdersService);
+  selectedOrder!: any;
 
-  selectedOrder!: Order;
+  orderStatus = [
+    { label: 'In Progress', value: 'inprogress' },
+    { label: 'Dispatched', value: 'dispatched' },
+    { label: 'Shipped', value: 'shipped' },
+    { label: 'Delivered', value: 'delivered' },
+  ];
+
+  handleStatusChange(order: any) {
+    const newStatus = order.status.value;
+    const orderId = order._id;
+    this.orderService.updateOrderStatus(orderId, newStatus).subscribe(() => {
+      alert('Status updated successfully');
+    });
+  }
 
   ngOnInit() {
-    this.getOrders().then((data) => (this.orders = data));
-
-    this.cities = [
-      { name: 'New York', code: 'NY' },
-      { name: 'Rome', code: 'RM' },
-      { name: 'London', code: 'LDN' },
-      { name: 'Istanbul', code: 'IST' },
-      { name: 'Paris', code: 'PRS' },
-    ];
-
-    this.selectedCity = this.cities[1];
+    this.getOrders();
 
     // route check
     this.checkRoute(this.router.url);
@@ -73,49 +65,13 @@ export class OrdersComponent implements OnInit {
     this.isDashboard = url === '/dashboard';
   }
 
-  getOrders(): Promise<Order[]> {
-    return Promise.resolve([
-      {
-        orderId: '#ORD001',
-        customer: 'John Doe',
-        paymentType: 'Card',
-        date: '2025-07-10',
-        total: 150,
-        status: 'Completed',
+  getOrders() {
+    this.orderService.getAdminOrder().subscribe({
+      next: (result: any) => {
+        console.log(result);
+        this.orders = result;
       },
-      {
-        orderId: '#ORD002',
-        customer: 'Jane Smith',
-        paymentType: 'Online',
-        date: '2025-07-08',
-        total: 220,
-        status: 'Pending',
-      },
-      {
-        orderId: '#ORD003',
-        customer: 'Alice Brown',
-        paymentType: 'Cash',
-        date: '2025-07-06',
-        total: 95,
-        status: 'Processing',
-      },
-      {
-        orderId: '#ORD004',
-        customer: 'Bob Martin',
-        paymentType: 'Card',
-        date: '2025-07-04',
-        total: 175,
-        status: 'Cancelled',
-      },
-      {
-        orderId: '#ORD005',
-        customer: 'Clara Wilson',
-        paymentType: 'Online',
-        date: '2025-07-01',
-        total: 310,
-        status: 'Completed',
-      },
-    ]);
+    });
   }
 
   getGlobalFilterValue(filter: any): string {
