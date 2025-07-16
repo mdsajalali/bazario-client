@@ -3,6 +3,7 @@ import { ProductType } from '../../../types';
 import { ButtonModule } from 'primeng/button';
 import { RouterLink } from '@angular/router';
 import { WishlistService } from '../../../services/wishlist.service';
+import { CartsService } from '../../../services/carts/carts.service';
 
 @Component({
   selector: 'app-product-card',
@@ -14,6 +15,7 @@ export class ProductCardComponent implements OnInit {
   @Input() product!: ProductType;
   wishlistService = inject(WishlistService);
   isWishlisted: boolean = false;
+  cartService = inject(CartsService);
 
   ngOnInit() {
     this.checkWishlistStatus();
@@ -57,5 +59,26 @@ export class ProductCardComponent implements OnInit {
         console.log(error);
       },
     });
+  }
+
+  // cart functionality
+  addToCart(product: ProductType) {
+    if (!this.isProductInCart(product._id!)) {
+      this.cartService.addToCart(product._id!, 1).subscribe(() => {
+        this.cartService.init();
+      });
+    } else {
+      this.cartService.removeFormCart(product._id!).subscribe(() => {
+        this.cartService.init();
+      });
+    }
+  }
+
+  isProductInCart(productId: string) {
+    if (this.cartService.items.find((x: any) => x.product._id == productId)) {
+      return true;
+    } else {
+      return false;
+    }
   }
 }

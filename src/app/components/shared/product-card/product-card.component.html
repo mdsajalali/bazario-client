@@ -28,7 +28,12 @@
         ></p-button>
 
         <p-button
-          icon="pi pi-shopping-cart"
+          (onClick)="addToCart(product)"
+          [icon]="
+            isProductInCart(product._id!)
+              ? 'pi pi-cart-minus'
+              : 'pi pi-shopping-cart'
+          "
           size="small"
           styleClass="p-button-rounded"
         ></p-button>

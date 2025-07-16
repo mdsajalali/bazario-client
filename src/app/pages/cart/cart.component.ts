@@ -1,14 +1,9 @@
 import { HeaderComponent } from '../../components/shared/header/header.component';
 import { FooterComponent } from '../../components/shared/footer/footer.component';
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { TableModule } from 'primeng/table';
-interface Order {
-  product: string;
-  productName: string;
-  price: string;
-  quantity: string;
-  total: number;
-}
+import { CartsService } from '../../services/carts/carts.service';
+import { ProductType } from '../../types';
 
 @Component({
   selector: 'app-cart',
@@ -17,54 +12,45 @@ interface Order {
   styleUrl: './cart.component.scss',
 })
 export class CartComponent {
-  orders!: Order[];
   orderStep: number = 0;
+  cartService = inject(CartsService);
 
   get checkoutOrderStepUpdate() {
     return (this.orderStep = 1);
   }
 
   ngOnInit() {
-    this.getOrders().then((data) => (this.orders = data));
+    this.cartService.init();
   }
 
-  getOrders(): Promise<Order[]> {
-    return Promise.resolve([
-      {
-        product: 'Vivo',
-        productName: 'John Doe',
-        price: 'Card',
-        quantity: '2025-07-10',
-        total: 150,
+  get cartItems() {
+    return this.cartService.items as any;
+  }
+
+  sellingPrice(product: ProductType) {
+    return product.price - (product.price * product.discount) / 100;
+  }
+
+  addToCart(productId: string, quantity: number) {
+    this.cartService.addToCart(productId, quantity).subscribe((result) => {
+      this.cartService.init();
+    });
+  }
+
+  get totalAmount() {
+    let amount = 0;
+    for (let index = 0; index < this.cartItems.length; index++) {
+      const element = this.cartItems[index];
+      amount += this.sellingPrice(element.product) * element.quantity;
+    }
+    return amount;
+  }
+
+  removeFormCart(productId: string) {
+    this.cartService.removeFormCart(productId).subscribe({
+      next: () => {
+        alert('Product remove to cart');
       },
-      {
-        product: 'Vivo',
-        productName: 'Jane Smith',
-        price: 'Online',
-        quantity: '2025-07-08',
-        total: 220,
-      },
-      {
-        product: 'Vivo',
-        productName: 'Alice Brown',
-        price: 'Cash',
-        quantity: '2025-07-06',
-        total: 95,
-      },
-      {
-        product: 'Vivo',
-        productName: 'Bob Martin',
-        price: 'Card',
-        quantity: '2025-07-04',
-        total: 175,
-      },
-      {
-        product: 'Vivo',
-        productName: 'Clara Wilson',
-        price: 'Online',
-        quantity: '2025-07-01',
-        total: 310,
-      },
-    ]);
+    });
   }
 }
