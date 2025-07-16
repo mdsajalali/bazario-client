@@ -37,4 +37,8 @@ export class ProductsService {
       environment.apiUrl + `/products/${id}`
     );
   }
+
+  getOverview(): Observable<any> {
+    return this.http.get<any>(environment.apiUrl + '/products/overview');
+  }
 }

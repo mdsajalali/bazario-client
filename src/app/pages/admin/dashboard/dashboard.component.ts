@@ -7,6 +7,7 @@ import {
 import { OrdersComponent } from '../orders/orders.component';
 import { ChartModule } from 'primeng/chart';
 import { isPlatformBrowser } from '@angular/common';
+import { ProductsService } from '../../../services/dashboard/products/products.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -19,11 +20,24 @@ export class DashboardComponent {
   basicOptions: any;
 
   platformId = inject(PLATFORM_ID);
+  productService = inject(ProductsService);
 
   constructor(private cd: ChangeDetectorRef) {}
 
+  totalProducts: number = 0;
+  totalBrands: number = 0;
+  totalCategories: number = 0;
+  totalOrders: number = 0;
   ngOnInit() {
     this.initChart();
+    this.productService.getOverview().subscribe({
+      next: (result: any) => {
+        this.totalProducts = result.totalProducts;
+        this.totalBrands = result.totalBrands;
+        this.totalCategories = result.totalCategories;
+        this.totalOrders = result.totalOrders;
+      },
+    });
   }
 
   initChart() {
