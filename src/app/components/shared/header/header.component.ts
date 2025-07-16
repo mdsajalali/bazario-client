@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Router, RouterModule } from '@angular/router';
+import { Router, RouterLinkActive, RouterModule } from '@angular/router';
 import { WishlistService } from '../../../services/wishlist.service';
 import { AuthService } from '../../../services/auth/auth.service';
 
