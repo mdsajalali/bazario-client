@@ -10,7 +10,9 @@
         <li><a routerLink="/about">About</a></li>
         <li><a routerLink="/contact">Contact</a></li>
         <li><a routerLink="/blogs">Blogs</a></li>
+        @if (isAdmin) {
         <li><a routerLink="/dashboard">Dashboard</a></li>
+        }
       </ul>
     </nav>
 
@@ -25,7 +27,7 @@
 
         <a routerLink="/wishlist" class="icon-wrapper position-relative">
           <i class="pi pi-heart fs-5 text-dark"></i>
-          <span class="badge">{{wishlistLength}}</span>
+          <span class="badge">{{ wishlistLength }}</span>
         </a>
 
         <div class="icon-wrapper position-relative" (click)="toggleSearch()">

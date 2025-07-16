@@ -3,6 +3,7 @@ import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { WishlistService } from '../../../services/wishlist.service';
+import { AuthService } from '../../../services/auth/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -15,6 +16,7 @@ export class HeaderComponent {
   searchValue: string = '';
   router = inject(Router);
   wishlistService = inject(WishlistService);
+  authService = inject(AuthService);
   wishlistLength = 0;
 
   ngOnInit() {
@@ -44,12 +46,17 @@ export class HeaderComponent {
   }
 
   get isLoggedIn(): boolean {
-    return !!localStorage.getItem('token');
+    return this.authService.isLoggedIn;
+  }
+
+  get isAdmin(): boolean {
+    return this.authService.isAdmin;
   }
 
   // logout
   logout() {
     localStorage.removeItem('token');
+    localStorage.removeItem('user');
     this.router.navigateByUrl('/login');
   }
 }

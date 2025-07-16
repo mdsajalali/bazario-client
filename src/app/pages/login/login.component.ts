@@ -57,6 +57,7 @@ export class LoginComponent {
             life: 3000,
           });
           localStorage.setItem('token', result.token);
+          localStorage.setItem('user', JSON.stringify(result.user));
           this.loginForm.reset();
           this.formSubmitted = false;
           setTimeout(() => {

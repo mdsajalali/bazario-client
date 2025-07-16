@@ -38,6 +38,7 @@ export class LayoutComponent {
   // logout
   logout() {
     localStorage.removeItem('token');
+    localStorage.removeItem('user');
     this.router.navigateByUrl('/login');
   }
 }

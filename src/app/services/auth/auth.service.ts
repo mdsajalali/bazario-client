@@ -10,6 +10,26 @@ import { AuthResponse } from '../../types';
 export class AuthService {
   http = inject(HttpClient);
 
+  get isLoggedIn() {
+    let token = localStorage.getItem('token');
+    if (token) {
+      return true;
+    }
+    return false;
+  }
+
+  get isAdmin(): boolean {
+    const userData = localStorage.getItem('user');
+    if (!userData) return false;
+
+    try {
+      const user = JSON.parse(userData);
+      return user.isAdmin === true;
+    } catch {
+      return false;
+    }
+  }
+
   register(
     name: string,
     email: string,
