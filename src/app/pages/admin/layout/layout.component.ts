@@ -1,12 +1,12 @@
 import { NgClass } from '@angular/common';
 import { Component, inject } from '@angular/core';
-import { Router, RouterLink, RouterOutlet } from '@angular/router';
+import { Router, RouterLink, RouterModule, RouterOutlet } from '@angular/router';
 import { MenuKey } from '../../../types';
 import { ButtonModule } from 'primeng/button';
 
 @Component({
   selector: 'app-layout',
-  imports: [RouterOutlet, RouterLink, NgClass, ButtonModule],
+  imports: [RouterOutlet, RouterLink, NgClass, ButtonModule, RouterModule],
   templateUrl: './layout.component.html',
   styleUrl: './layout.component.scss',
 })

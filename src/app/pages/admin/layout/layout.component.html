@@ -13,7 +13,9 @@
       <nav class="nav flex-column">
         <a
           routerLink="/dashboard"
-          class="nav-link btn btn-light fw-medium text-black d-flex align-items-center mb-2"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+          class="nav-link btn text_color fw-medium text-black d-flex align-items-center mb-2"
           (click)="closeAllSubmenus()"
         >
           Dashboard
@@ -21,7 +23,7 @@
 
         <div>
           <div
-            class="title-arrow btn btn-light mb-1"
+            class="title-arrow btn text_color mb-1"
             (click)="toggleSubmenu('products')"
           >
             <h6 class="mb-0">Products</h6>
@@ -35,29 +37,33 @@
             >
               <path
                 d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192
-              c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256
-              338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3
-              0s-12.5 32.8 0 45.3l192 192z"
+        c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256
+        338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3
+        0s-12.5 32.8 0 45.3l192 192z"
               />
             </svg>
           </div>
           <div [hidden]="!submenuOpen.products">
             <a
               routerLink="/dashboard/products"
-              class="nav-link btn btn-light text-size text-black mb-1"
-              >All Products</a
+              routerLinkActive="active"
+              class="nav-link btn text_color text-size text-black mb-1"
             >
+              All Products
+            </a>
             <a
               routerLink="/dashboard/add-product"
-              class="nav-link btn btn-light text-size text-black mb-1"
-              >Add Product</a
+              routerLinkActive="active"
+              class="nav-link btn text_color text-size text-black mb-1"
             >
+              Add Product
+            </a>
           </div>
         </div>
 
         <div>
           <div
-            class="title-arrow btn btn-light mb-1"
+            class="title-arrow btn text_color mb-1"
             (click)="toggleSubmenu('brands')"
           >
             <h6 class="mb-0">Brands</h6>
@@ -71,29 +77,33 @@
             >
               <path
                 d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192
-              c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256
-              338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3
-              0s-12.5 32.8 0 45.3l192 192z"
+        c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256
+        338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3
+        0s-12.5 32.8 0 45.3l192 192z"
               />
             </svg>
           </div>
           <div [hidden]="!submenuOpen.brands">
             <a
               routerLink="/dashboard/brands"
-              class="nav-link btn btn-light text-size text-black mb-1"
-              >All Brands</a
+              routerLinkActive="active"
+              class="nav-link btn text_color text-size text-black mb-1"
             >
+              All Brands
+            </a>
             <a
               routerLink="/dashboard/add-brand"
-              class="nav-link btn btn-light text-size text-black mb-1"
-              >Add Brand</a
+              routerLinkActive="active"
+              class="nav-link btn text_color text-size text-black mb-1"
             >
+              Add Brand
+            </a>
           </div>
         </div>
 
         <div>
           <div
-            class="title-arrow btn btn-light mb-1"
+            class="title-arrow btn text_color mb-1"
             (click)="toggleSubmenu('categories')"
           >
             <h6 class="mb-0">Categories</h6>
@@ -107,29 +117,34 @@
             >
               <path
                 d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192
-              c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256
-              338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3
-              0s-12.5 32.8 0 45.3l192 192z"
+        c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256
+        338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3
+        0s-12.5 32.8 0 45.3l192 192z"
               />
             </svg>
           </div>
           <div [hidden]="!submenuOpen.categories">
             <a
               routerLink="/dashboard/categories"
-              class="nav-link btn btn-light text-size text-black mb-1"
-              >All Categories</a
+              routerLinkActive="active"
+              class="nav-link btn text_color text-size text-black mb-1"
             >
+              All Categories
+            </a>
             <a
               routerLink="/dashboard/add-category"
-              class="nav-link btn btn-light text-size text-black mb-1"
-              >Add Category</a
+              routerLinkActive="active"
+              class="nav-link btn text_color text-size text-black mb-1"
             >
+              Add Category
+            </a>
           </div>
         </div>
 
         <a
           routerLink="/dashboard/orders"
-          class="nav-link btn btn-light text-size text-black fw-medium d-flex align-items-center mb-2"
+          routerLinkActive="active"
+          class="nav-link btn text_color text-size text-black fw-medium d-flex align-items-center mb-2"
           (click)="closeAllSubmenus()"
         >
           Orders
@@ -139,7 +154,7 @@
 
     <div class="p-3 border-top">
       <p-button
-      (onClick)="logout()"
+        (onClick)="logout()"
         label="Logout"
         class="w-100"
         severity="danger"
