@@ -29,13 +29,16 @@ export class DashboardComponent {
   totalCategories: number = 0;
   totalOrders: number = 0;
   ngOnInit() {
-    this.initChart();
     this.productService.getOverview().subscribe({
       next: (result: any) => {
         this.totalProducts = result.totalProducts;
         this.totalBrands = result.totalBrands;
         this.totalCategories = result.totalCategories;
         this.totalOrders = result.totalOrders;
+
+        this.initChart();
+
+        this.cd.markForCheck();
       },
     });
   }
@@ -51,23 +54,13 @@ export class DashboardComponent {
         documentStyle.getPropertyValue('--p-content-border-color') || '#dee2e6';
 
       this.basicData = {
-        labels: ['Q1', 'Q2', 'Q3', 'Q4'],
+        labels: ['Total Orders'],
         datasets: [
           {
-            label: 'Sales',
-            data: [8500, 7200, 9100, 10600],
-            backgroundColor: [
-              'rgba(255, 99, 132, 0.2)',
-              'rgba(54, 162, 235, 0.2)',
-              'rgba(255, 206, 86, 0.2)',
-              'rgba(75, 192, 192, 0.2)',
-            ],
-            borderColor: [
-              'rgba(255, 99, 132, 1)',
-              'rgba(54, 162, 235, 1)',
-              'rgba(255, 206, 86, 1)',
-              'rgba(75, 192, 192, 1)',
-            ],
+            label: 'Orders',
+            data: [this.totalOrders],
+            backgroundColor: 'rgba(75, 192, 192, 0.6)',
+            borderColor: 'rgba(75, 192, 192, 1)',
             borderWidth: 2,
           },
         ],
@@ -102,8 +95,6 @@ export class DashboardComponent {
           },
         },
       };
-
-      this.cd.markForCheck();
     }
   }
 }
