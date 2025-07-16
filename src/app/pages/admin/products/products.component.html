@@ -18,7 +18,8 @@
       stateKey="product-management"
     >
       <ng-template #caption>
-        <p-iconfield iconPosition="left">
+        <div class="d-flex align-items-center justify-content-between">
+          <p-iconfield iconPosition="left">
           <p-inputicon>
             <i class="pi pi-search"></i>
           </p-inputicon>
@@ -30,6 +31,10 @@
             placeholder="Search by name, brand, category..."
           />
         </p-iconfield>
+        <div>
+          <a routerLink="/dashboard/add-product" class="d-btn">Add Product</a>
+        </div>
+        </div>
       </ng-template>
 
       <ng-template pTemplate="header">

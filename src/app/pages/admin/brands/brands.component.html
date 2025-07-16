@@ -18,18 +18,23 @@
       stateKey="order-management"
     >
       <ng-template #caption>
-        <p-iconfield iconPosition="left">
-          <p-inputicon>
-            <i class="pi pi-search"></i>
-          </p-inputicon>
-          <input
-            pInputText
-            type="search"
-            [(ngModel)]="globalFilterValue"
-            (ngModelChange)="dt1.filterGlobal(globalFilterValue, 'contains')"
-            placeholder="Global Search"
-          />
-        </p-iconfield>
+        <div class="d-flex align-items-center justify-content-between">
+          <p-iconfield iconPosition="left">
+            <p-inputicon>
+              <i class="pi pi-search"></i>
+            </p-inputicon>
+            <input
+              pInputText
+              type="search"
+              [(ngModel)]="globalFilterValue"
+              (ngModelChange)="dt1.filterGlobal(globalFilterValue, 'contains')"
+              placeholder="Search by name"
+            />
+          </p-iconfield>
+          <div>
+            <a routerLink="/dashboard/add-brand" class="d-btn">Add Brand</a>
+          </div>
+        </div>
       </ng-template>
 
       <ng-template #header>

@@ -11,3 +11,25 @@ body {
 input:focus {
   box-shadow: none !important;
 }
+
+// shared btn style
+$primary-color: #4f46e5;
+$light-bg: #fff;
+$dark-text: #111;
+$transition: 0.3s;
+
+.d-btn {
+  padding: 0.5rem 1rem;
+  background-color: $primary-color;
+  color: $light-bg;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color $transition;
+  text-decoration: none;
+  font-weight: 500;
+
+  &:hover {
+    background-color: #6b63f3;
+  }
+}
