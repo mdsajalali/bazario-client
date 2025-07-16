@@ -1,0 +1,63 @@
+<app-header />
+<div class="container py-4">
+  <h2 class="mb-4">All Orders</h2>
+
+  @for (order of orders; track $index) {
+  <div class="order-card card mb-4 shadow-sm">
+    <div
+      class="card-header d-flex justify-content-between align-items-center flex-wrap"
+    >
+      <div>
+        <strong>Order ID:</strong> {{ order._id }}<br />
+        <strong>Status:</strong>
+        <span class="badge bg-info text-dark text-capitalize">{{
+          order.status
+        }}</span>
+      </div>
+      <div><strong>Date:</strong> {{ order.date | date : "medium" }}</div>
+    </div>
+
+    <div class="card-body">
+      <h5 class="mb-3">Shipping Address</h5>
+      <p class="mb-1">
+        {{ order.address?.address1 }}, {{ order.address?.address2 }}<br />
+        {{ order.address?.city }} - {{ order.address?.pincode }}
+      </p>
+      <p><strong>Payment Type:</strong> {{ order.paymentType }}</p>
+
+      <div class="products mt-4">
+        <h5 class="mb-3">Products</h5>
+        @for (item of order.items; track $index) {
+        <div class="product d-flex align-items-center mb-3 flex-wrap">
+          <img
+            [src]="item.product?.images?.[0]"
+            alt="{{ item.product?.name }}"
+            class="product-img img-thumbnail me-3 mb-2"
+          />
+          <div>
+            <h6 class="mb-1">{{ item.product?.name }}</h6>
+            <p class="mb-1">Qty: {{ item.quantity }}</p>
+            <p class="mb-1 text-muted">
+              Price:
+              <span class="text-success fw-semibold"
+                >${{ item.product?.price }}</span
+              >
+              @if (item.product?.discount > 0) {
+              <span class="text-danger ms-2"
+                >-{{ item.product.discount }}%</span
+              >
+              }
+            </p>
+            <p class="small text-secondary">
+              {{ item.product?.shotDescription }}
+            </p>
+          </div>
+        </div>
+        }
+      </div>
+    </div>
+  </div>
+  }
+</div>
+
+<app-footer />

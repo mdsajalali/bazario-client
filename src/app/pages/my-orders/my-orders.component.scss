@@ -1,0 +1,26 @@
+.order-card {
+  border-radius: 0.75rem;
+
+  .card-header {
+    background-color: #f8f9fa;
+    font-size: 0.95rem;
+  }
+
+  .product-img {
+    width: 100px;
+    height: auto;
+    object-fit: contain;
+    border-radius: 0.5rem;
+  }
+
+  @media (max-width: 576px) {
+    .product-img {
+      width: 80px;
+    }
+
+    .card-header,
+    .card-body {
+      font-size: 0.9rem;
+    }
+  }
+}

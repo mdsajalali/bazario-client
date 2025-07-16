@@ -22,6 +22,7 @@ import { WishlistComponent } from './pages/wishlist/wishlist.component';
 import { SearchComponent } from './pages/search/search.component';
 import { BlogsComponent } from './pages/blogs/blogs.component';
 import { BlogDetailsComponent } from './components/blog-details/blog-details.component';
+import { MyOrdersComponent } from './pages/my-orders/my-orders.component';
 
 export const routes: Routes = [
   {
@@ -95,6 +96,10 @@ export const routes: Routes = [
   {
     path: 'search',
     component: SearchComponent,
+  },
+  {
+    path: 'orders',
+    component: MyOrdersComponent,
   },
   {
     path: 'product/:id',
