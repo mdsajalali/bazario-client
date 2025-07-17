@@ -3,6 +3,7 @@ import { RouterLink } from '@angular/router';
 import { ButtonModule } from 'primeng/button';
 import { ProductType } from '../../../types';
 import { WishlistService } from '../../../services/wishlist.service';
+import { CartsService } from '../../../services/carts/carts.service';
 
 @Component({
   selector: 'app-base-product-card',
@@ -12,6 +13,7 @@ import { WishlistService } from '../../../services/wishlist.service';
 })
 export class BaseProductCardComponent {
   @Input() product!: ProductType;
+  cartService = inject(CartsService);
 
   wishlistService = inject(WishlistService);
   isWishlisted: boolean = false;
@@ -57,6 +59,12 @@ export class BaseProductCardComponent {
       error: (error) => {
         console.log(error);
       },
+    });
+  }
+
+  addToCart(product: ProductType) {
+    this.cartService.addToCart(product._id!, 1).subscribe(() => {
+      this.cartService.init();
     });
   }
 }

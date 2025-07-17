@@ -9,6 +9,7 @@ import { Carousel, CarouselModule } from 'primeng/carousel';
 import { CommonModule } from '@angular/common';
 import { Button } from 'primeng/button';
 import { WishlistService } from '../../services/wishlist.service';
+import { CartsService } from '../../services/carts/carts.service';
 
 @Component({
   selector: 'app-product-details',
@@ -30,6 +31,7 @@ export class ProductDetailsComponent {
   route = inject(ActivatedRoute);
   loading: boolean = true;
   selectedImage: string = '';
+  cartService = inject(CartsService);
 
   wishlistService = inject(WishlistService);
   isWishlisted: boolean = false;
@@ -91,6 +93,12 @@ export class ProductDetailsComponent {
       error: (error) => {
         console.log(error);
       },
+    });
+  }
+
+  addToCart(product: ProductType) {
+    this.cartService.addToCart(product._id!, 1).subscribe(() => {
+      this.cartService.init();
     });
   }
 

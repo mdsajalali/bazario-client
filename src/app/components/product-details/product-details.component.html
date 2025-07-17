@@ -44,7 +44,7 @@
       </p>
 
       <div class="d-flex gap-3 mb-4">
-        <button class="cart_btn">Add to Cart</button>
+        <button class="cart_btn" (click)="addToCart(product)">Add to Cart</button>
         <p-button
           class="mt-1"
           (onClick)="toggleWishlist(product._id)"
