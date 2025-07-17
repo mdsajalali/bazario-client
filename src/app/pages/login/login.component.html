@@ -9,7 +9,7 @@
         class="flex flex-col gap-4 w-full sm:w-56"
       >
         <div class="flex flex-col gap-1 mt-2">
-           <label for="email">Email</label>
+          <label for="email">Email</label>
           <input
             pInputText
             type="email"
@@ -31,7 +31,7 @@
           } }
         </div>
         <div class="flex flex-col gap-1 my-3">
-           <label for="password">Password</label>
+          <label for="password">Password</label>
           <input
             pInputText
             type="password"
@@ -47,10 +47,25 @@
           >
           }
         </div>
-        <button pButton severity="secondary" class="w-100" type="login">
-          <span pButtonLabel>Login</span>
-        </button>
+        <button type="submit" class="d-btn w-100">Login</button>
       </form>
+      <div class="d-flex gap-2 justify-content-between my-3">
+        <button
+          type="button"
+          class="btn btn-outline-primary btn-sm w-50"
+          (click)="fillDemoUser()"
+        >
+          Demo User
+        </button>
+        <button
+          type="button"
+          class="btn btn-outline-secondary btn-sm w-50"
+          (click)="fillDemoAdmin()"
+        >
+          Demo Admin
+        </button>
+      </div>
+
       <div class="text-center mt-4">
         <span>Don't have an account?</span>
         <a class="ms-1" routerLink="/register">Register</a>

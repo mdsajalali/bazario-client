@@ -6,7 +6,6 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { ButtonModule } from 'primeng/button';
 import { MessageModule } from 'primeng/message';
 import { Router, RouterLink } from '@angular/router';
 import { ToastModule } from 'primeng/toast';
@@ -18,7 +17,6 @@ import { AuthService } from '../../services/auth/auth.service';
   imports: [
     ReactiveFormsModule,
     InputTextModule,
-    ButtonModule,
     MessageModule,
     RouterLink,
     ToastModule,
@@ -80,5 +78,19 @@ export class LoginComponent {
   isInvalid(controlName: string) {
     const control = this.loginForm.get(controlName);
     return control?.invalid && (control.touched || this.formSubmitted);
+  }
+
+  fillDemoUser() {
+    this.loginForm.patchValue({
+      email: 'customer@gmail.com',
+      password: 'customer1234',
+    });
+  }
+
+  fillDemoAdmin() {
+    this.loginForm.patchValue({
+      email: 'admin@gmail.com',
+      password: 'admin1234',
+    });
   }
 }

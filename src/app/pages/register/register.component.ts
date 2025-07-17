@@ -5,8 +5,7 @@ import {
   FormGroup,
   ReactiveFormsModule,
   Validators,
-} from '@angular/forms';
-import { ButtonModule } from 'primeng/button';
+} from '@angular/forms'; 
 import { MessageModule } from 'primeng/message';
 import { Router, RouterLink } from '@angular/router';
 import { ToastModule } from 'primeng/toast';
@@ -17,8 +16,7 @@ import { AuthService } from '../../services/auth/auth.service';
   selector: 'app-register',
   imports: [
     ReactiveFormsModule,
-    InputTextModule,
-    ButtonModule,
+    InputTextModule, 
     MessageModule,
     RouterLink,
     ToastModule,
