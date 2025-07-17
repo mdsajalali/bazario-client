@@ -6,6 +6,8 @@ import { ShopCategoryComponent } from '../../components/shop-category/shop-categ
 import { ShopBrandsComponent } from '../../components/shop-brands/shop-brands.component';
 import { HomeProductsComponent } from '../../components/home-products/home-products.component';
 import { HomeBlogsComponent } from '../../components/home-blogs/home-blogs.component';
+import { FeaturedProductsComponent } from "../../components/featured-products/featured-products.component";
+import { RecentProductsComponent } from "../../components/recent-products/recent-products.component";
 
 @Component({
   selector: 'app-home',
@@ -13,11 +15,13 @@ import { HomeBlogsComponent } from '../../components/home-blogs/home-blogs.compo
     HeaderComponent,
     FooterComponent,
     BannerComponent,
-    ShopCategoryComponent, 
+    ShopCategoryComponent,
     ShopBrandsComponent,
     HomeBlogsComponent,
     HomeProductsComponent,
-  ],
+    FeaturedProductsComponent,
+    RecentProductsComponent
+],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
 })

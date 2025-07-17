@@ -1,10 +1,10 @@
 <div class="container py-5">
-  <h2 class="text-start mb-4 fw-bold">Recent Products</h2>
+  <h2 class="text-start mb-4 fw-bold">New Products</h2>
   <div class="card border border-white">
     @if(loading){
     <p>Loading...</p>
     }@else if(!loading && products.length === 0) {
-    <p>Recent products not found.</p>
+    <p>New products not found.</p>
     }@else {
     <p-carousel
       [value]="products"

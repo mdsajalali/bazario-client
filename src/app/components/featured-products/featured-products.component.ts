@@ -3,7 +3,7 @@ import { Carousel } from 'primeng/carousel';
 import { ButtonModule } from 'primeng/button';
 import { ProductType } from '../../types';
 import { ProductsService } from '../../services/products/products.service';
-import { BaseProductCardComponent } from "../shared/base-product-card/base-product-card.component"; 
+import { BaseProductCardComponent } from '../shared/base-product-card/base-product-card.component';
 
 @Component({
   selector: 'app-featured-products',
@@ -17,9 +17,9 @@ export class FeaturedProductsComponent implements OnInit {
   loading: boolean = true;
 
   ngOnInit() {
-    this.productService.getProducts().subscribe({
+    this.productService.getFeaturedProducts().subscribe({
       next: (result: any) => {
-        this.products = result.products.filter((p: ProductType) => p.isFeatured);
+        this.products = result;
         this.loading = false;
       },
       error: (error) => {

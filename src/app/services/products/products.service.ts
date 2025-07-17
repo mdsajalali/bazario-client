@@ -15,10 +15,24 @@ export class ProductsService {
   }
 
   getProductById(id: string): Observable<ProductType> {
-    return this.http.get<ProductType>(environment.apiUrl + `/shop/product/${id}`);
+    return this.http.get<ProductType>(
+      environment.apiUrl + `/shop/product/${id}`
+    );
   }
 
   getBrands(): Observable<BrandsType> {
     return this.http.get<BrandsType>(environment.apiUrl + '/shop/brands');
+  }
+
+  getFeaturedProducts(): Observable<ProductType> {
+    return this.http.get<ProductType>(
+      environment.apiUrl + '/shop/featured-products'
+    );
+  }
+
+  getNewProducts(): Observable<ProductType> {
+    return this.http.get<ProductType>(
+      environment.apiUrl + '/shop/new-products'
+    );
   }
 }

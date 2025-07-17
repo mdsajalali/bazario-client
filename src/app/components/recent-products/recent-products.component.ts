@@ -17,9 +17,9 @@ export class RecentProductsComponent {
   loading: boolean = true;
 
   ngOnInit() {
-    this.productService.getProducts().subscribe({
+    this.productService.getNewProducts().subscribe({
       next: (result: any) => {
-        this.products = result.products.filter((p: ProductType) => p.isNew);
+        this.products = result;
         this.loading = false;
       },
       error: (error) => {
