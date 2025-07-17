@@ -18,30 +18,22 @@
 
           <h5 class="mb-3 fw-bold">Categories</h5>
           <ul class="list-unstyled">
+            @for (category of categories; track $index) {
             <li>
               <input type="checkbox" class="form-check-input me-2" />
-              Electronics
+              {{ category.name }}
             </li>
-            <li>
-              <input type="checkbox" class="form-check-input me-2" /> Clothing
-            </li>
-            <li>
-              <input type="checkbox" class="form-check-input me-2" />
-              Accessories
-            </li>
+            }
           </ul>
 
           <h5 class="mt-4 mb-3 fw-bold">Brands</h5>
           <ul class="list-unstyled">
+            @for (brand of brands; track $index) {
             <li>
-              <input type="checkbox" class="form-check-input me-2" /> Apple
+              <input type="checkbox" class="form-check-input me-2" />
+              {{ brand.name }}
             </li>
-            <li>
-              <input type="checkbox" class="form-check-input me-2" /> Samsung
-            </li>
-            <li>
-              <input type="checkbox" class="form-check-input me-2" /> Nike
-            </li>
+            }
           </ul>
         </div>
       </div>
