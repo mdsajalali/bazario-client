@@ -1,9 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Router, RouterLinkActive, RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { WishlistService } from '../../../services/wishlist.service';
 import { AuthService } from '../../../services/auth/auth.service';
+import { CartsService } from '../../../services/carts/carts.service';
 
 @Component({
   selector: 'app-header',
@@ -17,11 +18,22 @@ export class HeaderComponent {
   router = inject(Router);
   wishlistService = inject(WishlistService);
   authService = inject(AuthService);
+  cartService = inject(CartsService);
   wishlistLength = 0;
+  cartCount = 0;
 
   ngOnInit() {
     this.wishlistService.getWishlists().subscribe((wishlists: any) => {
       this.wishlistLength = wishlists.length;
+    });
+
+    this.cartService.getCartItems().subscribe({
+      next: (result: any) => {
+        this.cartCount = result.reduce(
+          (total: any, item: any) => total + item.quantity,
+          0
+        );
+      },
     });
   }
 

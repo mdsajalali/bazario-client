@@ -65,6 +65,7 @@ export class ProductCardComponent implements OnInit {
   addToCart(product: ProductType) {
     if (!this.isProductInCart(product._id!)) {
       this.cartService.addToCart(product._id!, 1).subscribe(() => {
+        alert('Product Added!');
         this.cartService.init();
       });
     } else {
