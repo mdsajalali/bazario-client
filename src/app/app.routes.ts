@@ -24,6 +24,7 @@ import { BlogsComponent } from './pages/blogs/blogs.component';
 import { BlogDetailsComponent } from './components/blog-details/blog-details.component';
 import { MyOrdersComponent } from './pages/my-orders/my-orders.component';
 import { adminGuard } from './core/admin-guard';
+import { ShopComponent } from './components/shop/shop.component';
 
 export const routes: Routes = [
   {
@@ -86,6 +87,10 @@ export const routes: Routes = [
   {
     path: 'about',
     component: AboutComponent,
+  },
+  {
+    path: 'shop',
+    component: ShopComponent,
   },
   {
     path: 'cart',
