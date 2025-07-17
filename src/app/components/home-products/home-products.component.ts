@@ -19,7 +19,7 @@ export class HomeProductsComponent implements OnInit {
   ngOnInit() {
     this.productService.getProducts().subscribe({
       next: (result : any) => {
-        this.products = result;
+        this.products = result.products;
         this.loading = false;
       },
       error: () => {

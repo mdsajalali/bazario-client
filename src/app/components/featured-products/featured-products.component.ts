@@ -19,7 +19,7 @@ export class FeaturedProductsComponent implements OnInit {
   ngOnInit() {
     this.productService.getProducts().subscribe({
       next: (result: any) => {
-        this.products = result.filter((p: ProductType) => p.isFeatured);
+        this.products = result.products.filter((p: ProductType) => p.isFeatured);
         this.loading = false;
       },
       error: (error) => {

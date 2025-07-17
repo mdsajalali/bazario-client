@@ -11,14 +11,14 @@ export class ProductsService {
   http = inject(HttpClient);
 
   getProducts(): Observable<ProductType> {
-    return this.http.get<ProductType>(environment.apiUrl + '/products');
+    return this.http.get<ProductType>(environment.apiUrl + '/shop/products');
   }
 
   getProductById(id: string): Observable<ProductType> {
-    return this.http.get<ProductType>(environment.apiUrl + `/products/${id}`);
+    return this.http.get<ProductType>(environment.apiUrl + `/shop/product/${id}`);
   }
 
   getBrands(): Observable<BrandsType> {
-    return this.http.get<BrandsType>(environment.apiUrl + '/brands');
+    return this.http.get<BrandsType>(environment.apiUrl + '/shop/brands');
   }
 }

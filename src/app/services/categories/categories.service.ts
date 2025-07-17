@@ -11,6 +11,6 @@ export class CategoriesService {
   http = inject(HttpClient);
 
   getCategories(): Observable<CategoriesType> {
-    return this.http.get<CategoriesType>(environment.apiUrl + '/categories');
+    return this.http.get<CategoriesType>(environment.apiUrl + '/shop/categories');
   }
 }

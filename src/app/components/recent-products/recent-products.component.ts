@@ -3,8 +3,7 @@ import { Carousel } from 'primeng/carousel';
 import { ButtonModule } from 'primeng/button';
 import { ProductType } from '../../types';
 import { ProductsService } from '../../services/products/products.service';
-import { RouterLink } from '@angular/router';
-import { BaseProductCardComponent } from "../shared/base-product-card/base-product-card.component";
+import { BaseProductCardComponent } from '../shared/base-product-card/base-product-card.component';
 
 @Component({
   selector: 'app-recent-products',
@@ -20,7 +19,7 @@ export class RecentProductsComponent {
   ngOnInit() {
     this.productService.getProducts().subscribe({
       next: (result: any) => {
-        this.products = result.filter((p: ProductType) => p.isNew);
+        this.products = result.products.filter((p: ProductType) => p.isNew);
         this.loading = false;
       },
       error: (error) => {
