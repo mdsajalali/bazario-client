@@ -43,8 +43,13 @@
         {{ product.description }}
       </p>
 
-      <div class="d-flex gap-3 mb-4">
-        <button class="cart_btn" (click)="addToCart(product)">Add to Cart</button>
+      <div class="d-flex align-items-center gap-3">
+        <div class="quantity-control">
+          <button class="qty-btn" (click)="decreaseQty()">−</button>
+          <span class="qty-display">{{ quantityInCart }}</span>
+          <button class="qty-btn" (click)="increaseQty()">+</button>
+        </div>
+
         <p-button
           class="mt-1"
           (onClick)="toggleWishlist(product._id)"
@@ -55,13 +60,13 @@
           styleClass="p-button-rounded"
         ></p-button>
       </div>
-
-      <ul class="list-unstyled">
-        <li><strong>Category:</strong> Accessories</li>
-        <li><strong>Availability:</strong> In Stock</li>
-        <li><strong>Shipping:</strong> Free worldwide shipping</li>
-      </ul>
     </div>
+
+    <ul class="list-unstyled">
+      <li><strong>Category:</strong> Accessories</li>
+      <li><strong>Availability:</strong> In Stock</li>
+      <li><strong>Shipping:</strong> Free worldwide shipping</li>
+    </ul>
   </div>
   }
 </section>

@@ -35,6 +35,7 @@ export class ProductDetailsComponent {
 
   wishlistService = inject(WishlistService);
   isWishlisted: boolean = false;
+  quantityInCart: number = 0;
 
   ngOnInit() {
     this.checkWishlistStatus();
@@ -46,6 +47,7 @@ export class ProductDetailsComponent {
           if (this.product.images && this.product.images.length > 0) {
             this.selectedImage = this.product.images[0];
           }
+          this.getCartQuantity(product._id!);
           this.loading = false;
         },
         error: (err) => {
@@ -96,8 +98,41 @@ export class ProductDetailsComponent {
     });
   }
 
-  addToCart(product: ProductType) {
-    this.cartService.addToCart(product._id!, 1).subscribe(() => {
+  getCartQuantity(productId: string) {
+    this.cartService.getCartItems().subscribe({
+      next: (items: any) => {
+        const item = items.find((i: any) => i.product._id === productId);
+        this.quantityInCart = item ? item.quantity : 0;
+      },
+    });
+  }
+
+  increaseQty() {
+    if (this.product) {
+      this.cartService.addToCart(this.product._id!, 1).subscribe(() => {
+        this.quantityInCart++;
+        this.cartService.init();
+      });
+    }
+  }
+
+  decreaseQty() {
+    if (this.quantityInCart > 1) {
+      this.cartService.addToCart(this.product._id!, -1).subscribe(() => {
+        this.quantityInCart--;
+        this.cartService.init();
+      });
+    } else {
+      this.cartService.removeFormCart(this.product._id!).subscribe(() => {
+        this.quantityInCart = 0;
+        this.cartService.init();
+      });
+    }
+  }
+
+  addToCart() {
+    this.cartService.addToCart(this.product._id!, 1).subscribe(() => {
+      this.quantityInCart = 1;
       this.cartService.init();
     });
   }

@@ -63,23 +63,9 @@ export class ProductCardComponent implements OnInit {
 
   // cart functionality
   addToCart(product: ProductType) {
-    if (!this.isProductInCart(product._id!)) {
-      this.cartService.addToCart(product._id!, 1).subscribe(() => {
-        alert('Product Added!');
-        this.cartService.init();
-      });
-    } else {
-      this.cartService.removeFormCart(product._id!).subscribe(() => {
-        this.cartService.init();
-      });
-    }
-  }
-
-  isProductInCart(productId: string) {
-    if (this.cartService.items.find((x: any) => x.product._id == productId)) {
-      return true;
-    } else {
-      return false;
-    }
+    this.cartService.addToCart(product._id!, 1).subscribe(() => {
+      alert('Product Added!');
+      this.cartService.init();
+    });
   }
 }
