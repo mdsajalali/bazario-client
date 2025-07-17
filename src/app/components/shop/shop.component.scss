@@ -1,0 +1,47 @@
+.shop-page {
+  .card {
+    border-radius: 0.75rem;
+  }
+
+  input[type="text"] {
+    border-radius: 0.4rem;
+  }
+
+  .form-check-input {
+    margin-top: 0.25rem;
+  }
+
+  ul {
+    li {
+      margin-bottom: 0.5rem;
+      font-size: 0.95rem;
+    }
+  }
+
+  select.form-select {
+    min-width: 180px;
+    border-radius: 0.4rem;
+  }
+
+  .pagination .page-link {
+    border-radius: 0.4rem;
+  }
+
+  .sticky-sidebar {
+    position: sticky;
+    top: 90px;
+    transition: margin-top 0.3s ease;
+  }
+
+  .sticky-sidebar.scrolled {
+    margin-top: 100px;
+  }
+
+  @media (max-width: 991.98px) {
+    .sticky-sidebar {
+      position: static !important;
+      top: 10px;
+      margin-top: 0 !important;
+    }
+  }
+}
