@@ -9,8 +9,8 @@
     >
       <div>
         <strong>Order ID:</strong> {{ order._id }}<br />
-        <strong>Status:</strong>
-        <span class="badge bg-info text-dark text-capitalize">{{
+        <strong>Status:</strong> &nbsp;
+         <span class="badge bg-info text-dark text-capitalize">{{
           order.status
         }}</span>
       </div>
@@ -20,10 +20,17 @@
     <div class="card-body">
       <h5 class="mb-3">Shipping Address</h5>
       <p class="mb-1">
-        {{ order.address?.address1 }}, {{ order.address?.address2 }}<br />
-        {{ order.address?.city }} - {{ order.address?.pincode }}
+        <strong>Name: </strong> {{ order.address?.firstName }}
+        {{ order.address?.lastName }}<br />
       </p>
-      <p><strong>Payment Type:</strong> {{ order.paymentType }}</p>
+
+      <p class="mb-1">
+        <strong>Phone:</strong> {{ order.address?.phoneNumber }}
+      </p>
+
+      <p class="mb-3"><strong>Email:</strong> {{ order.address?.email }}</p>
+
+      <p class="mb-3"><strong>Payment Type:</strong> {{ order.paymentType }}</p>
 
       <div class="products mt-4">
         <h5 class="mb-3">Products</h5>
