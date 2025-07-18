@@ -1,4 +1,4 @@
-<div class="container-fluid py-4">
+<div class="container-lg py-lg-4">
   <h4 class="mb-4">Category Management</h4>
 
   @if(loading){
@@ -29,7 +29,7 @@
               placeholder="Search by name"
             />
           </p-iconfield>
-          <div>
+          <div class="d-md-block d-none">
             <a routerLink="/dashboard/add-category" class="d-btn"
               >Add Category</a
             >
@@ -57,7 +57,7 @@
             />
           </td>
           <td>{{ category.name }}</td>
-          <td>
+          <td class="d-flex gap-1">
             <a
               class="btn btn-sm btn-warning me-1"
               title="Edit"
