@@ -52,7 +52,6 @@ export class OrdersComponent implements OnInit {
   ngOnInit() {
     this.getOrders();
 
-    // route check
     this.checkRoute(this.router.url);
     this.router.events
       .pipe(filter((event) => event instanceof NavigationEnd))
@@ -68,8 +67,11 @@ export class OrdersComponent implements OnInit {
   getOrders() {
     this.orderService.getAdminOrder().subscribe({
       next: (result: any) => {
-        console.log(result);
-        this.orders = result;
+        this.orders = result.map((order: any) => ({
+          ...order,
+          status:
+            this.orderStatus.find((s) => s.value === order.status) || null,
+        }));
       },
     });
   }
