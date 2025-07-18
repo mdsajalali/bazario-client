@@ -102,14 +102,25 @@ $transition: 0.3s;
   }
 }
 
-// Responsive
 @media (max-width: 768px) {
   .nav {
     display: none !important;
   }
+
+  .icon-group {
+    .d-md-block {
+      display: none !important;
+    }
+  }
+
+  .search-popup {
+    right: 0;
+    left: auto;
+    width: calc(100vw - 2rem);
+    border-radius: 0.5rem;
+  }
 }
 
-// Mobile Bottom Nav
 .mobile-bottom-nav {
   position: fixed;
   bottom: 0;
@@ -133,6 +144,7 @@ $transition: 0.3s;
     font-size: 0.75rem;
     font-weight: 500;
     transition: color $transition;
+    position: relative;
 
     i {
       font-size: 1.2rem;
@@ -142,6 +154,18 @@ $transition: 0.3s;
     &.active,
     &:hover {
       color: $primary-color;
+    }
+
+    .mobile-badge {
+      position: absolute;
+      top: -3px;
+      right: 25%;
+      background-color: $primary-color;
+      color: #fff;
+      font-size: 0.6rem;
+      padding: 2px 5px;
+      border-radius: 50%;
+      line-height: 1;
     }
   }
 }

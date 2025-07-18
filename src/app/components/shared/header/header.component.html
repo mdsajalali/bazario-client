@@ -2,7 +2,7 @@
   <div class="container wrapper">
     <div class="logo" routerLink="/">Bazario</div>
 
-    <nav class="nav">
+    <nav class="nav d-none d-md-flex">
       <ul class="nav__items">
         <li>
           <a
@@ -16,8 +16,9 @@
         <li><a routerLink="/about" routerLinkActive="active">About</a></li>
         <li><a routerLink="/contact" routerLinkActive="active">Contact</a></li>
         <li><a routerLink="/blogs" routerLinkActive="active">Blogs</a></li>
-        @if (isAdmin) {
+        @if(isAdmin){
         <li><a routerLink="/dashboard">Dashboard</a></li>
+
         }
       </ul>
     </nav>
@@ -26,21 +27,30 @@
       <div
         class="icon-group d-flex align-items-center gap-3 position-relative pe-4"
       >
-        <a routerLink="/cart" class="icon-wrapper position-relative">
+        <a
+          routerLink="/cart"
+          class="icon-wrapper position-relative d-none d-md-block"
+        >
           <i class="pi pi-shopping-cart fs-5 text-dark"></i>
           <span class="badge">{{ cartCount }}</span>
         </a>
 
-        <a routerLink="/wishlist" class="icon-wrapper position-relative">
+        <a
+          routerLink="/wishlist"
+          class="icon-wrapper position-relative d-none d-md-block"
+        >
           <i class="pi pi-heart fs-5 text-dark"></i>
           <span class="badge">{{ wishlistLength }}</span>
         </a>
 
-        <div class="icon-wrapper position-relative" (click)="toggleSearch()">
+        <div
+          class="icon-wrapper position-relative d-none d-md-block"
+          (click)="toggleSearch()"
+        >
           <i class="pi pi-search fs-5 text-dark cursor-pointer"></i>
         </div>
 
-        @if (isSearchOpen) {
+        @if(isSearchOpen){
         <div
           class="search-popup position-absolute top-100 end-0 mt-2 p-3 shadow rounded bg-white"
         >
@@ -63,9 +73,11 @@
         }
       </div>
 
-      @if (isLoggedIn) {
-      <div class="login-btn" (click)="logout()">Logout</div>
-      } @else {
+      @if(isLoggedIn){
+      <div>
+        <div class="login-btn" (click)="logout()">Logout</div>
+      </div>
+      }@else {
       <a class="login-btn" routerLink="/login">Login</a>
       <a class="login-btn" routerLink="/register">Register</a>
       }
@@ -86,9 +98,15 @@
     <i class="pi pi-shopping-bag"></i>
     <span>Shop</span>
   </a>
-  <a routerLink="/blogs" routerLinkActive="active">
-    <i class="pi pi-book"></i>
-    <span>Blogs</span>
+  <a routerLink="/cart" routerLinkActive="active" class="position-relative">
+    <i class="pi pi-shopping-cart"></i>
+    <span>Cart</span>
+    <span class="badge mobile-badge">{{ cartCount }}</span>
+  </a>
+  <a routerLink="/wishlist" routerLinkActive="active" class="position-relative">
+    <i class="pi pi-heart"></i>
+    <span>Wishlist</span>
+    <span class="badge mobile-badge">{{ wishlistLength }}</span>
   </a>
   <a routerLink="/contact" routerLinkActive="active">
     <i class="pi pi-envelope"></i>
