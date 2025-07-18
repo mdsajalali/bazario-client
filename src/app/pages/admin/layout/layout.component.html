@@ -1,14 +1,29 @@
+<button class="d-md-none d-btn m-2" (click)="toggleMobileSidebar()">☰</button>
+
 <div class="d-flex gap-2">
-  <div class="d-flex flex-column vh-100 bg-light border-end sidebar">
+  <div
+    class="d-flex flex-column vh-100 bg-light border-end sidebar"
+    [ngClass]="{
+      'show-mobile-sidebar': mobileSidebarVisible,
+      'd-none': !mobileSidebarVisible && isMobile,
+      'd-md-flex': true
+    }"
+  >
     <div class="p-3 flex-grow-1">
-      <h5 class="mb-4">
+      <div class="d-flex justify-content-between align-items-center mb-4">
         <a
           routerLink="/"
-          class="text-black text-decoration-none"
+          class="text-black text-decoration-none h5 mb-0"
           (click)="closeAllSubmenus()"
           >Admin Panel</a
         >
-      </h5>
+        <button
+          class="btn d-md-none p-0 border-0 bg-transparent"
+          (click)="toggleMobileSidebar()"
+        >
+          <span style="font-size: 1.2rem">✖</span>
+        </button>
+      </div>
 
       <nav class="nav flex-column">
         <a
@@ -37,9 +52,9 @@
             >
               <path
                 d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192
-        c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256
-        338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3
-        0s-12.5 32.8 0 45.3l192 192z"
+                c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256
+                338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3
+                0s-12.5 32.8 0 45.3l192 192z"
               />
             </svg>
           </div>
@@ -77,9 +92,9 @@
             >
               <path
                 d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192
-        c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256
-        338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3
-        0s-12.5 32.8 0 45.3l192 192z"
+                c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256
+                338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3
+                0s-12.5 32.8 0 45.3l192 192z"
               />
             </svg>
           </div>
@@ -117,9 +132,9 @@
             >
               <path
                 d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192
-        c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256
-        338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3
-        0s-12.5 32.8 0 45.3l192 192z"
+                c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256
+                338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3
+                0s-12.5 32.8 0 45.3l192 192z"
               />
             </svg>
           </div>
@@ -164,7 +179,8 @@
     </div>
   </div>
 
-  <div style="margin-left: 250px; width: calc(100% - 250px)">
+  <!-- Main Content -->
+  <div class="main-content">
     <router-outlet></router-outlet>
   </div>
 </div>

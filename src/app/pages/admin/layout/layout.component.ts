@@ -17,15 +17,18 @@ export class LayoutComponent {
     categories: false,
   };
 
+  mobileSidebarVisible = false;
   router = inject(Router);
+
+  get isMobile(): boolean {
+    return window.innerWidth <= 768;
+  }
 
   toggleSubmenu(menu: MenuKey): void {
     const currentlyOpen = this.submenuOpen[menu];
-
     for (const key of Object.keys(this.submenuOpen) as MenuKey[]) {
       this.submenuOpen[key] = false;
     }
-
     this.submenuOpen[menu] = !currentlyOpen;
   }
 
@@ -33,10 +36,14 @@ export class LayoutComponent {
     for (const key of Object.keys(this.submenuOpen) as MenuKey[]) {
       this.submenuOpen[key] = false;
     }
+    this.mobileSidebarVisible = false; 
   }
 
-  // logout
-  logout() {
+  toggleMobileSidebar(): void {
+    this.mobileSidebarVisible = !this.mobileSidebarVisible;
+  }
+
+  logout(): void {
     localStorage.removeItem('token');
     localStorage.removeItem('user');
     this.router.navigateByUrl('/login');
