@@ -14,6 +14,12 @@ export class ProductsService {
     return this.http.get<ProductType>(environment.apiUrl + '/shop/products');
   }
 
+  getFilteredProducts(params: any): Observable<any> {
+    return this.http.get<any>(environment.apiUrl + '/shop/products', {
+      params,
+    });
+  }
+
   getProductById(id: string): Observable<ProductType> {
     return this.http.get<ProductType>(
       environment.apiUrl + `/shop/product/${id}`

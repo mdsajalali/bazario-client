@@ -13,7 +13,7 @@ import { CardModule } from 'primeng/card';
 import { InputTextModule } from 'primeng/inputtext';
 import { CheckboxModule } from 'primeng/checkbox';
 import { PaginatorModule } from 'primeng/paginator';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, NgModel } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -36,18 +36,19 @@ import { CommonModule } from '@angular/common';
   styleUrl: './shop.component.scss',
 })
 export class ShopComponent {
-  productService = inject(ProductsService);
-  categoryService = inject(CategoryService);
-  brandService = inject(BrandsService);
+  private productService = inject(ProductsService);
+  private categoryService = inject(CategoryService);
+  private brandService = inject(BrandsService);
 
   products: ProductType[] = [];
   filteredProducts: ProductType[] = [];
 
-  brands: any[] = [];
   categories: any[] = [];
+  brands: any[] = [];
 
-  selectedBrands: string[] = [];
+  searchTerm = '';
   selectedCategories: string[] = [];
+  selectedBrands: string[] = [];
   selectedSort: string | null = null;
 
   ngOnInit() {
@@ -56,41 +57,56 @@ export class ShopComponent {
 
   getProducts() {
     this.productService.getProducts().subscribe({
-      next: (result: any) => {
-        this.products = result.products;
+      next: (res: any) => {
+        this.products = res.products;
         this.filteredProducts = [...this.products];
       },
-      error: (error) => console.log(error),
-    });
-
-    this.brandService.getBrands().subscribe({
-      next: (result: any) => (this.brands = result),
-      error: (error) => console.log(error),
+      error: (err) => console.error(err),
     });
 
     this.categoryService.getCategories().subscribe({
-      next: (result: any) => (this.categories = result),
-      error: (error) => console.log(error),
+      next: (res: any) => (this.categories = res),
+      error: (err) => console.error(err),
+    });
+
+    this.brandService.getBrands().subscribe({
+      next: (res: any) => (this.brands = res),
+      error: (err) => console.error(err),
     });
   }
 
   onFilterChange() {
-    this.filteredProducts = this.products.filter((product: any) => {
-      const brandMatch = this.selectedBrands.length
-        ? this.selectedBrands.includes(product.brandId?.name)
-        : true;
-      const categoryMatch = this.selectedCategories.length
-        ? this.selectedCategories.includes(product.categoryId?.name)
-        : true;
-      return brandMatch && categoryMatch;
-    });
+    const params: any = {};
 
-    if (this.selectedSort === 'low') {
-      this.filteredProducts.sort((a, b) => a.price - b.price);
-    } else if (this.selectedSort === 'high') {
-      this.filteredProducts.sort((a, b) => b.price - a.price);
+    if (this.searchTerm.trim()) {
+      params.searchTerm = this.searchTerm.trim();
     }
 
-    console.log('Filtered:', this.filteredProducts);
+    if (this.selectedCategories.length) {
+      const matched = this.categories.find((c) =>
+        this.selectedCategories.includes(c.name)
+      );
+      if (matched) params.categoryId = matched._id;
+    }
+
+    if (this.selectedBrands.length) {
+      const matched = this.brands.find((b) =>
+        this.selectedBrands.includes(b.name)
+      );
+      if (matched) params.brandId = matched._id;
+    }
+
+    this.productService.getFilteredProducts(params).subscribe({
+      next: (res: any) => {
+        this.filteredProducts = res.products;
+
+        if (this.selectedSort === 'low') {
+          this.filteredProducts.sort((a, b) => a.price - b.price);
+        } else if (this.selectedSort === 'high') {
+          this.filteredProducts.sort((a, b) => b.price - a.price);
+        }
+      },
+      error: (err) => console.error(err),
+    });
   }
 }
