@@ -51,12 +51,6 @@ export class HeaderComponent {
     this.isSearchOpen = !this.isSearchOpen;
   }
 
-  isMenuOpen = false;
-
-  toggleMenu(): void {
-    this.isMenuOpen = !this.isMenuOpen;
-  }
-
   get isLoggedIn(): boolean {
     return this.authService.isLoggedIn;
   }
