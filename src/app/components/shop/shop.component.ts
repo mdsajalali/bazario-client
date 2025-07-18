@@ -13,8 +13,9 @@ import { CardModule } from 'primeng/card';
 import { InputTextModule } from 'primeng/inputtext';
 import { CheckboxModule } from 'primeng/checkbox';
 import { PaginatorModule } from 'primeng/paginator';
-import { FormsModule, NgModel } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-shop',
@@ -39,6 +40,7 @@ export class ShopComponent {
   private productService = inject(ProductsService);
   private categoryService = inject(CategoryService);
   private brandService = inject(BrandsService);
+  private router = inject(ActivatedRoute);
 
   products: ProductType[] = [];
 
@@ -54,22 +56,45 @@ export class ShopComponent {
   page = 1;
   pageSize = 6;
 
+  private categoriesLoaded = false;
+  private brandsLoaded = false;
+
   ngOnInit() {
+    this.searchTerm = this.router.snapshot.queryParamMap.get('q') || '';
+
+    const categoryParam = this.router.snapshot.queryParamMap.get('category');
+    this.selectedCategories = categoryParam ? [categoryParam] : [];
+
+    const brandParam = this.router.snapshot.queryParamMap.get('brand');
+    this.selectedBrands = brandParam ? [brandParam] : [];
+
     this.loadInitialData();
   }
 
   loadInitialData() {
     this.categoryService.getCategories().subscribe({
-      next: (res: any) => (this.categories = res),
+      next: (res: any) => {
+        this.categories = res;
+        this.categoriesLoaded = true;
+        this.tryLoadProducts();
+      },
       error: (err) => console.error(err),
     });
 
     this.brandService.getBrands().subscribe({
-      next: (res: any) => (this.brands = res),
+      next: (res: any) => {
+        this.brands = res;
+        this.brandsLoaded = true;
+        this.tryLoadProducts();
+      },
       error: (err) => console.error(err),
     });
+  }
 
-    this.onFilterChange();
+  private tryLoadProducts() {
+    if (this.categoriesLoaded && this.brandsLoaded) {
+      this.onFilterChange();
+    }
   }
 
   onFilterChange() {

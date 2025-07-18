@@ -1,10 +1,11 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { CategoriesService } from '../../services/categories/categories.service';
 import { CategoriesType } from '../../types';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-shop-category',
-  imports: [],
+  imports: [RouterLink],
   templateUrl: './shop-category.component.html',
   styleUrl: './shop-category.component.scss',
 })

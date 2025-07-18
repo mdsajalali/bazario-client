@@ -1,10 +1,11 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { BrandsType } from '../../types';
 import { ProductsService } from '../../services/products/products.service';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-shop-brands',
-  imports: [],
+  imports: [RouterLink],
   templateUrl: './shop-brands.component.html',
   styleUrl: './shop-brands.component.scss',
 })

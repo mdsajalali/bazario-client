@@ -3,17 +3,21 @@
 
   <div class="row g-lg-3 g-2">
     @if (loading) {
-      <p>Loading...</p>
-    }
-    @if (!loading && brands.length === 0) {
-      <p>No brands found.</p>
-    }
-    @for (brand of brands; track brand._id) {
-      <div class="col-6 col-sm-4 col-md-3 col-lg-2 col-xl-1-5">
-        <div class="brand-card p-3 border rounded d-flex justify-content-center align-items-center">
-          <img [src]="brand.image" alt="Brand Logo" />
-        </div>
+    <p>Loading...</p>
+    } @if (!loading && brands.length === 0) {
+    <p>No brands found.</p>
+    } @for (brand of brands; track brand._id) {
+    <a
+      [routerLink]="['/shop']"
+      [queryParams]="{ brand: brand.name }"
+      class="col-6 col-sm-4 col-md-3 col-lg-2 col-xl-1-5"
+    >
+      <div
+        class="brand-card p-3 border rounded d-flex justify-content-center align-items-center"
+      >
+        <img [src]="brand.image" alt="Brand Logo" />
       </div>
+    </a>
     }
   </div>
 </section>

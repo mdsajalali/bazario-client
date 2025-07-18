@@ -39,7 +39,7 @@ export class HeaderComponent {
 
   onSearchEnter() {
     if (this.searchValue.trim()) {
-      this.router.navigate(['/search'], {
+      this.router.navigate(['/shop'], {
         queryParams: { q: this.searchValue.trim() },
       });
     } else {
