@@ -43,6 +43,7 @@
           <th>Items</th>
           <th>Payment Type</th>
           <th>Date</th>
+          <th>Quantity</th>
           <th>Total</th>
           <th>Status</th>
           <th>Actions</th>
@@ -52,10 +53,13 @@
       <ng-template #body let-order>
         <tr>
           <td>#{{ order._id.slice(0, 5) }}</td>
-          <td>{{ order.address.firstName + order.address.lastName }}</td>
+          <td>
+            {{ order.address.firstName + " " + order.address.lastName }}
+          </td>
           <td>{{ order.items.length }}</td>
           <td>{{ order.paymentType }}</td>
           <td>{{ order.date | date }}</td>
+          <td>{{ order.totalQuantity }}</td>
           <td>${{ order.total }}</td>
           <td>
             <p-select

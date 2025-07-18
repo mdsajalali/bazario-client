@@ -102,7 +102,6 @@ export class CartComponent {
     this.formSubmitted = true;
     if (this.deliveryForm.valid) {
       this.orderStep = 2;
-      this.deliveryForm.reset();
       this.formSubmitted = false;
     }
   }
@@ -122,9 +121,11 @@ export class CartComponent {
       totalAmount: this.totalAmount,
     };
     this.orderService.addOrder(order).subscribe((result) => {
+      console.log(order.address);
       alert('Your order is completed');
       this.cartService.init();
       this.orderStep = 0;
+      this.deliveryForm.reset();
       this.router.navigateByUrl('/orders');
     });
   }

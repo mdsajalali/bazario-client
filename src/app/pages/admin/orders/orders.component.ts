@@ -33,6 +33,7 @@ export class OrdersComponent implements OnInit {
   isDashboard: boolean = false;
   orderService = inject(OrdersService);
   selectedOrder!: any;
+  totalPrice: any = 0;
 
   orderStatus = [
     { label: 'In Progress', value: 'inprogress' },
@@ -67,11 +68,32 @@ export class OrdersComponent implements OnInit {
   getOrders() {
     this.orderService.getAdminOrder().subscribe({
       next: (result: any) => {
-        this.orders = result.map((order: any) => ({
-          ...order,
-          status:
-            this.orderStatus.find((s) => s.value === order.status) || null,
-        }));
+        this.orders = result.map((order: any) => {
+          const status =
+            this.orderStatus.find((s) => s.value === order.status) || null;
+
+          // ✅ Calculate total price and quantity
+          let total = 0;
+          let totalQuantity = 0;
+
+          for (const item of order.items) {
+            const discountedPrice =
+              item.product.price -
+              (item.product.price * item.product.discount) / 100;
+
+            total += discountedPrice * item.quantity;
+            totalQuantity += item.quantity;
+          }
+
+          return {
+            ...order,
+            status,
+            total: total.toFixed(2),
+            totalQuantity,
+          };
+        });
+
+        console.log('Orders with total price & quantity:', this.orders);
       },
     });
   }
