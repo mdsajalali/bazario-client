@@ -72,19 +72,26 @@
       </div>
 
       <div class="row">
-        @for (product of filteredProducts; track product._id) {
+        @if (products.length > 0) { @for (product of products; track
+        product._id) {
         <div class="col-12 col-md-6 col-lg-4 mb-4">
           <app-product-card [product]="product" />
+        </div>
+        } } @else {
+        <div class="col-12 text-center py-5">
+          <h5 class="text-muted">No products found</h5>
         </div>
         }
       </div>
 
-      <div class="d-flex justify-content-center mt-4">
+      <div
+        class="d-flex justify-content-center mt-4"
+        *ngIf="totalRecords > pageSize"
+      >
         <p-paginator
-          [rows]="6"
-          [totalRecords]="filteredProducts.length"
-          [rowsPerPageOptions]="[6, 12, 18]"
-          (onPageChange)="($event)"
+          [rows]="pageSize"
+          [totalRecords]="totalRecords"
+          (onPageChange)="onPageChange($event)"
         ></p-paginator>
       </div>
     </div>

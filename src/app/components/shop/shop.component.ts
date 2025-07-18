@@ -41,7 +41,6 @@ export class ShopComponent {
   private brandService = inject(BrandsService);
 
   products: ProductType[] = [];
-  filteredProducts: ProductType[] = [];
 
   categories: any[] = [];
   brands: any[] = [];
@@ -51,19 +50,15 @@ export class ShopComponent {
   selectedBrands: string[] = [];
   selectedSort: string | null = null;
 
+  totalRecords = 0;
+  page = 1;
+  pageSize = 6;
+
   ngOnInit() {
-    this.getProducts();
+    this.loadInitialData();
   }
 
-  getProducts() {
-    this.productService.getProducts().subscribe({
-      next: (res: any) => {
-        this.products = res.products;
-        this.filteredProducts = [...this.products];
-      },
-      error: (err) => console.error(err),
-    });
-
+  loadInitialData() {
     this.categoryService.getCategories().subscribe({
       next: (res: any) => (this.categories = res),
       error: (err) => console.error(err),
@@ -73,14 +68,17 @@ export class ShopComponent {
       next: (res: any) => (this.brands = res),
       error: (err) => console.error(err),
     });
+
+    this.onFilterChange();
   }
 
   onFilterChange() {
-    const params: any = {};
+    const params: any = {
+      page: this.page,
+      pageSize: this.pageSize,
+    };
 
-    if (this.searchTerm.trim()) {
-      params.searchTerm = this.searchTerm.trim();
-    }
+    if (this.searchTerm.trim()) params.searchTerm = this.searchTerm.trim();
 
     if (this.selectedCategories.length) {
       const matched = this.categories.find((c) =>
@@ -96,17 +94,23 @@ export class ShopComponent {
       if (matched) params.brandId = matched._id;
     }
 
+    if (this.selectedSort) {
+      params.sortBy = 'price';
+      params.sortOrder = this.selectedSort === 'low' ? 1 : -1;
+    }
+
     this.productService.getFilteredProducts(params).subscribe({
       next: (res: any) => {
-        this.filteredProducts = res.products;
-
-        if (this.selectedSort === 'low') {
-          this.filteredProducts.sort((a, b) => a.price - b.price);
-        } else if (this.selectedSort === 'high') {
-          this.filteredProducts.sort((a, b) => b.price - a.price);
-        }
+        this.products = res.products;
+        this.totalRecords = res.total;
       },
       error: (err) => console.error(err),
     });
+  }
+
+  onPageChange(event: any) {
+    this.page = event.page + 1;
+    this.pageSize = event.rows;
+    this.onFilterChange();
   }
 }
