@@ -150,17 +150,17 @@ export class ProductDetailsComponent {
     },
     {
       breakpoint: '1199px',
-      numVisible: 3,
+      numVisible: 4,
       numScroll: 1,
     },
     {
       breakpoint: '767px',
-      numVisible: 2,
+      numVisible: 3,
       numScroll: 1,
     },
     {
       breakpoint: '575px',
-      numVisible: 1,
+      numVisible: 2,
       numScroll: 1,
     },
   ];

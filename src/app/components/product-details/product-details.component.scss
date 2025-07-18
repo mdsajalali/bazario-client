@@ -69,3 +69,14 @@ $transition: 0.3s;
     padding: 0 0.5rem;
   }
 }
+
+@media screen and (max-width: 740px) {
+  .main-image img {
+    height: 200px;
+  }
+
+  .showcase_img {
+    width: 100px;
+    height: 80px;
+  }
+}
