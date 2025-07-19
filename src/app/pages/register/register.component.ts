@@ -5,7 +5,7 @@ import {
   FormGroup,
   ReactiveFormsModule,
   Validators,
-} from '@angular/forms'; 
+} from '@angular/forms';
 import { MessageModule } from 'primeng/message';
 import { Router, RouterLink } from '@angular/router';
 import { ToastModule } from 'primeng/toast';
@@ -16,7 +16,7 @@ import { AuthService } from '../../services/auth/auth.service';
   selector: 'app-register',
   imports: [
     ReactiveFormsModule,
-    InputTextModule, 
+    InputTextModule,
     MessageModule,
     RouterLink,
     ToastModule,
@@ -30,6 +30,7 @@ export class RegisterComponent {
   messageService = inject(MessageService);
   authService = inject(AuthService);
   router = inject(Router);
+  loading: boolean = false;
 
   registerForm: FormGroup;
 
@@ -46,6 +47,7 @@ export class RegisterComponent {
   onSubmit() {
     this.formSubmitted = true;
     if (this.registerForm.valid) {
+      this.loading = true;
       const value = this.registerForm.value;
       this.authService
         .register(value.name, value.email, value.password)
@@ -59,6 +61,8 @@ export class RegisterComponent {
             });
             this.registerForm.reset();
             this.formSubmitted = false;
+            this.loading = false;
+
             setTimeout(() => {
               this.router.navigateByUrl('/login');
             }, 1000);
@@ -71,6 +75,7 @@ export class RegisterComponent {
               life: 3000,
             });
             this.formSubmitted = false;
+            this.loading = false;
           },
         });
     }

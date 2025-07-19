@@ -44,6 +44,7 @@ export class BaseProductCardComponent {
     this.wishlistService.addToWishlist(id).subscribe({
       next: () => {
         this.checkWishlistStatus();
+        alert('Wishlist Added!');
       },
       error: (error) => {
         console.log(error);

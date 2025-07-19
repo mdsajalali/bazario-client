@@ -38,8 +38,11 @@ import { CategoriesService } from '../../services/categories/categories.service'
 })
 export class ShopComponent {
   private productService = inject(ProductsService);
-  private categoryService = inject(CategoriesService); 
+  private categoryService = inject(CategoriesService);
   private router = inject(ActivatedRoute);
+  categoryLoading: boolean = true;
+  brandLoading: boolean = true;
+  productLoading: boolean = true;
 
   products: ProductType[] = [];
 
@@ -76,6 +79,7 @@ export class ShopComponent {
         this.categories = res;
         this.categoriesLoaded = true;
         this.tryLoadProducts();
+        this.categoryLoading = false;
       },
       error: (err) => console.error(err),
     });
@@ -85,6 +89,7 @@ export class ShopComponent {
         this.brands = res;
         this.brandsLoaded = true;
         this.tryLoadProducts();
+        this.brandLoading = false;
       },
       error: (err) => console.error(err),
     });
@@ -127,6 +132,7 @@ export class ShopComponent {
       next: (res: any) => {
         this.products = res.products;
         this.totalRecords = res.total;
+        this.productLoading = false;
       },
       error: (err) => console.error(err),
     });

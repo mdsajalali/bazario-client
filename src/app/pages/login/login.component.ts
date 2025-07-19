@@ -6,6 +6,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { MessageModule } from 'primeng/message';
 import { Router, RouterLink } from '@angular/router';
 import { ToastModule } from 'primeng/toast';
@@ -21,6 +22,7 @@ import { AuthService } from '../../services/auth/auth.service';
     RouterLink,
     ToastModule,
     MessageModule,
+    ProgressSpinnerModule,
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
@@ -30,6 +32,7 @@ export class LoginComponent {
   messageService = inject(MessageService);
   authService = inject(AuthService);
   router = inject(Router);
+  loading: boolean = false;
 
   loginForm: FormGroup;
 
@@ -45,6 +48,7 @@ export class LoginComponent {
   onSubmit() {
     this.formSubmitted = true;
     if (this.loginForm.valid) {
+      this.loading = true;
       const value = this.loginForm.value;
       this.authService.login(value.email, value.password).subscribe({
         next: (result: any) => {
@@ -58,6 +62,7 @@ export class LoginComponent {
           localStorage.setItem('user', JSON.stringify(result.user));
           this.loginForm.reset();
           this.formSubmitted = false;
+          this.loading = false;
           setTimeout(() => {
             this.router.navigateByUrl('/');
           }, 1000);
@@ -70,6 +75,7 @@ export class LoginComponent {
             life: 3000,
           });
           this.formSubmitted = false;
+          this.loading = false;
         },
       });
     }

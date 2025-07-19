@@ -34,8 +34,10 @@ export class ProductCardComponent implements OnInit {
   toggleWishlist(id: string) {
     if (this.isWishlisted) {
       this.removeToWishlist(id);
+      alert('Wishlist Removed!');
     } else {
       this.addToWishlist(id);
+      alert('Wishlist Added!');
     }
   }
 

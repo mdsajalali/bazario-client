@@ -47,7 +47,9 @@
           >
           }
         </div>
-        <button type="submit" class="d-btn w-100">Login</button>
+        <button type="submit" class="d-btn w-100">
+          @if(loading) { Loading... }@else { Login }
+        </button>
       </form>
       <div class="d-flex gap-2 justify-content-between my-3">
         <button

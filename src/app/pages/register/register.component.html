@@ -64,7 +64,9 @@
           >
           }
         </div>
-        <button type="submit" class="d-btn w-100">Register</button>
+        <button type="submit" class="d-btn w-100">
+          @if (loading) { loading... }@else { Register }
+        </button>
       </form>
       <div class="text-center mt-4">
         <span>Already have an account?</span>
