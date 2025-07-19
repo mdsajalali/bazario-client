@@ -25,12 +25,14 @@ import { BlogDetailsComponent } from './components/blog-details/blog-details.com
 import { MyOrdersComponent } from './pages/my-orders/my-orders.component';
 import { adminGuard } from './core/admin-guard';
 import { ShopComponent } from './components/shop/shop.component';
+import { authGuard } from './core/auth-guard';
 
 export const routes: Routes = [
   {
     path: '',
     component: HomeComponent,
     pathMatch: 'full',
+    canActivate: [authGuard],
   },
   {
     path: '',
@@ -87,42 +89,52 @@ export const routes: Routes = [
   {
     path: 'about',
     component: AboutComponent,
+    canActivate: [authGuard],
   },
   {
     path: 'shop',
     component: ShopComponent,
+    canActivate: [authGuard],
   },
   {
     path: 'cart',
     component: CartComponent,
+    canActivate: [authGuard],
   },
   {
     path: 'wishlist',
     component: WishlistComponent,
+    canActivate: [authGuard],
   },
   {
     path: 'search',
     component: SearchComponent,
+    canActivate: [authGuard],
   },
   {
     path: 'orders',
     component: MyOrdersComponent,
+    canActivate: [authGuard],
   },
   {
     path: 'product/:id',
     component: ProductDetailsComponent,
+    canActivate: [authGuard],
   },
   {
     path: 'blogs',
     component: BlogsComponent,
+    canActivate: [authGuard],
   },
   {
     path: 'blogs/:id',
     component: BlogDetailsComponent,
+    canActivate: [authGuard],
   },
   {
     path: 'contact',
     component: ContactComponent,
+    canActivate: [authGuard],
   },
   {
     path: 'login',
