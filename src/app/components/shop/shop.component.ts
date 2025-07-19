@@ -4,7 +4,6 @@ import { FooterComponent } from '../shared/footer/footer.component';
 import { ProductType } from '../../types';
 import { ProductsService } from '../../services/products/products.service';
 import { ProductCardComponent } from '../shared/product-card/product-card.component';
-import { CategoryService } from '../../services/dashboard/category/category.service';
 import { BrandsService } from '../../services/dashboard/brands/brands.service';
 import { Paginator } from 'primeng/paginator';
 import { Select } from 'primeng/select';
@@ -16,6 +15,7 @@ import { PaginatorModule } from 'primeng/paginator';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
+import { CategoriesService } from '../../services/categories/categories.service';
 
 @Component({
   selector: 'app-shop',
@@ -38,8 +38,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class ShopComponent {
   private productService = inject(ProductsService);
-  private categoryService = inject(CategoryService);
-  private brandService = inject(BrandsService);
+  private categoryService = inject(CategoriesService); 
   private router = inject(ActivatedRoute);
 
   products: ProductType[] = [];
@@ -81,7 +80,7 @@ export class ShopComponent {
       error: (err) => console.error(err),
     });
 
-    this.brandService.getBrands().subscribe({
+    this.productService.getBrands().subscribe({
       next: (res: any) => {
         this.brands = res;
         this.brandsLoaded = true;
