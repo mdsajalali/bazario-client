@@ -4,18 +4,22 @@ import { ButtonModule } from 'primeng/button';
 import { RouterLink } from '@angular/router';
 import { WishlistService } from '../../../services/wishlist.service';
 import { CartsService } from '../../../services/carts/carts.service';
+import { MessageService } from 'primeng/api';
+import { Toast } from 'primeng/toast';
 
 @Component({
   selector: 'app-product-card',
-  imports: [ButtonModule, RouterLink],
+  imports: [ButtonModule, RouterLink, Toast],
   templateUrl: './product-card.component.html',
   styleUrl: './product-card.component.scss',
+  providers: [MessageService],
 })
 export class ProductCardComponent implements OnInit {
   @Input() product!: ProductType;
   wishlistService = inject(WishlistService);
   isWishlisted: boolean = false;
   cartService = inject(CartsService);
+  messageService = inject(MessageService);
 
   ngOnInit() {
     this.checkWishlistStatus();
@@ -34,10 +38,18 @@ export class ProductCardComponent implements OnInit {
   toggleWishlist(id: string) {
     if (this.isWishlisted) {
       this.removeToWishlist(id);
-      alert('Wishlist Removed!');
+      this.messageService.add({
+        severity: 'success',
+        summary: 'Success',
+        detail: 'Removed from your wishlist!',
+      });
     } else {
       this.addToWishlist(id);
-      alert('Wishlist Added!');
+      this.messageService.add({
+        severity: 'success',
+        summary: 'Success',
+        detail: 'Added to your wishlist!',
+      });
     }
   }
 
@@ -66,7 +78,11 @@ export class ProductCardComponent implements OnInit {
   // cart functionality
   addToCart(product: ProductType) {
     this.cartService.addToCart(product._id!, 1).subscribe(() => {
-      alert('Product Added!');
+      this.messageService.add({
+        severity: 'success',
+        summary: 'Success',
+        detail: 'Product added to cart!!',
+      });
       this.cartService.init();
     });
   }
