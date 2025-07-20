@@ -5,23 +5,23 @@
     {{ isDashboard ? "Recent Orders" : "Order Management" }}
   </h4>
 
+  @if(loading){
+  <p>Loading...</p>
+  }@else {
   <div class="card">
     <p-table
       #dt1
       [value]="orders"
       [globalFilterFields]="[
-        'orderId',
-        'customer',
-        'paymentType',
-        'date',
-        'total',
-        'status'
+        '_id',
+        'address.firstName',
+        'address.lastName'
       ]"
-      [rows]="5"
+      [rows]="isDashboard ? 5 : 10"
       [paginator]="true"
       dataKey="orderId"
       stateStorage="session"
-      stateKey="order-management"
+      [stateKey]="isDashboard ? 'recent-order-management' : 'order-management'"
     >
       <ng-template #caption>
         <p-iconfield iconPosition="left">
@@ -71,6 +71,7 @@
               placeholder="Select Status"
               (onChange)="handleStatusChange(order)"
               class="w-100"
+              appendTo="body"
             />
           </td>
 
@@ -89,4 +90,5 @@
       </ng-template>
     </p-table>
   </div>
+  }
 </div>

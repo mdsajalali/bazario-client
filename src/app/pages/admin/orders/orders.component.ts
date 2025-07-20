@@ -11,7 +11,7 @@ import { filter } from 'rxjs';
 import { OrdersService } from '../../../services/orders/orders.service';
 import { DatePipe } from '@angular/common';
 import { MessageService } from 'primeng/api';
-import { Toast } from "primeng/toast";
+import { Toast } from 'primeng/toast';
 
 @Component({
   selector: 'app-orders',
@@ -26,8 +26,8 @@ import { Toast } from "primeng/toast";
     SelectModule,
     FormsModule,
     DatePipe,
-    Toast
-],
+    Toast,
+  ],
   providers: [MessageService],
 })
 export class OrdersComponent implements OnInit {
@@ -39,6 +39,7 @@ export class OrdersComponent implements OnInit {
   selectedOrder!: any;
   totalPrice: any = 0;
   messageService = inject(MessageService);
+  loading: boolean = true;
 
   orderStatus = [
     { label: 'In Progress', value: 'inprogress' },
@@ -82,7 +83,6 @@ export class OrdersComponent implements OnInit {
           const status =
             this.orderStatus.find((s) => s.value === order.status) || null;
 
-          // ✅ Calculate total price and quantity
           let total = 0;
           let totalQuantity = 0;
 
@@ -102,8 +102,7 @@ export class OrdersComponent implements OnInit {
             totalQuantity,
           };
         });
-
-        console.log('Orders with total price & quantity:', this.orders);
+        this.loading = false;
       },
     });
   }
