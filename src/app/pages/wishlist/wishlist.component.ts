@@ -17,6 +17,11 @@ export class WishlistComponent implements OnInit {
   loading: boolean = true;
 
   ngOnInit() {
+    this.reloadWishlist();
+  }
+
+  reloadWishlist() {
+    this.loading = true;
     this.http.getWishlists().subscribe({
       next: (result: any) => {
         this.wishlists = result;

@@ -3,7 +3,7 @@ import { RouterLink } from '@angular/router';
 import { ButtonModule } from 'primeng/button';
 import { ProductsService } from '../../services/products/products.service';
 import { ProductType } from '../../types';
-import { ProductCardComponent } from "../shared/product-card/product-card.component";
+import { ProductCardComponent } from '../shared/product-card/product-card.component';
 
 @Component({
   selector: 'app-home-products',
@@ -17,8 +17,13 @@ export class HomeProductsComponent implements OnInit {
   loading: boolean = true;
 
   ngOnInit() {
+    this.reloadProducts();
+  }
+
+  reloadProducts() {
+    this.loading = true;
     this.productService.getProducts().subscribe({
-      next: (result : any) => {
+      next: (result: any) => {
         this.products = result.products;
         this.loading = false;
       },

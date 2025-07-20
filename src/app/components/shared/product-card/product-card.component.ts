@@ -1,4 +1,11 @@
-import { Component, inject, Input, OnInit } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  inject,
+  Input,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { ProductType } from '../../../types';
 import { ButtonModule } from 'primeng/button';
 import { RouterLink } from '@angular/router';
@@ -16,6 +23,7 @@ import { Toast } from 'primeng/toast';
 })
 export class ProductCardComponent implements OnInit {
   @Input() product!: ProductType;
+  @Output() wishlistChanged = new EventEmitter<void>();
   wishlistService = inject(WishlistService);
   isWishlisted: boolean = false;
   cartService = inject(CartsService);
@@ -37,21 +45,22 @@ export class ProductCardComponent implements OnInit {
 
   toggleWishlist(id: string) {
     if (this.isWishlisted) {
+      this.isWishlisted = false;
       this.removeToWishlist(id);
       this.messageService.add({
         severity: 'success',
         summary: 'Success',
         detail: 'Removed from your wishlist!',
       });
-      // this.wishlistService.getWishlists()
+      this.wishlistChanged.emit();
     } else {
+      this.isWishlisted = true;
       this.addToWishlist(id);
       this.messageService.add({
         severity: 'success',
         summary: 'Success',
         detail: 'Added to your wishlist!',
       });
-      // this.wishlistService.getWishlists();
     }
   }
 
