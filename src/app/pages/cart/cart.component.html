@@ -7,7 +7,7 @@
       #dt1
       [value]="cartItems"
       [rows]="10"
-      [paginator]="true"
+      [paginator]="cartItems.length > 10"
       dataKey="product._id"
       stateStorage="session"
       stateKey="order-management"
@@ -54,21 +54,24 @@
             </div>
           </td>
           <td>
-            <div>
-              <p class="text-muted mb-1">
+            <div class="d-flex flex-column gap-1">
+              <p class="text-muted mb-0 small">
                 <s>${{ item.product.price.toFixed(2) }}</s>
-                <span class="text-success ms-2"
-                  >{{ item.product.discount }}% OFF</span
-                >
-              </p>
-              <p class="text-primary fw-bold mb-1">
-                ${{ sellingPrice(item.product).toFixed(2) }}
-              </p>
-              <p class="text-muted">
-                Total:
-                <span class="fw-semibold">
-                  ${{ (sellingPrice(item.product) * item.quantity).toFixed(2) }}
+                <span class="text-success ms-2 fw-semibold">
+                  {{ item.product.discount }}% OFF
                 </span>
+              </p>
+
+              <p class="text-dark fw-bold mb-0">
+                ${{ sellingPrice(item.product).toFixed(2) }} ×
+                {{ item.quantity }}
+              </p>
+
+              <!-- Show total price -->
+              <p class="fw-bold mb-0" [style.color]="'#4f46e5'">
+                Total: ${{
+                  (sellingPrice(item.product) * item.quantity).toFixed(2)
+                }}
               </p>
             </div>
           </td>
@@ -98,10 +101,13 @@
   >
     <div class="mb-3 mb-md-0">
       <h5 class="mb-0">
-        Total: <span class="text-primary">${{ totalAmount.toFixed(2) }}</span>
+        Total:
+        <span [style.color]="'#4f46e5'"
+          ><b>${{ totalAmount.toFixed(2) }}</b></span
+        >
       </h5>
     </div>
-    <button class="btn btn-success px-4" (click)="(checkoutOrderStepUpdate)">
+    <button class="d-btn" (click)="(checkoutOrderStepUpdate)">
       Proceed to Checkout
     </button>
   </div>
@@ -285,17 +291,11 @@
             class="d-flex justify-content-between align-items-center border-bottom pb-2 mb-3"
           >
             <span class="fw-semibold fs-5">TOTAL</span>
-            <span class="text-success fw-bold fs-5">${{ totalAmount.toFixed(2) }}</span>
+            <span [style.color]="'#4f46e5'" class="fw-bold fs-5"
+              >${{ totalAmount.toFixed(2) }}</span
+            >
           </div>
-          <button
-            pButton
-            severity="secondary"
-            type="button"
-            (click)="onSubmit()"
-            class="w-100"
-          >
-            Proceed To Payment
-          </button>
+          <button class="d-btn" (click)="onSubmit()">Proceed To Payment</button>
         </div>
       </div>
     </div>
@@ -346,7 +346,7 @@
 
     <button
       type="submit"
-      class="w-100 btn btn-primary mt-3"
+      class="w-100 mt-3 d-btn"
       [disabled]="!paymentType"
       (click)="completeOrder()"
     >

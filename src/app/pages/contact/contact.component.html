@@ -2,7 +2,7 @@
 <section class="contact-section py-5">
   <div class="container">
     <div class="text-center mb-5">
-      <h2 class="text-primary">Contact Us</h2>
+      <h2 [style.color]="'#4f46e5'">Contact Us</h2>
       <p class="text-muted">
         We’re here to help and answer any questions you might have.
       </p>
@@ -14,7 +14,7 @@
           <h5 class="mb-4">Get in Touch</h5>
 
           <div class="mb-3 d-flex align-items-start">
-            <i class="pi pi-map-marker fs-3 text-primary me-3"></i>
+            <i class="pi pi-map-marker fs-3 me-3" [style.color]="'#4f46e5'"></i>
             <div>
               <h6>Address</h6>
               <p class="mb-0 text-muted">
@@ -24,7 +24,7 @@
           </div>
 
           <div class="mb-3 d-flex align-items-start">
-            <i class="pi pi-phone fs-3 text-primary me-3"></i>
+            <i class="pi pi-phone fs-3 me-3" [style.color]="'#4f46e5'"></i>
             <div>
               <h6>Phone</h6>
               <p class="mb-0 text-muted">+1 (555) 123-4567</p>
@@ -32,7 +32,7 @@
           </div>
 
           <div class="mb-3 d-flex align-items-start">
-            <i class="pi pi-envelope fs-3 text-primary me-3"></i>
+            <i class="pi pi-envelope fs-3 me-3" [style.color]="'#4f46e5'"></i>
             <div>
               <h6>Email</h6>
               <p class="mb-0 text-muted">support&#64;bazario.com</p>
@@ -40,7 +40,7 @@
           </div>
 
           <div class="mb-3 d-flex align-items-start">
-            <i class="pi pi-clock fs-3 text-primary me-3"></i>
+            <i class="pi pi-clock fs-3 me-3" [style.color]="'#4f46e5'"></i>
             <div>
               <h6>Working Hours</h6>
               <p class="mb-0 text-muted">Mon - Fri: 9 AM - 5 PM</p>
@@ -96,9 +96,7 @@
             ></textarea>
           </div>
 
-          <button type="submit" class="btn btn-primary px-4">
-            Send Message
-          </button>
+          <button type="submit" class="d-btn">Send Message</button>
         </form>
       </div>
     </div>
