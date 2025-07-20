@@ -1,4 +1,5 @@
 <div class="container-lg py-lg-4">
+  <p-toast />
   <h4 class="mb-4">Brand Management</h4>
 
   @if (loading) {
@@ -53,21 +54,23 @@
             <img [src]="brand.image" class="brand_image" [alt]="brand.name" />
           </td>
           <td>{{ brand.name }}</td>
-          <td class="d-flex gap-1">
-            <a
-              class="btn btn-sm btn-warning me-1"
-              title="Edit"
-              [routerLink]="['/dashboard/brand/edit/', brand._id]"
-            >
-              <i class="pi pi-pen-to-square mt-1"></i>
-            </a>
-            <button
-              class="btn btn-sm btn-danger"
-              title="Delete"
-              (click)="deleteBrand(brand._id)"
-            >
-              <i class="pi pi-trash mt-1"></i>
-            </button>
+          <td>
+            <div class="d-flex g-2">
+              <a
+                class="btn btn-sm btn-warning me-1"
+                title="Edit"
+                [routerLink]="['/dashboard/brand/edit/', brand._id]"
+              >
+                <i class="pi pi-pen-to-square mt-1"></i>
+              </a>
+              <button
+                class="btn btn-sm btn-danger"
+                title="Delete"
+                (click)="deleteBrand(brand._id)"
+              >
+                <i class="pi pi-trash mt-1"></i>
+              </button>
+            </div>
           </td>
         </tr>
       </ng-template>

@@ -8,6 +8,8 @@ import { InputIcon } from 'primeng/inputicon';
 import { SelectModule } from 'primeng/select';
 import { FormsModule } from '@angular/forms';
 import { CategoryService } from '../../../services/dashboard/category/category.service';
+import { MessageService } from 'primeng/api';
+import { Toast } from "primeng/toast";
 
 interface Category {
   _id: string;
@@ -26,14 +28,17 @@ interface Category {
     SelectModule,
     FormsModule,
     RouterLink,
-  ],
+    Toast
+],
   templateUrl: './categories.component.html',
   styleUrl: './categories.component.scss',
+  providers: [MessageService],
 })
 export class CategoriesComponent {
   categories!: Category[];
   categoryService = inject(CategoryService);
   loading: boolean = true;
+  messageService = inject(MessageService);
 
   globalFilterValue: string = '';
 
@@ -53,7 +58,13 @@ export class CategoriesComponent {
   deleteCategory(id: string) {
     this.categoryService.deleteCategory(id).subscribe({
       next: (result: any) => {
-        alert(result.message);
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Success',
+          detail: 'Category deleted successfully!',
+          life: 3000,
+        });
+        this.getCategory();
       },
       error: (error) => {
         console.log(error);

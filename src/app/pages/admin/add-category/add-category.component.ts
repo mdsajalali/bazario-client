@@ -50,11 +50,11 @@ export class AddCategoryComponent {
         image: this.categoryForm.value.image,
       };
       this.categoryService.createCategory(value).subscribe({
-        next: (result: any) => {
+        next: () => {
           this.messageService.add({
             severity: 'success',
             summary: 'Success',
-            detail: result.message,
+            detail: 'Category created successfully!',
             life: 3000,
           });
           this.categoryForm.reset();

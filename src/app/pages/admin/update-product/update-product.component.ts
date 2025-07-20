@@ -134,7 +134,7 @@ export class UpdateProductComponent {
           this.messageService.add({
             severity: 'success',
             summary: 'Success',
-            detail: result.message,
+            detail: 'Product updated successfully!',
             life: 3000,
           });
 

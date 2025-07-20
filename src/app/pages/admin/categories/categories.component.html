@@ -1,4 +1,6 @@
 <div class="container-lg py-lg-4">
+  <p-toast />
+
   <h4 class="mb-4">Category Management</h4>
 
   @if(loading){
@@ -57,8 +59,9 @@
             />
           </td>
           <td>{{ category.name }}</td>
-          <td class="d-flex gap-1">
-            <a
+          <td>
+           <div class="d-flex g-2">
+             <a
               class="btn btn-sm btn-warning me-1"
               title="Edit"
               [routerLink]="['/dashboard/category/edit/', category._id]"
@@ -72,6 +75,7 @@
             >
               <i class="pi pi-trash mt-1"></i>
             </button>
+           </div>
           </td>
         </tr>
       </ng-template>

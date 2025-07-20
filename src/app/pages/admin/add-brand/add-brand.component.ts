@@ -55,7 +55,7 @@ export class AddBrandComponent {
           this.messageService.add({
             severity: 'success',
             summary: 'Success',
-            detail: result.message,
+            detail: 'Brand created successfully!',
             life: 3000,
           });
           console.log('Brand Value', this.brandForm.value);

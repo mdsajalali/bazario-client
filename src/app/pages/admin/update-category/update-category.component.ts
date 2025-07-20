@@ -66,11 +66,11 @@ export class UpdateCategoryComponent {
         image: this.categoryForm.value.image,
       };
       this.categoryService.updateCategory(id, category).subscribe({
-        next: (result: any) => {
+        next: () => {
           this.messageService.add({
             severity: 'success',
             summary: 'Success',
-            detail: result.message,
+            detail: 'Category updated successfully!',
             life: 3000,
           });
           this.categoryForm.reset();

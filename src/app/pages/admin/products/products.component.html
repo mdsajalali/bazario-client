@@ -1,5 +1,6 @@
 <div class="container-lg py-lg-4">
   <h4 class="mb-4">Product Management</h4>
+  <p-toast />
 
   @if (loading) {
   <p>Loading...</p>
@@ -87,21 +88,23 @@
               >{{ product.isNew ? "Yes" : "No" }}</span
             >
           </td>
-          <td class="d-flex gap-1">
-            <a
-              class="btn btn-sm btn-warning me-1"
-              title="Edit"
-              [routerLink]="['/dashboard/product/edit/', product._id]"
-            >
-              <i class="pi pi-pen-to-square mt-1"></i>
-            </a>
-            <button
-              class="btn btn-sm btn-danger"
-              title="Delete"
-              (click)="deleteProduct(product._id)"
-            >
-              <i class="pi pi-trash mt-1"></i>
-            </button>
+          <td>
+            <div class="d-flex g-2">
+              <a
+                class="btn btn-sm btn-warning me-1"
+                title="Edit"
+                [routerLink]="['/dashboard/product/edit/', product._id]"
+              >
+                <i class="pi pi-pen-to-square mt-1"></i>
+              </a>
+              <button
+                class="btn btn-sm btn-danger"
+                title="Delete"
+                (click)="deleteProduct(product._id)"
+              >
+                <i class="pi pi-trash mt-1"></i>
+              </button>
+            </div>
           </td>
         </tr>
       </ng-template>

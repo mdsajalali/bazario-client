@@ -73,11 +73,10 @@ export class UpdateBrandComponent implements OnInit {
           this.messageService.add({
             severity: 'success',
             summary: 'Success',
-            detail: result.message,
+            detail: 'Brand updated successfully!',
             life: 3000,
           });
 
-          console.log('Brand Value', this.brandForm.value);
           this.brandForm.reset();
           this.formSubmitted = false;
 

@@ -10,6 +10,8 @@ import { RouterLink } from '@angular/router';
 import { NgClass } from '@angular/common';
 import { ProductsService } from '../../../services/dashboard/products/products.service';
 import { ProductType } from '../../../types';
+import { MessageService } from 'primeng/api';
+import { Toast } from "primeng/toast";
 
 @Component({
   selector: 'app-products',
@@ -23,15 +25,18 @@ import { ProductType } from '../../../types';
     FormsModule,
     RouterLink,
     NgClass,
-  ],
+    Toast
+],
   templateUrl: './products.component.html',
   styleUrl: './products.component.scss',
+  providers: [MessageService],
 })
 export class ProductsComponent {
   products: ProductType[] = [];
   globalFilterValue: string = '';
   productService = inject(ProductsService);
   loading: boolean = true;
+  messageService = inject(MessageService);
 
   ngOnInit() {
     this.getProducts();
@@ -41,21 +46,25 @@ export class ProductsComponent {
     this.productService.getProducts().subscribe({
       next: (result: any) => {
         this.products = result;
-        console.log(this.products.length)
         this.loading = false;
       },
       error: (error) => {
         console.log(error);
         this.loading = false;
-
       },
     });
   }
 
   deleteProduct(id: string) {
     this.productService.deleteProduct(id).subscribe({
-      next: (result: any) => {
-        alert(result.message);
+      next: () => {
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Success',
+          detail: 'Product deleted successfully!',
+          life: 3000,
+        });
+        this.getProducts()
       },
       error: (error) => {
         console.log(error);

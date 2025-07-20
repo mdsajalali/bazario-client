@@ -113,7 +113,7 @@ export class AddProductComponent implements OnInit {
           this.messageService.add({
             severity: 'success',
             summary: 'Success',
-            detail: result.message,
+            detail: 'Product created successfully!',
             life: 3000,
           });
 

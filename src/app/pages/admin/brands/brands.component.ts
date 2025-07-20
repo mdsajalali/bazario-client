@@ -8,6 +8,8 @@ import { SelectModule } from 'primeng/select';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { BrandsService } from '../../../services/dashboard/brands/brands.service';
+import { Toast } from 'primeng/toast';
+import { MessageService } from 'primeng/api';
 
 interface Brand {
   brandId: string;
@@ -25,14 +27,17 @@ interface Brand {
     SelectModule,
     FormsModule,
     RouterLink,
+    Toast,
   ],
   templateUrl: './brands.component.html',
   styleUrl: './brands.component.scss',
+  providers: [MessageService],
 })
 export class BrandsComponent {
   brands!: Brand[];
   brandService = inject(BrandsService);
   loading: boolean = true;
+  messageService = inject(MessageService);
 
   globalFilterValue: string = '';
 
@@ -56,7 +61,12 @@ export class BrandsComponent {
   deleteBrand(id: string) {
     return this.brandService.deleteBrand(id).subscribe({
       next: () => {
-        alert('deleted');
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Success',
+          detail: 'Brand deleted successfully!',
+        });
+        this.getBrands()
       },
       error: (error) => {
         console.log(error);
