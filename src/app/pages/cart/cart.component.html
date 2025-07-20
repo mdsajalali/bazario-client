@@ -1,6 +1,7 @@
 <app-header />
 
 <div class="container py-4">
+  <p-toast />
   @if(orderStep === 0){
   <div class="card">
     <p-table
@@ -90,7 +91,7 @@
 
       <ng-template pTemplate="emptymessage">
         <tr>
-          <td colspan="6" class="text-center">No orders found.</td>
+          <td colspan="6" class="text-center">Your cart is empty.</td>
         </tr>
       </ng-template>
     </p-table>

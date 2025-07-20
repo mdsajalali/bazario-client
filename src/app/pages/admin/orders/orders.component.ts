@@ -10,6 +10,8 @@ import { NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs';
 import { OrdersService } from '../../../services/orders/orders.service';
 import { DatePipe } from '@angular/common';
+import { MessageService } from 'primeng/api';
+import { Toast } from "primeng/toast";
 
 @Component({
   selector: 'app-orders',
@@ -24,7 +26,9 @@ import { DatePipe } from '@angular/common';
     SelectModule,
     FormsModule,
     DatePipe,
-  ],
+    Toast
+],
+  providers: [MessageService],
 })
 export class OrdersComponent implements OnInit {
   orders!: any[];
@@ -34,6 +38,7 @@ export class OrdersComponent implements OnInit {
   orderService = inject(OrdersService);
   selectedOrder!: any;
   totalPrice: any = 0;
+  messageService = inject(MessageService);
 
   orderStatus = [
     { label: 'In Progress', value: 'inprogress' },
@@ -46,7 +51,12 @@ export class OrdersComponent implements OnInit {
     const newStatus = order.status.value;
     const orderId = order._id;
     this.orderService.updateOrderStatus(orderId, newStatus).subscribe(() => {
-      alert('Status updated successfully');
+      this.messageService.add({
+        severity: 'success',
+        summary: 'Success',
+        detail: 'Status updated successfully!',
+        life: 3000,
+      });
     });
   }
 

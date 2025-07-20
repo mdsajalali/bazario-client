@@ -13,10 +13,11 @@ import {
 } from '@angular/forms';
 import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
-import { ToastModule } from 'primeng/toast';
+import { Toast, ToastModule } from 'primeng/toast';
 import { MessageModule } from 'primeng/message';
 import { OrdersService } from '../../services/orders/orders.service';
 import { Router } from '@angular/router';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-cart',
@@ -30,9 +31,11 @@ import { Router } from '@angular/router';
     ToastModule,
     MessageModule,
     FormsModule,
+    Toast,
   ],
   templateUrl: './cart.component.html',
   styleUrl: './cart.component.scss',
+  providers: [MessageService],
 })
 export class CartComponent {
   orderStep: number = 0;
@@ -40,6 +43,7 @@ export class CartComponent {
   paymentType: string = '';
   orderService = inject(OrdersService);
   router = inject(Router);
+  messageService = inject(MessageService);
 
   get checkoutOrderStepUpdate() {
     return (this.orderStep = 1);
@@ -75,7 +79,13 @@ export class CartComponent {
   removeFormCart(productId: string) {
     this.cartService.removeFormCart(productId).subscribe({
       next: () => {
-        alert('Product remove to cart');
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Success',
+          detail: 'Product removed from cart!',
+          life: 3000,
+        });
+        this.cartService.init();
       },
     });
   }
@@ -120,13 +130,19 @@ export class CartComponent {
       date: new Date(),
       totalAmount: this.totalAmount,
     };
-    this.orderService.addOrder(order).subscribe((result) => {
-      console.log(order.address);
-      alert('Your order is completed');
+    this.orderService.addOrder(order).subscribe(() => {
+      this.messageService.add({
+        severity: 'success',
+        summary: 'Success',
+        detail: 'Your order has been completed!!',
+        life: 3000,
+      });
       this.cartService.init();
       this.orderStep = 0;
       this.deliveryForm.reset();
-      this.router.navigateByUrl('/orders');
+      setTimeout(() => {
+        this.router.navigateByUrl('/orders');
+      }, 2000);
     });
   }
 }

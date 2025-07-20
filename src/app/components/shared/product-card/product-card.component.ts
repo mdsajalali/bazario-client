@@ -81,7 +81,7 @@ export class ProductCardComponent implements OnInit {
       this.messageService.add({
         severity: 'success',
         summary: 'Success',
-        detail: 'Product added to cart!!',
+        detail: 'Product added to cart!',
       });
       this.cartService.init();
     });
