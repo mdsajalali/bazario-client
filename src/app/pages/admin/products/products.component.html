@@ -1,6 +1,9 @@
 <div class="container-lg py-lg-4">
   <h4 class="mb-4">Product Management</h4>
 
+  @if (loading) {
+  <p>Loading...</p>
+  }@else {
   <div class="card">
     <p-table
       #dt1
@@ -12,28 +15,29 @@
         'shortDescription',
         'price'
       ]"
-      [rows]="5"
       [paginator]="true"
+      [rows]="5"
+      [rowsPerPageOptions]="[10, 25, 50]"
       stateStorage="session"
       stateKey="product-management"
     >
       <ng-template #caption>
         <div class="d-flex align-items-center justify-content-between">
           <p-iconfield iconPosition="left">
-          <p-inputicon>
-            <i class="pi pi-search"></i>
-          </p-inputicon>
-          <input
-            pInputText
-            type="search"
-            [(ngModel)]="globalFilterValue"
-            (ngModelChange)="dt1.filterGlobal(globalFilterValue, 'contains')"
-            placeholder="Search by name, brand, category..."
-          />
-        </p-iconfield>
-        <div class="d-md-block d-none">
-          <a routerLink="/dashboard/add-product" class="d-btn">Add Product</a>
-        </div>
+            <p-inputicon>
+              <i class="pi pi-search"></i>
+            </p-inputicon>
+            <input
+              pInputText
+              type="search"
+              [(ngModel)]="globalFilterValue"
+              (ngModelChange)="dt1.filterGlobal(globalFilterValue, 'contains')"
+              placeholder="Search by name, brand, category..."
+            />
+          </p-iconfield>
+          <div class="d-md-block d-none">
+            <a routerLink="/dashboard/add-product" class="d-btn">Add Product</a>
+          </div>
         </div>
       </ng-template>
 
@@ -109,4 +113,5 @@
       </ng-template>
     </p-table>
   </div>
+  }
 </div>

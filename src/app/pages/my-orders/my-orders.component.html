@@ -1,8 +1,9 @@
 <app-header />
 <div class="container py-4">
   <h2 class="mb-4">All Orders</h2>
-
-  @for (order of orders; track $index) {
+  @if (orders.length === 0) {
+  <p class="text-center text-muted">No orders found. Start shopping now to place your first order!</p>
+  } @for (order of orders; track $index) {
   <div class="order-card card mb-4 shadow-sm">
     <div
       class="card-header d-flex justify-content-between align-items-center flex-wrap"
@@ -10,7 +11,7 @@
       <div>
         <strong>Order ID:</strong> {{ order._id }}<br />
         <strong>Status:</strong>&nbsp;
-        <span [style.background]="'#4f46e5'"  class="badge text-capitalize">{{
+        <span [style.background]="'#4f46e5'" class="badge text-capitalize">{{
           order.status
         }}</span>
       </div>

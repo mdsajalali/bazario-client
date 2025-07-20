@@ -31,6 +31,7 @@ export class ProductsComponent {
   products: ProductType[] = [];
   globalFilterValue: string = '';
   productService = inject(ProductsService);
+  loading: boolean = true;
 
   ngOnInit() {
     this.getProducts();
@@ -40,9 +41,13 @@ export class ProductsComponent {
     this.productService.getProducts().subscribe({
       next: (result: any) => {
         this.products = result;
+        console.log(this.products.length)
+        this.loading = false;
       },
       error: (error) => {
         console.log(error);
+        this.loading = false;
+
       },
     });
   }

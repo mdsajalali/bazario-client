@@ -13,7 +13,9 @@
           >
         </li>
         <li><a routerLink="/shop" routerLinkActive="active">Shop</a></li>
+        @if (!isAdmin) {
         <li><a routerLink="/orders" routerLinkActive="active">Orders</a></li>
+        }
         <li><a routerLink="/about" routerLinkActive="active">About</a></li>
         <li><a routerLink="/contact" routerLinkActive="active">Contact</a></li>
         <li><a routerLink="/blogs" routerLinkActive="active">Blogs</a></li>
