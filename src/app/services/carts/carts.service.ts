@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -27,5 +28,18 @@ export class CartsService {
 
   removeFormCart(productId: string) {
     return this.http.delete(environment.apiUrl + `/shop/carts/${productId}`);
+  }
+
+  private cartCountSubject = new BehaviorSubject<number>(0);
+  cartCount$ = this.cartCountSubject.asObservable();
+
+  updateCartCount() {
+    this.getCartItems().subscribe((result: any) => {
+      const count = result.reduce(
+        (total: number, item: any) => total + item.quantity,
+        0
+      );
+      this.cartCountSubject.next(count);
+    });
   }
 }

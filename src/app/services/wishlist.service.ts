@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { ProductType } from '../types';
 
@@ -26,5 +26,14 @@ export class WishlistService {
       environment.apiUrl + `/shop/wishlists/${id}`,
       {}
     );
+  }
+
+  private wishlistCountSubject = new BehaviorSubject<number>(0);
+  wishlistCount$ = this.wishlistCountSubject.asObservable();
+
+  updateWishlistCount() {
+    this.getWishlists().subscribe((wishlist: any) => {
+      this.wishlistCountSubject.next(wishlist.length);
+    });
   }
 }

@@ -29,25 +29,27 @@ export class ProductDetailsComponent {
   product!: ProductType;
   productService = inject(ProductsService);
   route = inject(ActivatedRoute);
+  cartService = inject(CartsService);
+  wishlistService = inject(WishlistService);
+
   loading: boolean = true;
   selectedImage: string = '';
-  cartService = inject(CartsService);
-
-  wishlistService = inject(WishlistService);
   isWishlisted: boolean = false;
   quantityInCart: number = 0;
 
   ngOnInit() {
     this.checkWishlistStatus();
+
     const id = this.route.snapshot.paramMap.get('id');
     if (id) {
       this.productService.getProductById(id).subscribe({
         next: (product) => {
           this.product = product;
-          if (this.product.images && this.product.images.length > 0) {
-            this.selectedImage = this.product.images[0];
+          if (product.images?.length) {
+            this.selectedImage = product.images[0];
           }
           this.getCartQuantity(product._id!);
+
           this.loading = false;
         },
         error: (err) => {
@@ -80,6 +82,8 @@ export class ProductDetailsComponent {
     this.wishlistService.addToWishlist(id).subscribe({
       next: () => {
         this.checkWishlistStatus();
+
+        this.wishlistService.updateWishlistCount();  
       },
       error: (error) => {
         console.log(error);
@@ -91,6 +95,8 @@ export class ProductDetailsComponent {
     this.wishlistService.removeToWishlist(id).subscribe({
       next: () => {
         this.checkWishlistStatus();
+
+        this.wishlistService.updateWishlistCount();  
       },
       error: (error) => {
         console.log(error);
@@ -111,7 +117,8 @@ export class ProductDetailsComponent {
     if (this.product) {
       this.cartService.addToCart(this.product._id!, 1).subscribe(() => {
         this.quantityInCart++;
-        this.cartService.init();
+        this.cartService.init(); 
+        this.cartService.updateCartCount();  
       });
     }
   }
@@ -120,12 +127,14 @@ export class ProductDetailsComponent {
     if (this.quantityInCart > 1) {
       this.cartService.addToCart(this.product._id!, -1).subscribe(() => {
         this.quantityInCart--;
-        this.cartService.init();
+        this.cartService.init(); 
+        this.cartService.updateCartCount();  
       });
     } else {
       this.cartService.removeFormCart(this.product._id!).subscribe(() => {
         this.quantityInCart = 0;
-        this.cartService.init();
+        this.cartService.init(); 
+        this.cartService.updateCartCount();  
       });
     }
   }
@@ -133,7 +142,8 @@ export class ProductDetailsComponent {
   addToCart() {
     this.cartService.addToCart(this.product._id!, 1).subscribe(() => {
       this.quantityInCart = 1;
-      this.cartService.init();
+      this.cartService.init(); 
+      this.cartService.updateCartCount();  
     });
   }
 

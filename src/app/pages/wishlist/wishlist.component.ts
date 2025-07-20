@@ -12,7 +12,7 @@ import { ProductCardComponent } from '../../components/shared/product-card/produ
   styleUrl: './wishlist.component.scss',
 })
 export class WishlistComponent implements OnInit {
-  http = inject(WishlistService);
+  wishlistService = inject(WishlistService);
   wishlists: ProductType[] = [];
   loading: boolean = true;
 
@@ -22,10 +22,12 @@ export class WishlistComponent implements OnInit {
 
   reloadWishlist() {
     this.loading = true;
-    this.http.getWishlists().subscribe({
+    this.wishlistService.getWishlists().subscribe({
       next: (result: any) => {
         this.wishlists = result;
         this.loading = false;
+
+        this.wishlistService.updateWishlistCount();
       },
       error: (error) => {
         console.log(error);

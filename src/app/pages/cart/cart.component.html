@@ -68,7 +68,6 @@
                 {{ item.quantity }}
               </p>
 
-              <!-- Show total price -->
               <p class="fw-bold mb-0" [style.color]="'#4f46e5'">
                 Total: ${{
                   (sellingPrice(item.product) * item.quantity).toFixed(2)
@@ -284,7 +283,6 @@
         </div>
       </div>
 
-      <!-- Cart Totals -->
       <div class="col-lg-4">
         <div class="card p-4 shadow-sm">
           <h5 class="mb-3 text-center">Cart Totals</h5>

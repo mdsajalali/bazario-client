@@ -62,8 +62,10 @@ export class CartComponent {
   }
 
   addToCart(productId: string, quantity: number) {
-    this.cartService.addToCart(productId, quantity).subscribe((result) => {
+    this.cartService.addToCart(productId, quantity).subscribe(() => {
       this.cartService.init();
+
+      this.cartService.updateCartCount();  
     });
   }
 
@@ -85,12 +87,14 @@ export class CartComponent {
           detail: 'Product removed from cart!',
           life: 3000,
         });
+
         this.cartService.init();
+
+        this.cartService.updateCartCount();  
       },
     });
   }
 
-  // order functionality
   deliveryForm: FormGroup;
   formSubmitted = false;
 
@@ -138,6 +142,7 @@ export class CartComponent {
         life: 3000,
       });
       this.cartService.init();
+      this.cartService.updateCartCount();  
       this.orderStep = 0;
       this.deliveryForm.reset();
       setTimeout(() => {

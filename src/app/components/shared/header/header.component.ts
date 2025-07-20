@@ -23,18 +23,18 @@ export class HeaderComponent {
   cartCount = 0;
 
   ngOnInit() {
-    this.wishlistService.getWishlists().subscribe((wishlists: any) => {
-      this.wishlistLength = wishlists.length;
+    this.wishlistService.wishlistCount$.subscribe((count) => {
+      this.wishlistLength = count;
+      console.log('wishlist', this.wishlistLength);
     });
 
-    this.cartService.getCartItems().subscribe({
-      next: (result: any) => {
-        this.cartCount = result.reduce(
-          (total: any, item: any) => total + item.quantity,
-          0
-        );
-      },
+    this.cartService.cartCount$.subscribe((count) => {
+      this.cartCount = count;
+      console.log('count', this.cartCount);
     });
+
+    this.wishlistService.updateWishlistCount();
+    this.cartService.updateCartCount();
   }
 
   onSearchEnter() {

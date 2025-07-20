@@ -68,10 +68,9 @@ export class ProductCardComponent implements OnInit {
     this.wishlistService.addToWishlist(id).subscribe({
       next: () => {
         this.checkWishlistStatus();
+        this.wishlistService.updateWishlistCount();  
       },
-      error: (error) => {
-        console.log(error);
-      },
+      error: (error) => console.log(error),
     });
   }
 
@@ -79,14 +78,12 @@ export class ProductCardComponent implements OnInit {
     this.wishlistService.removeToWishlist(id).subscribe({
       next: () => {
         this.checkWishlistStatus();
+        this.wishlistService.updateWishlistCount(); 
       },
-      error: (error) => {
-        console.log(error);
-      },
+      error: (error) => console.log(error),
     });
   }
 
-  // cart functionality
   addToCart(product: ProductType) {
     this.cartService.addToCart(product._id!, 1).subscribe(() => {
       this.messageService.add({
@@ -94,7 +91,7 @@ export class ProductCardComponent implements OnInit {
         summary: 'Success',
         detail: 'Product added to cart!',
       });
-      this.cartService.init();
+      this.cartService.updateCartCount();  
     });
   }
 }
