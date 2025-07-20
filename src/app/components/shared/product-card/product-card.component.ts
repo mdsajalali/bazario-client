@@ -43,6 +43,7 @@ export class ProductCardComponent implements OnInit {
         summary: 'Success',
         detail: 'Removed from your wishlist!',
       });
+      // this.wishlistService.getWishlists()
     } else {
       this.addToWishlist(id);
       this.messageService.add({
@@ -50,6 +51,7 @@ export class ProductCardComponent implements OnInit {
         summary: 'Success',
         detail: 'Added to your wishlist!',
       });
+      // this.wishlistService.getWishlists();
     }
   }
 

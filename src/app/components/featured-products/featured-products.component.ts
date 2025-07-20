@@ -2,12 +2,12 @@ import { Component, inject, OnInit } from '@angular/core';
 import { Carousel } from 'primeng/carousel';
 import { ButtonModule } from 'primeng/button';
 import { ProductType } from '../../types';
-import { ProductsService } from '../../services/products/products.service';
-import { BaseProductCardComponent } from '../shared/base-product-card/base-product-card.component';
+import { ProductsService } from '../../services/products/products.service'; 
+import { ProductCardComponent } from "../shared/product-card/product-card.component";
 
 @Component({
   selector: 'app-featured-products',
-  imports: [Carousel, ButtonModule, BaseProductCardComponent],
+  imports: [Carousel, ButtonModule, ProductCardComponent],
   templateUrl: './featured-products.component.html',
   styleUrl: './featured-products.component.scss',
 })

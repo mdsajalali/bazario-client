@@ -3,11 +3,11 @@ import { Carousel } from 'primeng/carousel';
 import { ButtonModule } from 'primeng/button';
 import { ProductType } from '../../types';
 import { ProductsService } from '../../services/products/products.service';
-import { BaseProductCardComponent } from '../shared/base-product-card/base-product-card.component';
+import { ProductCardComponent } from "../shared/product-card/product-card.component";
 
 @Component({
   selector: 'app-recent-products',
-  imports: [Carousel, ButtonModule, BaseProductCardComponent],
+  imports: [Carousel, ButtonModule, ProductCardComponent],
   templateUrl: './recent-products.component.html',
   styleUrl: './recent-products.component.scss',
 })
