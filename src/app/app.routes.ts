@@ -26,6 +26,7 @@ import { MyOrdersComponent } from './pages/my-orders/my-orders.component';
 import { adminGuard } from './core/admin-guard';
 import { ShopComponent } from './components/shop/shop.component';
 import { authGuard } from './core/auth-guard';
+import { guestGuard } from './core/guest-guard';
 
 export const routes: Routes = [
   {
@@ -139,9 +140,11 @@ export const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent,
+    canActivate: [guestGuard],
   },
   {
     path: 'register',
     component: RegisterComponent,
+    canActivate: [guestGuard],
   },
 ];
