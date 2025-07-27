@@ -89,7 +89,8 @@ export const routes: Routes = [
   },
   {
     path: 'about',
-    component: AboutComponent,
+    loadComponent: () =>
+      import('./pages/about/about.component').then((m) => m.AboutComponent),
     canActivate: [authGuard],
   },
   {
@@ -134,7 +135,10 @@ export const routes: Routes = [
   },
   {
     path: 'contact',
-    component: ContactComponent,
+    loadComponent: () =>
+      import('./pages/contact/contact.component').then(
+        (m) => m.ContactComponent
+      ),
     canActivate: [authGuard],
   },
   {
