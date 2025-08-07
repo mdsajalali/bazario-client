@@ -2,32 +2,33 @@
 <div class="container pt-5">
   <div class="row">
     <div class="col-lg-8 mb-4">
+      @if (loading) {
+      <p>Loading...</p>
+      }@else {
       <div class="blog-card shadow-sm p-4 rounded bg-white">
         <img
-          src="https://dazzle.com.bd/_next/image?url=https%3A%2F%2Fdazzle.sgp1.cdn.digitaloceanspaces.com%2F30106%2Fg85.jpg&w=1920&q=75"
+          [src]="blog.images[0]"
           alt="Blog Banner"
           class="img-fluid rounded mb-4"
         />
-        <h2 class="blog-title mb-3">Top 10 Summer Fashion Trends for 2025</h2>
-        <p class="text-muted mb-4">Posted on July 15, 2025 by Admin</p>
+        <h2 class="blog-title mb-3">{{ blog.title }}</h2>
+        <p class="text-muted mb-4">
+          Posted on {{ blog.createdAt | date }} by Admin
+        </p>
         <p class="blog-text">
-          Discover the latest fashion trends taking the eCommerce world by storm
-          this summer! From pastel shades to oversized bags, this guide helps
-          you revamp your wardrobe and stay stylish while shopping online.
+          {{ blog.description }}
         </p>
         <p>
-          E-commerce stores are now offering personalized recommendations and
-          AI-driven shopping experiences. It's easier than ever to find outfits
-          that suit your style. Stay ahead of the curve with these exciting
-          trends!
+          {{ blog.description }}
         </p>
         <p>
-          Whether you're shopping for vacation fits or work-from-home
-          loungewear, these trends are must-haves for every wardrobe.
+          {{ blog.description }}
         </p>
       </div>
+      }
     </div>
 
+    <!-- static ui -->
     <div class="col-lg-4">
       <div class="suggested-blogs bg-light p-3 rounded shadow-sm">
         <h5 class="mb-3">Suggested Blogs</h5>
