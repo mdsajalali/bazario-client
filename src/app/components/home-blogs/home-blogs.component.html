@@ -1,105 +1,35 @@
 <section class="container py-5">
   <h2 class="mb-4 fw-bold text-start">Latest Blog Posts</h2>
   <div class="row g-4">
+    @if(loading){
+    <p>Loading...</p>
+    } @else { @for (blog of blogs; track blog._id) {
     <div class="col-12 col-md-6 col-lg-3">
       <div class="card h-100 shadow-sm">
-        <a routerLink="/blogs/123">
+        <a [routerLink]="'/blogs/' + blog._id">
           <img
-            src="https://dazzle.com.bd/_next/image?url=https%3A%2F%2Fdazzle.sgp1.cdn.digitaloceanspaces.com%2F30083%2Fiphone.jpg&w=1920&q=75"
+            [src]="blog.images[0]"
             class="card-img-top"
-            alt="Blog Post 1"
+            alt="Blog Post"
             style="object-fit: cover; height: 180px"
           />
         </a>
         <div class="card-body d-flex flex-column">
-          <a routerLink="/blogs/123" class="text-decoration-none">
-            <h5 class="card-title">How to Style Summer Outfits</h5>
+          <a [routerLink]="'/blogs/' + blog._id" class="text-decoration-none">
+            <h5 class="card-title">{{ blog.title }}</h5>
           </a>
-          <a routerLink="/blogs/123" class="text-decoration-none">
+          <a [routerLink]="'/blogs/' + blog._id" class="text-decoration-none">
             <p class="card-text flex-grow-1 text-muted">
-              Discover the latest summer fashion trends and tips to keep cool
-              and stylish.
+              {{ blog.description }}
             </p>
           </a>
-          <small class="text-secondary mb-3">July 10, 2025</small>
-          <a routerLink="/blogs/123" class="blog_btn mt-auto">Read More</a>
+          <small class="text-secondary mb-3">{{ blog.createdAt | date }}</small>
+          <a [routerLink]="'/blogs/' + blog._id" class="blog_btn mt-auto"
+            >Read More</a
+          >
         </div>
       </div>
     </div>
-    <div class="col-12 col-md-6 col-lg-3">
-      <div class="card h-100 shadow-sm">
-        <a routerLink="/blogs/123">
-          <img
-            src="https://dazzle.com.bd/_next/image?url=https%3A%2F%2Fdazzle.sgp1.cdn.digitaloceanspaces.com%2F30106%2Fg85.jpg&w=1920&q=75"
-            class="card-img-top"
-            alt="Blog Post 1"
-            style="object-fit: cover; height: 180px"
-          />
-        </a>
-        <div class="card-body d-flex flex-column">
-          <a routerLink="/blogs/123" class="text-decoration-none">
-            <h5 class="card-title">How to Style Summer Outfits</h5>
-          </a>
-          <a routerLink="/blogs/123" class="text-decoration-none">
-            <p class="card-text flex-grow-1 text-muted">
-              Discover the latest summer fashion trends and tips to keep cool
-              and stylish.
-            </p>
-          </a>
-          <small class="text-secondary mb-3">July 10, 2025</small>
-          <a routerLink="/blogs/123" class="blog_btn mt-auto">Read More</a>
-        </div>
-      </div>
-    </div>
-    <div class="col-12 col-md-6 col-lg-3">
-      <div class="card h-100 shadow-sm">
-        <a routerLink="/blogs/123">
-          <img
-            src="https://dazzle.com.bd/_next/image?url=https%3A%2F%2Fdazzle.sgp1.cdn.digitaloceanspaces.com%2F30118%2Fmac-mini.jpg&w=1920&q=75"
-            class="card-img-top"
-            alt="Blog Post 1"
-            style="object-fit: cover; height: 180px"
-          />
-        </a>
-        <div class="card-body d-flex flex-column">
-          <a routerLink="/blogs/123" class="text-decoration-none">
-            <h5 class="card-title">How to Style Summer Outfits</h5>
-          </a>
-          <a routerLink="/blogs/123" class="text-decoration-none">
-            <p class="card-text flex-grow-1 text-muted">
-              Discover the latest summer fashion trends and tips to keep cool
-              and stylish.
-            </p>
-          </a>
-          <small class="text-secondary mb-3">July 10, 2025</small>
-          <a routerLink="/blogs/123" class="blog_btn mt-auto">Read More</a>
-        </div>
-      </div>
-    </div>
-    <div class="col-12 col-md-6 col-lg-3">
-      <div class="card h-100 shadow-sm">
-        <a routerLink="/blogs/123">
-          <img
-            src="https://dazzle.com.bd/_next/image?url=https%3A%2F%2Fdazzle.sgp1.cdn.digitaloceanspaces.com%2F30126%2Fs25-ultra.jpg&w=1920&q=75"
-            class="card-img-top"
-            alt="Blog Post 1"
-            style="object-fit: cover; height: 180px"
-          />
-        </a>
-        <div class="card-body d-flex flex-column">
-          <a routerLink="/blogs/123" class="text-decoration-none">
-            <h5 class="card-title">How to Style Summer Outfits</h5>
-          </a>
-          <a routerLink="/blogs/123" class="text-decoration-none">
-            <p class="card-text flex-grow-1 text-muted">
-              Discover the latest summer fashion trends and tips to keep cool
-              and stylish.
-            </p>
-          </a>
-          <small class="text-secondary mb-3">July 10, 2025</small>
-          <a routerLink="/blogs/123" class="blog_btn mt-auto">Read More</a>
-        </div>
-      </div>
-    </div>
+    } }
   </div>
 </section>
