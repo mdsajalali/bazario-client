@@ -15,6 +15,7 @@ export class HomeBlogsComponent {
   loading: boolean = true;
 
   ngOnInit() {
+    window.scrollTo(0, 0);
     this.loading = true;
     this.blogsService.getBlogs().subscribe({
       next: (result: any) => {
