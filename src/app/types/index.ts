@@ -1,5 +1,5 @@
 // dashboard sidebar menu
-export type MenuKey = 'products' | 'brands' | 'categories';
+export type MenuKey = 'products' | 'brands' | 'categories' | 'blogs';
 
 // auth
 export interface AuthResponse {

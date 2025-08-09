@@ -15,6 +15,7 @@ export class LayoutComponent {
     products: false,
     brands: false,
     categories: false,
+    blogs: false,
   };
 
   mobileSidebarVisible = false;

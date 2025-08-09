@@ -28,6 +28,9 @@ import { ShopComponent } from './components/shop/shop.component';
 import { authGuard } from './core/auth-guard';
 import { guestGuard } from './core/guest-guard';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
+import { AdminBlogsComponent } from './pages/admin/admin-blogs/admin-blogs.component';
+import { AdminAddBlogComponent } from './pages/admin/admin-add-blog/admin-add-blog.component';
+import { AdminUpdateBlogComponent } from './pages/admin/admin-update-blog/admin-update-blog.component';
 
 export const routes: Routes = [
   {
@@ -80,6 +83,19 @@ export const routes: Routes = [
       {
         path: 'dashboard/category/edit/:id',
         component: UpdateCategoryComponent,
+      },
+
+       {
+        path: 'dashboard/blogs',
+        component: AdminBlogsComponent,
+      },
+      {
+        path: 'dashboard/add-blog',
+        component: AdminAddBlogComponent,
+      },
+      {
+        path: 'dashboard/blog/edit/:id',
+        component: AdminUpdateBlogComponent,
       },
 
       {

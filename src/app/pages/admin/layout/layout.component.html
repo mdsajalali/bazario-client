@@ -156,6 +156,46 @@
           </div>
         </div>
 
+        <div>
+          <div
+            class="title-arrow btn text_color mb-1"
+            (click)="toggleSubmenu('blogs')"
+          >
+            <h6 class="mb-0">Blogs</h6>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="12px"
+              height="12px"
+              viewBox="0 0 512 512"
+              fill="currentColor"
+              [ngClass]="{ rotated: submenuOpen.blogs }"
+            >
+              <path
+                d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192
+                c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256
+                338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3
+                0s-12.5 32.8 0 45.3l192 192z"
+              />
+            </svg>
+          </div>
+          <div [hidden]="!submenuOpen.blogs">
+            <a
+              routerLink="/dashboard/blogs"
+              routerLinkActive="active"
+              class="nav-link btn text_color text-size text-black mb-1"
+            >
+              All Blogs
+            </a>
+            <a
+              routerLink="/dashboard/add-blog"
+              routerLinkActive="active"
+              class="nav-link btn text_color text-size text-black mb-1"
+            >
+              Add Blog
+            </a>
+          </div>
+        </div>
+
         <a
           routerLink="/dashboard/orders"
           routerLinkActive="active"
